@@ -20,8 +20,12 @@ namespace FMOD
     public class VERSION
     {
         public const int    number = 0x00020000;
+				
+				// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
+				
+				public const string dll = "fmod.dll";
 
-        public const string dll    = "libfmod";
+				// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
     }
 
     public class CONSTANTS

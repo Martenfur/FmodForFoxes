@@ -55,7 +55,7 @@ namespace ChaiFoxes.FMODAudio
 				}
 				else
 				{
-					LoadLibrary(Path.GetFullPath("x32/fmod.dll"));
+					LoadLibrary(Path.GetFullPath("x86/fmod.dll"));
 				}
 			}
 			else
@@ -66,7 +66,7 @@ namespace ChaiFoxes.FMODAudio
 				}
 				else
 				{
-					dlopen(Path.GetFullPath("/x32/libfmod.so"), RTLD_LAZY);
+					dlopen(Path.GetFullPath("/x86/libfmod.so"), RTLD_LAZY);
 				}
 			}
 
