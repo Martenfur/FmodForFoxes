@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.Desktop", "ChaiFoxes.FMODAudio.Demos.Desktop\ChaiFoxes.FMODAudio.Demos.Desktop.csproj", "{16CA3CCC-663F-40B2-B9C8-A910CE35C7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.Android", "ChaiFoxes.FMODAudio.Demos.Android\ChaiFoxes.FMODAudio.Demos.Android.csproj", "{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Demos", "ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.shproj", "{4FC7A6B9-6D95-4D0B-B748-3EDD39FC97DB}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{16ca3ccc-663f-40b2-b9c8-a910ce35c7a9}*SharedItemsImports = 4
+		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{1ac29f42-1a31-4213-9c36-37ff51ae5b1b}*SharedItemsImports = 4
+		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{4fc7a6b9-6d95-4d0b-b748-3edd39fc97db}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16CA3CCC-663F-40B2-B9C8-A910CE35C7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16CA3CCC-663F-40B2-B9C8-A910CE35C7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16CA3CCC-663F-40B2-B9C8-A910CE35C7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16CA3CCC-663F-40B2-B9C8-A910CE35C7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AC29F42-1A31-4213-9C36-37FF51AE5B1B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0E082C2-1837-4496-9124-1243364D2CFF}
+	EndGlobalSection
+EndGlobal
