@@ -23,8 +23,11 @@ namespace FMOD
 				
 				// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
 				
-				public const string dll = "fmod.dll";
-
+				#if ANDROID
+	        public const string dll = "libfmod"; // Android.
+				#else
+					public const string dll = "fmod.dll"; // Windows and Linux.
+				#endif
 				// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
     }
 

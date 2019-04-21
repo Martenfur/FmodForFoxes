@@ -45,9 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioMgr.cs" />
+    <Compile Include="AudioMgr.Desktop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sound.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="x64\fmod.dll">
