@@ -8,8 +8,6 @@ namespace ChaiFoxes.FMODAudio
 
 	/// <summary>
 	/// Audio manager. Controls main audiosystem parameters.
-	/// 
-	/// NOTE: Right now FMOD only works with Windows. 
 	/// </summary>
 	public static partial class AudioMgr
 	{
@@ -31,6 +29,13 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		private static string _rootDir;
 		
+		/// <summary>
+		/// Initializes FMOD with default parameters. 
+		/// 
+		/// If you want to use only the default wrapper, call
+		/// LoadNativeLibrary() instead.
+		/// </summary>
+		/// <param name="rootDir"></param>
 		public static void Init(string rootDir)
 		{
 			_rootDir = rootDir;
@@ -109,39 +114,6 @@ namespace ChaiFoxes.FMODAudio
 			
 		}
 
-
-		#region Vector converters.
-		
-		public static FMOD.VECTOR GetFmodVector(float x = 0, float y = 0, float z = 0)
-		{
-			var vector = new FMOD.VECTOR();
-			vector.x = x;
-			vector.y = y;
-			vector.z = z;
-			return vector;
-		}
-
-		public static FMOD.VECTOR Vector3ToFmodVector(Vector3 v)
-		{
-			var vector = new FMOD.VECTOR();
-			vector.x = v.X;
-			vector.y = v.Y;
-			vector.z = v.Z;
-			return vector;
-		}
-
-		public static FMOD.VECTOR Vector2ToFmodVector(Vector2 v)
-		{
-			var vector = new FMOD.VECTOR();
-			vector.x = v.X;
-			vector.y = v.Y;
-			vector.z = 0;
-			return vector;
-		}
-		
-		#endregion Vector converters.
-
-
 		/// <summary>
 		/// Plays given sound and returns separate instance of it.
 		/// </summary>
@@ -174,22 +146,23 @@ namespace ChaiFoxes.FMODAudio
 
 		public static void SetListenerPosition(Vector2 position, int listenerId = 0)
 		{
-			var fmodPos = Vector2ToFmodVector(position);
-			var fmodZeroVec = GetFmodVector();
+			var fmodPos = position.ToFmodVector();
+			var fmodZeroVec = Vector3.Zero.ToFmodVector();
+
 			// Apparently, you cannot just pass zero vector and call it a day.
-			var fmodForward = Vector2ToFmodVector(Vector2.UnitY);
-			var fmodUp = Vector3ToFmodVector(Vector3.UnitZ);
+			var fmodForward = Vector2.UnitY.ToFmodVector();
+			var fmodUp = Vector3.UnitZ.ToFmodVector();
 
 			LastResult = FMODSystem.set3DListenerAttributes(listenerId, ref fmodPos, ref fmodZeroVec, ref fmodForward, ref fmodUp);
 		}
 
 		public static void SetListenerAttributes(Vector2 position, Vector2 velocity, Vector2 forward, int listenerId = 0)
 		{
-			var fmodPos = Vector2ToFmodVector(position);
-			var fmodVelocity = Vector2ToFmodVector(velocity);
-			var fmodForward = Vector2ToFmodVector(forward);
-			var fmodZeroVec = GetFmodVector();
-			var fmodUp = Vector3ToFmodVector(Vector3.UnitZ);
+			var fmodPos = position.ToFmodVector();
+			var fmodVelocity = velocity.ToFmodVector();
+			var fmodForward = forward.ToFmodVector();
+			var fmodZeroVec = Vector3.Zero.ToFmodVector();
+			var fmodUp = Vector3.UnitZ.ToFmodVector();
 
 			LastResult = FMODSystem.set3DListenerAttributes(listenerId, ref fmodPos, ref fmodVelocity, ref fmodForward, ref fmodUp);		
 		}

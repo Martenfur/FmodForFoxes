@@ -6,12 +6,13 @@
     <SharedGUID>8d82e21d-b9ee-438b-a2ce-7b801bf712ea</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>ChaiFoxes.FMOD</Import_RootNamespace>
+    <Import_RootNamespace>ChaiFoxes.FMODAudio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AudioMgr.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_dsp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
   </ItemGroup>
 </Project>

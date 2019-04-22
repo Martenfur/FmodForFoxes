@@ -208,8 +208,8 @@ namespace ChaiFoxes.FMODAudio
 		/// <param name="altPanPos">Panning position.</param>
 		public void Set3DAttributes(Vector2 position, Vector2 velocity)
 		{
-			var fmodPos = AudioMgr.Vector2ToFmodVector(position);
-			var fmodVelocity = AudioMgr.Vector2ToFmodVector(velocity);
+			var fmodPos = position.ToFmodVector();
+			var fmodVelocity = velocity.ToFmodVector();
 			SetLastResult(_channel.set3DAttributes(ref fmodPos, ref fmodVelocity));
 		}
 

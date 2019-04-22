@@ -56,15 +56,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidNativeLibrary Include="libs\arm64-v8a\libfmod.so" />
-    <AndroidNativeLibrary Include="libs\armeabi-v7a\libfmod.so" />
-    <AndroidNativeLibrary Include="libs\armeabi\libfmod.so" />
     <None Include="ChaiFoxes.FMODAudio.Android.nuspec">
       <SubType>Designer</SubType>
     </None>
     <None Include="Resources\AboutResources.txt" />
-    <AndroidNativeLibrary Include="libs\x86\libfmod.so" />
-    <AndroidNativeLibrary Include="libs\x86_64\libfmod.so" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />

@@ -4,7 +4,8 @@
 
 **NOTE: CURRENTLY THIS LIBRARY IS IN DEVELOPMENT AND NUGET PACKAGES ARE NOT AVAILABLE**
 
-The time has come. You're finally witnessing a high-level cross-platform C# library, which makes Monogame and FMOD the best friends.
+The time has come. You're finally witnessing a high-level cross-platform C# library, 
+which makes Monogame and FMOD best friends.
 
 ![header](/pics/ebites.png)
 
@@ -13,28 +14,28 @@ In case you came here and the only thing you got so far was that hilarious doge 
 [FMOD](http://fmod.org) is quite powerful cross-platform audio engine, which is
 pretty much the only hope to have any decent audio in Monogame. 
 
-The catch is - FMOD is written in C++, and the only thing C# overlords got
-is bare-bones C# wrapper. No tutorials, no setup guides. Only you and DllImport.
+The catch is - FMOD is written in C++, and the only thing C# overlords have
+is a bare-bones C# wrapper. No tutorials, no setup guides. Only you and DllImport.
 
 ![send help](/pics/help.png)
 
 
-This is why this library exists. It does the tough part for you, loads and sets 
-everything up, plus provides some basic high-level interface. 
+This is why this library exists. It does the tough part for you, and provides 
+basic high-level interface. 
 
-Also note that even though primary target of this library is Monogame, its sources
+Also note that even though the primary target of this library is Monogame, its sources
 will be very useful if you want to use FMOD in some other C#-based project.
 
 ## Setup
 
-Setting things up is a little fiddly. Here's the thing - FMOD license prohibits me from
-distributing their libraries in my Nuget package - so you have to
+Setting things up is a little fiddly. Here's the thing - the FMOD license prohibits 
+me from distributing their libraries in my Nuget package - so you have to
 download them yourself.
 
 ### Preparations.
 
 Go to the [FMOD Download page](https://www.fmod.com/download) (accessing it requires
-registration), find FMOD Studio API downloads and download APIs for Windows, Linux
+registration), find the FMOD Studio API downloads and download APIs for Windows, Linux
 and Android. If you're going to set up all three, of course.
 
 
