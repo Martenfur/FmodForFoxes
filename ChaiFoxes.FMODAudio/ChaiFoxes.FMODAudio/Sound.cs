@@ -31,22 +31,22 @@ namespace ChaiFoxes.FMODAudio
 			}
 		}
 
-		public int Loops;
+		public int Loops = 0;
 
 		/// <summary>
 		/// Sound pitch. Affects speed too.
 		/// 1 - Normal pitch.
 		/// </summary>
-		public float Pitch;
+		public float Pitch = 1;
 		
-		public float Volume;
+		public float Volume = 1;
 		
 		/// <summary>
 		/// Low pass filter. Makes sound muffled.
 		/// 1 - No filtering.
 		/// 0 - Full filtering.
 		/// </summary>
-		public float LowPass;
+		public float LowPass = 1;
 
 		/// <summary>
 		/// Sound mode. Mainly used for 3D sound.

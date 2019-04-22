@@ -3,8 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ChaiFoxes.FMODAudio;
 using ChaiFoxes.FMODAudio.Demos;
+using System;
 
-namespace ChaiFoxes.FMODAudio.Demos.Android
+namespace ChaiFoxes.FMODAudio.Demos
 {
 	/// <summary>
 	/// This is the main type for your game.
@@ -14,15 +15,25 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		Texture2D gato;
+
+		float rotation;
+		float rotationSpeed = 0.01f;
+
+
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-			graphics.IsFullScreen = true;
-			graphics.PreferredBackBufferWidth = 800;
-			graphics.PreferredBackBufferHeight = 480;
-			graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
+			#if ANDROID
+				graphics.IsFullScreen = true;
+				graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+				graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+				graphics.SupportedOrientations = DisplayOrientation.Portrait;
+			#endif
+
+
 		}
 
 		/// <summary>
@@ -33,10 +44,12 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		/// </summary>
 		protected override void Initialize()
 		{
-			// TODO: Add your initialization logic here
-			AudioMgr.Init("Content/");
+			AudioMgr.Init("Content");
+		
+			var sound = AudioMgr.LoadStreamedSound("test.mp3");	
+			var group = AudioMgr.CreateChannelGroup("group");
 			
-			Test.Play();
+			sound.Play(group);
 
 			base.Initialize();
 		}
@@ -50,7 +63,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			gato = Content.Load<Texture2D>("gato");
 		}
 
 		/// <summary>
@@ -59,7 +72,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		/// </summary>
 		protected override void UnloadContent()
 		{
-			// TODO: Unload any non ContentManager content here
+			AudioMgr.Unload();
 		}
 
 		/// <summary>
@@ -69,10 +82,22 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			if(GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+			if (
+				GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+				|| Keyboard.GetState().IsKeyDown(Keys.Escape)
+			)
+			{
 				Exit();
+			}
+			
+			AudioMgr.Update();
+			
+			rotation += rotationSpeed;
 
-			// TODO: Add your update logic here
+			if (rotation > MathHelper.TwoPi)
+			{
+				rotation -= MathHelper.TwoPi;
+			}
 
 			base.Update(gameTime);
 		}
@@ -83,9 +108,34 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(new Color(187, 163, 255));
 
-			// TODO: Add your drawing code here
+			#if !ANDROID
+				var screenSize = new Vector2(
+					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
+				) / 2;
+			#else
+				var screenSize = new Vector2(
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, 
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+				) / 2;
+			#endif
+			
+			var scale = Math.Min(screenSize.X, screenSize.Y) / (float)gato.Width;
+			
+			spriteBatch.Begin();
+			spriteBatch.Draw(
+				gato, 
+				screenSize,
+				null,
+				Color.White,
+				rotation, 
+				Vector2.One * gato.Width / 2, 
+				Vector2.One * scale, 
+				SpriteEffects.None, 
+				0
+			);
+			spriteBatch.End();
 
 			base.Draw(gameTime);
 		}

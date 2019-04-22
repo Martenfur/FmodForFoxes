@@ -45,8 +45,9 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChaiFoxes.FMODAudio.Android">
-      <HintPath>..\..\ChaiFoxes.FMODAudio.Android\bin\Debug\ChaiFoxes.FMODAudio.Android.dll</HintPath>
+    <Reference Include="ChaiFoxes.FMODAudio.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Android\bin\Debug\ChaiFoxes.FMODAudio.Android.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
@@ -61,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
-    <Compile Include="Game1.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
