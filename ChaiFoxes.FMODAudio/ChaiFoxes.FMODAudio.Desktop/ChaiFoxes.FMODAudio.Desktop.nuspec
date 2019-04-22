@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package >
+  <metadata>
+    <id>ChaiFoxes.FMODAudio</id>
+    <version>1.0.0</version>
+    <title>ChaiFoxes.FMODAudio.Desktop</title>
+    <authors>gn Fur</authors>
+    <owners>Chai Foxes</owners>
+ 	  <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FMOD library wrapper for Monogame DesktopGL. Supports Windows and Linux.</description>
+    <releaseNotes>Added foxes.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>fmod audio monogame windows linux</tags>
+  </metadata>
+  <files>
+  	<file src="x64\*" target="Build\x64\" />
+  	<file src="x86\*" target="Build\x86\" />
+  	<file src="ChaiFoxes.FMODAudio.targets" target="Build\" />
+	</files>
+</package>
