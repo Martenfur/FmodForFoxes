@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ChaiFoxes.FMODAudio.Desktop.nuspec" />
     <None Include="x64\fmod.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -70,7 +71,7 @@
     <None Include="x86\libfmod.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="ChaiFoxes.FMODAudio.targets" />
+    <None Include="ChaiFoxes.FMODAudio.Desktop.targets" />
     <None Include="x86\libfmod.so.11">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

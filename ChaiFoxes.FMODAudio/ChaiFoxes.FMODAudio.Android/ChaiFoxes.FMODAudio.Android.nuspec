@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package >
+  <metadata>
+    <id>ChaiFoxes.FMODAudio.Android</id>
+    <version>1.0.0</version>
+    <title>ChaiFoxes.FMODAudio.Android</title>
+    <authors>gn Fur</authors>
+    <owners>Chai Foxes</owners>
+ 	  <projectUrl>https://github.com/gnFur/ChaiFoxes.FMODAudio</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/logofoxe.png?raw=true</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>FMOD library wrapper for Monogame Android.</description>
+    <releaseNotes>Added foxes.</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>fmod audio monogame android</tags>
+  </metadata>
+</package>

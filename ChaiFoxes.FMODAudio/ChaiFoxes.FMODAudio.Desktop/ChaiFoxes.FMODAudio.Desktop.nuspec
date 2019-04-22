@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <package >
   <metadata>
-    <id>ChaiFoxes.FMODAudio</id>
+    <id>ChaiFoxes.FMODAudio.Desktop</id>
     <version>1.0.0</version>
     <title>ChaiFoxes.FMODAudio.Desktop</title>
     <authors>gn Fur</authors>
     <owners>Chai Foxes</owners>
  	  <projectUrl>https://github.com/gnFur/ChaiFoxes.FMODAudio</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/logofoxe.png?raw=true</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/icon.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>FMOD library wrapper for Monogame DesktopGL. Supports Windows and Linux.</description>
     <releaseNotes>Added foxes.</releaseNotes>
@@ -17,6 +17,6 @@
   <files>
   	<file src="x64\*" target="Build\x64\" />
   	<file src="x86\*" target="Build\x86\" />
-  	<file src="ChaiFoxes.FMODAudio.targets" target="Build\" />
+  	<file src="ChaiFoxes.FMODAudio.Desktop.targets" target="Build\" />
 	</files>
 </package>
