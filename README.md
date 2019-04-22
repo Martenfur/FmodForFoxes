@@ -1,10 +1,10 @@
 # ChaiFoxes.FMODAudio
 
-*I suffer so you don't have to.*
+*I suffer so you won't have to.*
 
 **NOTE: CURRENTLY THIS LIBRARY IS IN DEVELOPMENT AND NUGET PACKAGES ARE NOT AVAILABLE**
 
-The time has come. You're finally witnessing a high-level cross-platform C# library, which makes Monogame and FMOD best friends.
+The time has come. You're finally witnessing a high-level cross-platform C# library, which makes Monogame and FMOD the best friends.
 
 ![header](/pics/ebites.png)
 
@@ -28,7 +28,7 @@ will be very useful if you want to use FMOD in some other C#-based project.
 ## Setup
 
 Setting things up is a little fiddly. Here's the thing - FMOD license prohibits me from
-distributing from distributing their libraries with my Nuget package - so you have to
+distributing their libraries in my Nuget package - so you have to
 download them yourself.
 
 ### Preparations.
@@ -49,14 +49,14 @@ Windows API just to have everything in one place.
 2. Install NuGet package ChaiFoxes.FMODAudio.Desktop. Alternatively, you can compile
 it from sources.
 3. Navigate to your FMOD Windows API installation. From it navigate to `\api\core\lib`.
-You will see two directories: x64 and x86. Each one will contain this:
+You will see two directories: `x64` and `x86`. Each will contain this:
 
 ![setup2](/pics/setup2.png)
 
 
 Out of all the files you'll need only `fmod.dll` from both `x86` and `x64` directories.
 Your Monogame project should already have `x86` and `x64` directories 
-(if you don't - just create them) - copy corresponding versions of `fmod.dll` 
+(if it doesn't - just create them). Copy corresponding versions of `fmod.dll` 
 into them. You should end up with it looking like this:
 
 
@@ -116,7 +116,7 @@ Build Action to `AndroidNativeLibrary`.
 
 ## Playing some tunes!
 
-So, after you've set up everything, it's time to bop some pops, as kids say these days.
+So, after you've set everything up, it's time to bop some pops, as kids say these days.
 
 1. Find some sound file and import it into Content Pipeline.
 2. Select sound file and set its Build Action to Copy. 
@@ -125,7 +125,6 @@ So, after you've set up everything, it's time to bop some pops, as kids say thes
 
 3. Include ChaiFoxes.FMODAudio namespace and paste the following code in your
 Initialize() method:
-
 ```
 AudioMgr.Init("Content/");
 
@@ -137,12 +136,12 @@ AudioMgr.PlaySound(sound, group);
 
 You can also check out demo project included in sources. Though, note that it requires
 main library project to be present and compiled in Debug. You can also replace project reference
-to Nuget packages.
+with Nuget packages.
 
 ## But what about other platforms?
 
 I'd like to make console versions of the library - but currently I have no ability
-to do so, and probably won't have for a long time. As for UWP an Apple platforms,
+to do so, and probably won't have for a long time. As for UWP and Apple platforms,
 I just don't care about them enough. 
 
 If you want to be a hero and expand the library with any of those platfrorms yourself - 
@@ -159,10 +158,5 @@ But the show's main star is a bit different. FMOD has its own [license](https://
 which is much less permissive than mine. 
 
 Demo [music](https://www.youtube.com/watch?v=zZ81qi90E-Y) is provided by Agrofox.
-
-## Fin.
-
-Want to contribute, suggest a feature or just want to pour shit on my code? Feel free to contact me via email: **chaifoxes@gmail.com** or on [Twitter](https://twitter.com/ChaiFoxes).
-
 
 *don't forget to pet your foxes*
