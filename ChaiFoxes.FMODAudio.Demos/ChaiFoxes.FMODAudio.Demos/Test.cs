@@ -12,10 +12,15 @@ namespace ChaiFoxes.FMODAudio.Demos
 			AudioMgr.Init("Content/");
 
 			var sound = AudioMgr.LoadStreamedSound("test.mp3");
-
+			
 			var group = AudioMgr.CreateChannelGroup("group");
+			
+			sound.Play(group);
+			sound.LowPass = 0.5f;
 
-			AudioMgr.PlaySound(sound, group);
+			//AudioMgr.PlaySound(sound, group);
+
+
 		}
 	}
 }

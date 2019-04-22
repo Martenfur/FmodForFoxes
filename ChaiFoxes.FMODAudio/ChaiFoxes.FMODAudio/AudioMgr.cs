@@ -69,80 +69,47 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public static Sound LoadSound(string name, FMOD.MODE mode = FMOD.MODE.DEFAULT)
 		{
-			// TODO: Fix paths, when will be porting FMOD to other platforms.
-			LastResult = FMODSystem.createSound(
-				_rootDir + name, 
-				mode, 
-				out FMOD.Sound newSound
-			);
 			
-			return new Sound(FMODSystem, newSound, new FMOD.Channel());
-		}
-				
-		/// <summary>
-		/// Loads sound stream from file.
-		/// Use this function to load music and lond ambience tracks.
-		/// </summary>
-		public static Sound LoadStreamedSound(string name, FMOD.MODE mode = FMOD.MODE.DEFAULT)
-		{
-			var stream = TitleContainer.OpenStream(_rootDir + name);
-			
-			byte[] buffer = new byte[16*1024];
-			byte[] bufferRes;
-			using (MemoryStream ms = new MemoryStream())
-			{
-				int read;
-        while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-        {
-            ms.Write(buffer, 0, read);
-        }
-        bufferRes =  ms.ToArray();
-			}
+			var buffer = LoadFileAsBuffer(Path.Combine(_rootDir, name));
 			
 			var info = new FMOD.CREATESOUNDEXINFO();
-			info.length = (uint)bufferRes.Length;
+			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
 
-			LastResult = FMODSystem.createStream(
-				bufferRes, 
+			LastResult = FMODSystem.createSound(
+				buffer, 
 				FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESAMPLE, 
 				ref info,
 				out FMOD.Sound newSound
 			);
 
-			return new Sound(FMODSystem, newSound, new FMOD.Channel());
-			
-		}
-
-		/// <summary>
-		/// Plays given sound and returns separate instance of it.
-		/// </summary>
-		public static Sound PlaySound(Sound sound, FMOD.ChannelGroup group, bool paused = false)
-		{
-			LastResult = FMODSystem.playSound(sound.FMODSound, group, paused, out FMOD.Channel channel);
-			return new Sound(FMODSystem, sound.FMODSound, channel);
+			return new Sound(newSound);
 		}
 		
 		/// <summary>
-		/// Plays given sound and returns separate instance of it.
+		/// Loads streamed sound stream from file.
+		/// Use this function to load music and long ambience tracks.
 		/// </summary>
-		public static Sound PlaySoundAt(
-			Sound sound, 
-			FMOD.ChannelGroup group, 
-			bool paused = false, 
-			Vector2 position = default(Vector2), 
-			Vector2 velocity = default(Vector2)
-		)
+		public static Sound LoadStreamedSound(string name, FMOD.MODE mode = FMOD.MODE.DEFAULT)
 		{
-			LastResult = FMODSystem.playSound(sound.FMODSound, group, paused, out FMOD.Channel channel);
-			var newSound = new Sound(FMODSystem, sound.FMODSound, channel);
-			newSound.Mode = FMOD.MODE._3D;
-			newSound.Set3DAttributes(position, velocity);
+			
+			var buffer = LoadFileAsBuffer(Path.Combine(_rootDir, name));
+			
+			var info = new FMOD.CREATESOUNDEXINFO();
+			info.length = (uint)buffer.Length;
+			info.cbsize = Marshal.SizeOf(info);
 
-			return newSound;
+			LastResult = FMODSystem.createStream(
+				buffer, 
+				FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESTREAM, 
+				ref info,
+				out FMOD.Sound newSound
+			);
+
+			return new Sound(newSound);
 		}
-
-
+		
+		
 
 		public static void SetListenerPosition(Vector2 position, int listenerId = 0)
 		{
@@ -167,6 +134,31 @@ namespace ChaiFoxes.FMODAudio
 			LastResult = FMODSystem.set3DListenerAttributes(listenerId, ref fmodPos, ref fmodVelocity, ref fmodForward, ref fmodUp);		
 		}
 
+
+
+		/// <summary>
+		/// Loads file as a byte array.
+		/// </summary>
+		private static byte[] LoadFileAsBuffer(string path)
+		{
+			// TitleContainer is cross-platform Monogame file loader.
+			var stream = TitleContainer.OpenStream(path);
+			
+			// File is opened as a stream, so we need to read it to the end.
+			byte[] buffer = new byte[16*1024];
+			byte[] bufferRes;
+			using (MemoryStream ms = new MemoryStream())
+			{
+				int read;
+        while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+        {
+            ms.Write(buffer, 0, read);
+        }
+        bufferRes =  ms.ToArray();
+			}
+
+			return bufferRes;
+		}
 
 	}
 }

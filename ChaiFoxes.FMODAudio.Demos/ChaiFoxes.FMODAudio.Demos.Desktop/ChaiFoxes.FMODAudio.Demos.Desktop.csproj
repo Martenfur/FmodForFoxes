@@ -123,6 +123,12 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="x64\libfmod.so" />
+    <None Include="x64\libfmod.so.11" />
+    <None Include="x64\libfmod.so.11.0" />
+    <None Include="x86\libfmod.so" />
+    <None Include="x86\libfmod.so.11" />
+    <None Include="x86\libfmod.so.11.0" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="..\ChaiFoxes.FMODAudio.Demos\Content\Content.mgcb" />
@@ -138,6 +144,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="x64\fmod.dll" />
+    <Content Include="x86\fmod.dll" />
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AudioMgr.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_dsp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SoundChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
   </ItemGroup>
