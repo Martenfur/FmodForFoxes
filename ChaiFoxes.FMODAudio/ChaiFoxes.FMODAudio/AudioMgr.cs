@@ -3,11 +3,19 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 
+// DO NOT include FMOD namespace in ANY of your classes.
+// Use FMOD.SomeClass instead.
+// FMOD classes seriously interfere with System namespace.
+
 namespace ChaiFoxes.FMODAudio
 {
 
 	/// <summary>
 	/// Audio manager. Controls main audiosystem parameters.
+	/// 
+	/// NOTE: My wrappers don't provide full FMOD functionality. For example,
+	/// DSPs and advanced 3D stuff are largely left untouched. I may extend my audio
+	/// classes to add new features. For now, you have to use FMOD classes directly.
 	/// </summary>
 	public static partial class AudioMgr
 	{
@@ -19,6 +27,7 @@ namespace ChaiFoxes.FMODAudio
 			get 
 			{
 				LastResult = FMODSystem.get3DNumListeners(out int listeners);
+				
 				return listeners;
 			}
 			set => LastResult = FMODSystem.set3DNumListeners(value);

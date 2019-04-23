@@ -122,12 +122,24 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
-    <None Include="x64\libfmod.so" />
-    <None Include="x64\libfmod.so.11" />
-    <None Include="x64\libfmod.so.11.0" />
-    <None Include="x86\libfmod.so" />
-    <None Include="x86\libfmod.so.11" />
-    <None Include="x86\libfmod.so.11.0" />
+    <None Include="x64\libfmod.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x64\libfmod.so.11">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x64\libfmod.so.11.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\libfmod.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\libfmod.so.11">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="x86\libfmod.so.11.0">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="..\ChaiFoxes.FMODAudio.Demos\Content\Content.mgcb" />
@@ -145,8 +157,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x64\fmod.dll" />
-    <Content Include="x86\fmod.dll" />
+    <Content Include="x64\fmod.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\fmod.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

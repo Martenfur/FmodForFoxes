@@ -1,7 +1,7 @@
 ﻿namespace ChaiFoxes.FMODAudio
 {
 	/// <summary>
-	/// Android-specific part of an audio manager.
+	/// Android-specific part of the audio manager.
 	/// </summary>
 	public static partial class AudioMgr
 	{

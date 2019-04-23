@@ -1,9 +1,7 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using ChaiFoxes.FMODAudio;
-using ChaiFoxes.FMODAudio.Demos;
-using System;
 
 namespace ChaiFoxes.FMODAudio.Demos
 {
@@ -25,15 +23,13 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-
+			
 			#if ANDROID
 				graphics.IsFullScreen = true;
 				graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 				graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 				graphics.SupportedOrientations = DisplayOrientation.Portrait;
 			#endif
-
-
 		}
 
 		/// <summary>
@@ -44,12 +40,27 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void Initialize()
 		{
+			// All our music files reside in Content directory.
 			AudioMgr.Init("Content");
-		
-			var sound = AudioMgr.LoadStreamedSound("test.mp3");	
-			var group = AudioMgr.CreateChannelGroup("group");
-			
-			sound.Play(group);
+
+			// You can load pretty much any popular audio format.
+			// I'd recommend .ogg for music, tho.
+			var sound = AudioMgr.LoadStreamedSound("test.mp3");
+			sound.Loops = 3;
+			sound.LowPass = 0.1f;
+			//sound.Volume = 2;
+			//sound.Pitch = 2;
+
+			var channel = sound.Play();
+			//channel.Loops = 2;
+
+			Console.WriteLine((channel.Mode));
+
+			/*
+			// Add some effects to the sound! :0
+			channel.LowPass = 0.5f;
+			channel.Pitch = 2f;
+			*/
 
 			base.Initialize();
 		}
@@ -83,17 +94,17 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Update(GameTime gameTime)
 		{
 			if (
-				GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed 
+				GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+				|| GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
 				|| Keyboard.GetState().IsKeyDown(Keys.Escape)
 			)
 			{
 				Exit();
 			}
-			
-			AudioMgr.Update();
-			
-			rotation += rotationSpeed;
 
+			AudioMgr.Update();
+
+			rotation += rotationSpeed;
 			if (rotation > MathHelper.TwoPi)
 			{
 				rotation -= MathHelper.TwoPi;
@@ -116,23 +127,23 @@ namespace ChaiFoxes.FMODAudio.Demos
 				) / 2;
 			#else
 				var screenSize = new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, 
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
 					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
 				) / 2;
 			#endif
-			
+
 			var scale = Math.Min(screenSize.X, screenSize.Y) / (float)gato.Width;
-			
+
 			spriteBatch.Begin();
 			spriteBatch.Draw(
-				gato, 
+				gato,
 				screenSize,
 				null,
 				Color.White,
-				rotation, 
-				Vector2.One * gato.Width / 2, 
-				Vector2.One * scale, 
-				SpriteEffects.None, 
+				rotation,
+				Vector2.One * gato.Width / 2,
+				Vector2.One * scale,
+				SpriteEffects.None,
 				0
 			);
 			spriteBatch.End();

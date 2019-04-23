@@ -8,43 +8,27 @@ using Microsoft.Xna.Framework;
 namespace ChaiFoxes.FMODAudio
 {
 	/// <summary>
-	/// FMOD sound wrapper. Takes horrible FMOD wrapper and makes it look pretty.
-	/// Basically, a sound instance.
-	/// 
-	/// NOTE: You can set sound parameters only AFTER you've started playing sound.
-	/// Otherwise they will have no effect!
-	/// 
-	/// NOTE: My wrappers don't provide full FMOD functionality. For example,
-	/// DSPs and advanced 3D stuff are largely left untouched. I may extend my audio
-	/// classes to add new features. For now, you have to use FMOD classes directly.
+	/// FMOD sound channel wrapper. Takes horrible FMOD wrapper and makes it look pretty.
+	/// Basically, a playing sound instance.
 	/// </summary>
 	public class SoundChannel
 	{
 		/// <summary>
-		/// FMOD channel object.
-		/// 
-		/// NOTE: It is not recommended to use it directly. 
-		/// If you'll really need some of its features, 
-		/// just implement them in this class.
-		/// 
-		/// NOTE: ALWAYS check for null!!!
+		/// FMOD channel object. Use it if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Channel Channel 
-		{
-			get => _channel;
-			private set => _channel = value;
-		}
-		private FMOD.Channel _channel; // Can't use "out" on properties. 
+		public FMOD.Channel Channel => _channel;
+		protected FMOD.Channel _channel; // Can't use "out" on properties. 
 
-		public Sound Sound;
+		/// <summary>
+		/// Sound, from which this channel has been created.
+		/// </summary>
+		public readonly Sound Sound;
+
 
 		#region Properties.
 
 		/// <summary>
-		/// Amount of loops. 
-		/// > 0 - Specific count.
-		/// 0 - No loops.
-		/// -1 - Infinite loops.
+		/// Tells if channel is looping.
 		/// </summary>
 		public bool Looping
 		{
@@ -57,28 +41,49 @@ namespace ChaiFoxes.FMODAudio
 			{
 				if (value)
 				{
-					SetLastResult(_channel.setLoopCount(-1));
+					Loops = -1;
 				}
 				else
-				{	
-					SetLastResult(_channel.setLoopCount(0));
+				{
+					Loops = 0;
 				}
 			}
 		}
-
+		
+		/// <summary>
+		/// Amount of loops. 
+		/// > 0 - Specific count.
+		/// 0 - No loops.
+		/// -1 - Infinite loops.
+		/// </summary>
 		public int Loops
 		{
 			get
 			{
+				// Do you have some lööps, bröther?
 				SetLastResult(_channel.getLoopCount(out int loops));
 				return loops;
 			}
-			set => SetLastResult(_channel.setLoopCount(value));
+			set
+			{
+				if (value == 0)
+				{
+					Mode = FMOD.MODE.LOOP_OFF;
+				}
+				else
+				{
+					Mode = FMOD.MODE.LOOP_NORMAL;
+				}
+
+				SetLastResult(_channel.setLoopCount(value));
+			}
 		}
 
 		/// <summary>
 		/// Sound pitch. Affects speed too.
 		/// 1 - Normal pitch.
+		/// More than 1 - Higher pitch.
+		/// Less than 1 - Lower pitch.
 		/// </summary>
 		public float Pitch
 		{
@@ -90,6 +95,11 @@ namespace ChaiFoxes.FMODAudio
 			set => SetLastResult(_channel.setPitch(value));
 		}
 
+		/// <summary>
+		/// Sound volume.
+		/// 1 - Normal volume.
+		/// 0 - Muted.
+		/// </summary>
 		public float Volume
 		{
 			get
@@ -116,6 +126,24 @@ namespace ChaiFoxes.FMODAudio
 		}
 
 		/// <summary>
+		/// Sound mode. Mainly used for 3D sound.
+		/// </summary>
+		public FMOD.MODE Mode
+		{
+			get
+			{
+				SetLastResult(_channel.getMode(out _mode));
+				return _mode;
+			}
+			set
+			{
+				_mode = value;
+				SetLastResult(_channel.setMode(_mode));
+			}
+		}
+		private FMOD.MODE _mode;
+
+		/// <summary>
 		/// Tells if sound is playing.
 		/// </summary>
 		public bool IsPlaying
@@ -126,19 +154,23 @@ namespace ChaiFoxes.FMODAudio
 				return isPlaying;
 			}
 		}
-
+		
 		/// <summary>
-		/// Sound mode. Mainly used for 3D sound.
+		/// Track position in milliseconds.
 		/// </summary>
-		public FMOD.MODE Mode
+		public uint TrackPosition
 		{
 			get
 			{
-				SetLastResult(_channel.getMode(out FMOD.MODE mode));
-				return mode;
+				SetLastResult(_channel.getPosition(out uint position, FMOD.TIMEUNIT.MS));
+				return position;
 			}
-			set => SetLastResult(_channel.setMode(value));
+			set
+			{
+				SetLastResult(_channel.setPosition(value, FMOD.TIMEUNIT.MS));
+			}
 		}
+		
 
 		#endregion Properties.
 
@@ -167,18 +199,7 @@ namespace ChaiFoxes.FMODAudio
 
 		public void Stop() =>
 			SetLastResult(_channel.stop());
-
-		
-
-		public uint GetTrackPosition(FMOD.TIMEUNIT timeUnit = FMOD.TIMEUNIT.MS)
-		{
-			SetLastResult(_channel.getPosition(out uint position, timeUnit));
-			return position;
-		}
-
-		public void SetTrackPosition(uint position, FMOD.TIMEUNIT timeUnit = FMOD.TIMEUNIT.MS) =>
-			SetLastResult(_channel.setPosition(position, timeUnit));
-		
+			
 
 
 		/// <summary>
