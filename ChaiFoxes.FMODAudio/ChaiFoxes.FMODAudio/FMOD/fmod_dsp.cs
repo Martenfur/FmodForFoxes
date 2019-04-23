@@ -10,6 +10,9 @@
 /* https://fmod.com/resources/documentation-api?version=2.0&page=plugin-api-dsp.html        */
 /* =========================================================================================*/
 
+// Disabling XML docs warnings.
+#pragma warning disable 1591
+
 using System;
 using System.Text;
 using System.Runtime.InteropServices;

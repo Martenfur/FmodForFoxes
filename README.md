@@ -40,17 +40,17 @@ and Android. If you're going to set up all three, of course.
 
 
 Windows API requires installation, Linux and Android doesn't. You can drop them near
-Windows API just to have everything in one place.
+the Windows API just to have everything in one place.
 
 ![setup1](/pics/setup1.png)
 
 ### Windows & Linux
 
 1. Open your DesktopGL or SharpDX Monogame project.
-2. Install NuGet package ChaiFoxes.FMODAudio.Desktop. Alternatively, you can compile
+2. Install the NuGet package ChaiFoxes.FMODAudio.Desktop. Alternatively, you can compile
 it from sources.
-3. Navigate to your FMOD Windows API installation. From it navigate to `\api\core\lib`.
-You will see two directories: `x64` and `x86`. Each will contain this:
+3. Navigate to your FMOD Windows API installation. From there navigate to `\api\core\lib`.
+You will see two directories: `x64` and `x86`. Each one will contain this:
 
 ![setup2](/pics/setup2.png)
 
@@ -67,7 +67,7 @@ Make sure dll files will be copied to the output directory:
 
 ![setup4](/pics/setup4.png)
 
-4. Navigate to your FMOD Linux API installation. From it navigate to `\api\core\lib`.
+4. Navigate to your FMOD Linux API installation. From there navigate to `\api\core\lib`.
 This time you will see four directories: 
 
 ![setup5](/pics/setup5.png)
@@ -78,7 +78,7 @@ Each directory contains this:
 
 ![setup6](/pics/setup6.png)
 
-You will need only `libfmod` files - those without L. Copy fmod files from `x86`
+You will only need `libfmod` files - those without L. Copy fmod files from `x86`
 directory to `x86` directory of your project, and then copy files from `x86_64` 
 to your `x64` directory. You'll end up with this:
 
@@ -91,7 +91,7 @@ to the output directory:
 
 ![setup4](/pics/setup4.png)
 
-And that's it - you got yourself cross-platform desktop FMOD!
+And that's it - you've gotten yourself cross-platform desktop FMOD!
 
 ### Android
 
@@ -99,12 +99,12 @@ And that's it - you got yourself cross-platform desktop FMOD!
 2. Install NuGet package ChaiFoxes.FMODAudio.Android. Alternatively, you can compile
 it from sources.
 3. Create `libs` directory in the root of your project.
-4. Navigate to your FMOD Android API installation. From it navigate to `\api\core\lib`.
-You will see this:
+4. Navigate to your FMOD Android API installation. From there navigate to 
+`\api\core\lib`. You will see this:
 
 ![setup8](/pics/setup8.png)
 
-5. Each folder contains `libfmod.so` and `libfmodL.so` files. 
+5. Each folder contains `libfmod.so` and `libfmodL.so`. 
 You need only `libfmod.so` from each directory. Copy everything over to your `libs`
 directory. You'll end up with this:
 
@@ -119,19 +119,19 @@ Build Action to `AndroidNativeLibrary`.
 
 So, after you've set everything up, it's time to bop some pops, as kids say these days.
 
-1. Find some sound file and import it into Content Pipeline.
-2. Select sound file and set its Build Action to Copy. 
+1. Find a sound file and import it into the Content Pipeline.
+2. Select the sound file and set its Build Action to Copy. 
 
 ![setup11](/pics/setup11.png)
 
-3. Include ChaiFoxes.FMODAudio namespace and paste the following code in your
+3. Include the ChaiFoxes.FMODAudio namespace and paste the following code into your
 Initialize() method:
 ```
-AudioMgr.Init("Content/");
+AudioMgr.Init("Content");
 
 var sound = AudioMgr.LoadStreamedSound("test.mp3");
-var group = AudioMgr.CreateChannelGroup("group");
-AudioMgr.PlaySound(sound, group);
+var channel = sound.Play();
+channel.Looping = true;
 ```
 4. Compile and hope that you (and me) did everything right.
 
@@ -145,7 +145,7 @@ I'd like to make console versions of the library - but currently I have no abili
 to do so, and probably won't have for a long time. As for UWP and Apple platforms,
 I just don't care about them enough. 
 
-If you want to be a hero and expand the library with any of those platfrorms yourself - 
+If you want to be a hero and expand the library with any of those platforms yourself - 
 contact me and we'll figure something out. ; - )
 
 

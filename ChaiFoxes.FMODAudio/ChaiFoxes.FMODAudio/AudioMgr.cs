@@ -19,8 +19,10 @@ namespace ChaiFoxes.FMODAudio
 	/// </summary>
 	public static partial class AudioMgr
 	{
+		/// <summary>
+		/// Low-level FMOD sound system.
+		/// </summary>
 		public static FMOD.System FMODSystem;
-		public static FMOD.RESULT LastResult {get; internal set;}
 		
 
 		/// <summary>
@@ -28,14 +30,29 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		private static string _rootDir;
 		
+
 		/// <summary>
 		/// Initializes FMOD with default parameters. 
 		/// 
 		/// If you want to use only the default wrapper, call
 		/// LoadNativeLibrary() instead.
 		/// </summary>
-		/// <param name="rootDir"></param>
-		public static void Init(string rootDir)
+		public static void Init(string rootDir) =>
+			Init(rootDir, 256, 4, 32, FMOD.INITFLAGS.CHANNEL_LOWPASS | FMOD.INITFLAGS.CHANNEL_DISTANCEFILTER);
+		
+		/// <summary>
+		/// Initializes FMOD with custom parameters. 
+		/// 
+		/// If you want to use only the default wrapper, call
+		/// LoadNativeLibrary() instead.
+		/// </summary>
+		public static void Init(
+			string rootDir, 
+			uint dspBufferLength, 
+			int dspBufferCount, 
+			int maxChannels,
+			FMOD.INITFLAGS initFlags
+		)
 		{
 			_rootDir = rootDir;
 			LoadNativeLibrary();		
@@ -43,18 +60,12 @@ namespace ChaiFoxes.FMODAudio
 			FMOD.Factory.System_Create(out FMOD.System system);
 			FMODSystem = system;
 
-			FMODSystem.setDSPBufferSize(256, 4);
-			FMODSystem.init(32, FMOD.INITFLAGS.CHANNEL_LOWPASS | FMOD.INITFLAGS.CHANNEL_DISTANCEFILTER, (IntPtr)0);
+			// Too high values will cause sound lag.
+			FMODSystem.setDSPBufferSize(dspBufferLength, dspBufferCount);
+
+			FMODSystem.init(maxChannels, initFlags, (IntPtr)0);
 		}
 		
-
-		public static FMOD.ChannelGroup CreateChannelGroup(string name)
-		{
-			FMODSystem.createChannelGroup(name, out FMOD.ChannelGroup group);
-			return group;
-		}
-
-
 		public static void Update() =>
 			FMODSystem.update();
 		
@@ -62,6 +73,16 @@ namespace ChaiFoxes.FMODAudio
 			FMODSystem.release();
 		
 		
+		/// <summary>
+		/// Creates new channel group with given name.
+		/// </summary>
+		public static FMOD.ChannelGroup CreateChannelGroup(string name)
+		{
+			FMODSystem.createChannelGroup(name, out FMOD.ChannelGroup group);
+			return group;
+		}
+
+
 		/// <summary>
 		/// Loads sound from file.
 		/// Use this function to load short sound effects.
@@ -75,7 +96,7 @@ namespace ChaiFoxes.FMODAudio
 			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
 
-			LastResult = FMODSystem.createSound(
+			FMODSystem.createSound(
 				buffer, 
 				FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESAMPLE, 
 				ref info,
@@ -98,7 +119,7 @@ namespace ChaiFoxes.FMODAudio
 			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
 
-			LastResult = FMODSystem.createStream(
+			FMODSystem.createStream(
 				buffer, 
 				FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESTREAM, 
 				ref info,
@@ -108,8 +129,6 @@ namespace ChaiFoxes.FMODAudio
 			return new Sound(newSound);
 		}
 		
-		
-
 	
 
 		/// <summary>

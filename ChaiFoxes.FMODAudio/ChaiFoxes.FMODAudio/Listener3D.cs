@@ -25,7 +25,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Listener position in 3D space. Used for panning and attenuation
 		/// </summary>
-		public Vector3 Position
+		public Vector3 Position3D
 		{
 			get
 			{
@@ -42,7 +42,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Listener velocity in 3D space. Used for doppler effect.
 		/// </summary>
-		public Vector3 Velocity
+		public Vector3 Velocity3D
 		{
 			get
 			{

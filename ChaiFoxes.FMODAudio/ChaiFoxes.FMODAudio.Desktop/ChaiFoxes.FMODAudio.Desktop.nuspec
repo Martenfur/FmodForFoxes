@@ -6,6 +6,7 @@
     <title>ChaiFoxes.FMODAudio.Desktop</title>
     <authors>gn Fur</authors>
     <owners>Chai Foxes</owners>
+		<license type="expression">MPL-2.0</license>
  	  <projectUrl>https://github.com/gnFur/ChaiFoxes.FMODAudio</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

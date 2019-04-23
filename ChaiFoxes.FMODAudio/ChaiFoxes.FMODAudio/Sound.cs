@@ -6,6 +6,9 @@
 
 namespace ChaiFoxes.FMODAudio
 {
+	/// <summary>
+	/// Sound class. Can play sound with given attributes.
+	/// </summary>
 	public class Sound
 	{
 		protected FMOD.Sound _FMODSound {get; private set;}
@@ -109,8 +112,7 @@ namespace ChaiFoxes.FMODAudio
 		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
 		{
 			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
-			var channel = new SoundChannel(this, fmodChannel);			
-			return channel;
+			return new SoundChannel(this, fmodChannel);	
 		}
 
 

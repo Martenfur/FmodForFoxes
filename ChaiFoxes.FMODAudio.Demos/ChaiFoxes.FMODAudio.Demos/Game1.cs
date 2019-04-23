@@ -42,33 +42,17 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			// All our music files reside in Content directory.
 			AudioMgr.Init("Content");
-			
-			var listener = Listener.Create();
-			listener.Position = new Vector3(100, 0, 0);
-			
-			var listener1 = Listener.Create();
-			listener1.Position = new Vector3(-100, 0, 0);
-			listener1.Velocity = new Vector3(100, 0, 0);
-
-
-			listener.Destroy();
-
+		
 			// You can load pretty much any popular audio format.
 			// I'd recommend .ogg for music, tho.
 			var sound = AudioMgr.LoadStreamedSound("test.mp3");
-			sound.Loops = -1;
+			sound.Looping = true;
 			//sound.LowPass = 0.1f;
 			//sound.Volume = 2;
 			//sound.Pitch = 2;
-
+			
 			var channel = sound.Play();
-			channel.Is3D = true;
-			channel.Position3D = new Vector3(0, 0, 0);
-			channel.Set3DMinMaxDistance(32, 200);
-			//channel.Loops = 2;
-
-			Console.WriteLine((channel.Mode));
-
+			
 			/*
 			// Add some effects to the sound! :0
 			channel.LowPass = 0.5f;
