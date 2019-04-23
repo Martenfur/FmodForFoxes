@@ -2,8 +2,6 @@
 
 *I suffer so you won't have to.*
 
-**NOTE: CURRENTLY THIS LIBRARY IS IN DEVELOPMENT AND NUGET PACKAGES ARE NOT AVAILABLE**
-
 The time has come. You're finally witnessing a high-level cross-platform C# library, 
 which makes Monogame and FMOD best friends.
 
