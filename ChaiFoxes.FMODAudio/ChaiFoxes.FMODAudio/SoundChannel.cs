@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -25,8 +24,6 @@ namespace ChaiFoxes.FMODAudio
 		public readonly Sound Sound;
 
 
-		#region Properties.
-
 		/// <summary>
 		/// Tells if channel is looping.
 		/// </summary>
@@ -34,7 +31,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getLoopCount(out int loops));
+				_channel.getLoopCount(out int loops);
 				return (loops == -1);
 			}
 			set 
@@ -61,7 +58,7 @@ namespace ChaiFoxes.FMODAudio
 			get
 			{
 				// Do you have some lööps, bröther?
-				SetLastResult(_channel.getLoopCount(out int loops));
+				_channel.getLoopCount(out int loops);
 				return loops;
 			}
 			set
@@ -75,7 +72,7 @@ namespace ChaiFoxes.FMODAudio
 					Mode = FMOD.MODE.LOOP_NORMAL;
 				}
 
-				SetLastResult(_channel.setLoopCount(value));
+				_channel.setLoopCount(value);
 			}
 		}
 
@@ -89,10 +86,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getPitch(out float pitch));
+				_channel.getPitch(out float pitch);
 				return pitch;
 			}
-			set => SetLastResult(_channel.setPitch(value));
+			set => 
+				_channel.setPitch(value);
 		}
 
 		/// <summary>
@@ -104,10 +102,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getVolume(out float volume));
+				_channel.getVolume(out float volume);
 				return volume;
 			}
-			set => SetLastResult(_channel.setVolume(value));	
+			set => 
+				_channel.setVolume(value);
 		}
 
 		/// <summary>
@@ -119,10 +118,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getLowPassGain(out float lowPassGain));
+				_channel.getLowPassGain(out float lowPassGain);
 				return lowPassGain;
 			}
-			set => SetLastResult(_channel.setLowPassGain(value));
+			set => 
+				_channel.setLowPassGain(value);
 		}
 
 		/// <summary>
@@ -132,16 +132,99 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getMode(out _mode));
-				return _mode;
+				_channel.getMode(out FMOD.MODE mode);
+				return mode;
+			}
+			set =>
+				_channel.setMode(value);
+		}
+
+
+		/// <summary>
+		/// If true, allows sound to be positioned in 3D space.
+		/// </summary>
+		public bool Is3D
+		{
+			get => 
+				(Mode & FMOD.MODE._3D) != 0;
+			set
+			{
+				if (value)
+				{
+					Mode = FMOD.MODE._3D;
+				}
+				else
+				{
+					Mode = FMOD.MODE._2D;
+				}
+			}
+		}
+		
+		/// <summary>
+		/// Sound's position in 3D space. Can be used only id 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Position3D
+		{
+			get
+			{
+				_channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				return pos.ToVector3();
 			}
 			set
 			{
-				_mode = value;
-				SetLastResult(_channel.setMode(_mode));
+				var fmodPos = value.ToFmodVector();
+				var fmodVel = Velocity3D.ToFmodVector();
+				_channel.set3DAttributes(ref fmodPos, ref fmodVel);
 			}
 		}
-		private FMOD.MODE _mode;
+
+		/// <summary>
+		/// Sound's velocity in 3D space. Can be used only id 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Velocity3D
+		{
+			get
+			{
+				_channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				return vel.ToVector3();
+			}
+			set
+			{
+				var fmodPos = Position3D.ToFmodVector();
+				var fmodVel = value.ToFmodVector();
+				_channel.set3DAttributes(ref fmodPos, ref fmodVel);
+			}
+		}
+
+		/// <summary>
+		/// Distance from the source where attenuation begins.
+		/// </summary>
+		public float MinDistance3D
+		{
+			get
+			{
+				_channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				return minDistance;
+			}
+			set =>
+				_channel.set3DMinMaxDistance(value, MaxDistance3D);
+		}
+		
+		/// <summary>
+		/// Distance from the source where attenuation ends.
+		/// </summary>
+		public float MaxDistance3D
+		{
+			get
+			{
+				_channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				return maxDistance;
+			}
+			set =>
+				_channel.set3DMinMaxDistance(MinDistance3D, value);
+		}
+
+
 
 		/// <summary>
 		/// Tells if sound is playing.
@@ -150,7 +233,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.isPlaying(out bool isPlaying));
+				_channel.isPlaying(out bool isPlaying);
 				return isPlaying;
 			}
 		}
@@ -162,17 +245,12 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				SetLastResult(_channel.getPosition(out uint position, FMOD.TIMEUNIT.MS));
+				_channel.getPosition(out uint position, FMOD.TIMEUNIT.MS);
 				return position;
 			}
-			set
-			{
-				SetLastResult(_channel.setPosition(value, FMOD.TIMEUNIT.MS));
-			}
+			set => 
+				_channel.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
-		
-
-		#endregion Properties.
 
 
 
@@ -186,60 +264,22 @@ namespace ChaiFoxes.FMODAudio
 			Pitch = Sound.Pitch;
 			LowPass = sound.LowPass;
 			Mode = sound.Mode;
+			Is3D = sound.Is3D;
+			Position3D = sound.Position3D;
+			Velocity3D = sound.Velocity3D;
+			MinDistance3D = sound.MinDistance3D;
+			MaxDistance3D = sound.MaxDistance3D;
 		}
-
-
 
 		
 		public void Pause() =>
-			SetLastResult(_channel.setPaused(true));
+			_channel.setPaused(true);
 
 		public void Resume() =>
-			SetLastResult(_channel.setPaused(false));
+			_channel.setPaused(false);
 
 		public void Stop() =>
-			SetLastResult(_channel.stop());
-			
-
-
-		/// <summary>
-		/// Sets 3D attributes.
-		/// </summary>
-		/// <param name="position">Sound position.</param>
-		/// <param name="velocity">Sound velocity.</param>
-		public void Set3DAttributes(Vector2 position, Vector2 velocity)
-		{
-			var fmodPos = position.ToFmodVector();
-			var fmodVelocity = velocity.ToFmodVector();
-			SetLastResult(_channel.set3DAttributes(ref fmodPos, ref fmodVelocity));
-		}
-
-
-
-		public void Set3DMinMaxDistance(float minDistance, float maxDistance) =>
-			SetLastResult(_channel.set3DMinMaxDistance(minDistance, maxDistance));
-
-		public Tuple<float, float> Get3DMinMaxDistance()
-		{
-			float minDistance = 0, 
-				maxDistance = 0;
-			SetLastResult(_channel.get3DMinMaxDistance(out minDistance, out maxDistance));
-			return new Tuple<float, float>(minDistance, maxDistance);
-		}
-		
-
-		/// <summary>
-		/// Sets last result to the Audio Manager.
-		/// NOTE: There is very high probability that this code will change, so 
-		/// making it separate function will make life a bit easier.
-		/// </summary>
-		private void SetLastResult(FMOD.RESULT? result)
-		{
-			if (result != null)
-			{
-				AudioMgr.LastResult = (FMOD.RESULT)result;
-			}
-		}
+			_channel.stop();
 
 	}
 }

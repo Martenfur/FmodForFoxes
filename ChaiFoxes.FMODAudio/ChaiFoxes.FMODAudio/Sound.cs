@@ -70,6 +70,32 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public FMOD.ChannelGroup ChannelGroup;
 
+		/// <summary>
+		/// If true, allows sound to be positioned in 3D space.
+		/// </summary>
+		public bool Is3D = false;
+
+		/// <summary>
+		/// Sound's position in 3D space. Can be used only id 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Position3D = Vector3.Zero;
+		
+		/// <summary>
+		/// Sound's velocity in 3D space. Can be used only id 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Velocity3D = Vector3.Zero;
+		
+		/// <summary>
+		/// Distance from the source where attenuation begins.
+		/// </summary>
+		public float MinDistance3D;
+		
+		/// <summary>
+		/// Distance from the source where attenuation ends.
+		/// </summary>
+		public float MaxDistance3D;
+
+
 		public Sound(FMOD.Sound sound)
 		{
 			_FMODSound = sound;
@@ -84,25 +110,6 @@ namespace ChaiFoxes.FMODAudio
 		{
 			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
 			var channel = new SoundChannel(this, fmodChannel);			
-			return channel;
-		}
-		
-		public SoundChannel PlayAt(Vector2 position, Vector2 velocity, bool paused = false) =>
-			PlayAt(ChannelGroup, position, velocity, paused);
-		
-		
-		public SoundChannel PlayAt(
-			FMOD.ChannelGroup group, 
-			Vector2 position,
-			Vector2 velocity,
-			bool paused = false
-		)
-		{
-			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
-			var channel = new SoundChannel(this, fmodChannel);
-			channel.Mode = FMOD.MODE._3D;
-			channel.Set3DAttributes(position, velocity);
-
 			return channel;
 		}
 

@@ -22,16 +22,6 @@ namespace ChaiFoxes.FMODAudio
 		public static FMOD.System FMODSystem;
 		public static FMOD.RESULT LastResult {get; internal set;}
 		
-		public static int ListenerCount 
-		{
-			get 
-			{
-				LastResult = FMODSystem.get3DNumListeners(out int listeners);
-				
-				return listeners;
-			}
-			set => LastResult = FMODSystem.set3DNumListeners(value);
-		}
 
 		/// <summary>
 		/// Root directory for sounds and music.
@@ -120,30 +110,7 @@ namespace ChaiFoxes.FMODAudio
 		
 		
 
-		public static void SetListenerPosition(Vector2 position, int listenerId = 0)
-		{
-			var fmodPos = position.ToFmodVector();
-			var fmodZeroVec = Vector3.Zero.ToFmodVector();
-
-			// Apparently, you cannot just pass zero vector and call it a day.
-			var fmodForward = Vector2.UnitY.ToFmodVector();
-			var fmodUp = Vector3.UnitZ.ToFmodVector();
-
-			LastResult = FMODSystem.set3DListenerAttributes(listenerId, ref fmodPos, ref fmodZeroVec, ref fmodForward, ref fmodUp);
-		}
-
-		public static void SetListenerAttributes(Vector2 position, Vector2 velocity, Vector2 forward, int listenerId = 0)
-		{
-			var fmodPos = position.ToFmodVector();
-			var fmodVelocity = velocity.ToFmodVector();
-			var fmodForward = forward.ToFmodVector();
-			var fmodZeroVec = Vector3.Zero.ToFmodVector();
-			var fmodUp = Vector3.UnitZ.ToFmodVector();
-
-			LastResult = FMODSystem.set3DListenerAttributes(listenerId, ref fmodPos, ref fmodVelocity, ref fmodForward, ref fmodUp);		
-		}
-
-
+	
 
 		/// <summary>
 		/// Loads file as a byte array.
