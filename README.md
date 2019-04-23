@@ -47,7 +47,7 @@ the Windows API just to have everything in one place.
 ### Windows & Linux
 
 1. Open your DesktopGL or SharpDX Monogame project.
-2. Install the NuGet package ChaiFoxes.FMODAudio.Desktop. Alternatively, you can compile
+2. Install the NuGet package [ChaiFoxes.FMODAudio.Desktop](https://www.nuget.org/packages/ChaiFoxes.FMODAudio.Desktop/). Alternatively, you can compile
 it from sources.
 3. Navigate to your FMOD Windows API installation. From there navigate to `\api\core\lib`.
 You will see two directories: `x64` and `x86`. Each one will contain this:
@@ -96,7 +96,7 @@ And that's it - you've gotten yourself cross-platform desktop FMOD!
 ### Android
 
 1. Open your Monogame Android project.
-2. Install NuGet package ChaiFoxes.FMODAudio.Android. Alternatively, you can compile
+2. Install NuGet package [ChaiFoxes.FMODAudio.Android](https://www.nuget.org/packages/ChaiFoxes.FMODAudio.Android/). Alternatively, you can compile
 it from sources.
 3. Create `libs` directory in the root of your project.
 4. Navigate to your FMOD Android API installation. From there navigate to 
