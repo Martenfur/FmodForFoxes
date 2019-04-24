@@ -103,7 +103,7 @@ it from sources.
 ![setup8](/pics/setup8.png)
 
 5. Each folder contains `libfmod.so` and `libfmodL.so`. 
-You need only `libfmod.so` from each directory. Copy everything over to your `libs`
+You need only `libfmod.so` from each directory. Copy everything except `.jar` file over to your `libs`
 directory. You'll end up with this:
 
 ![setup9](/pics/setup9.png)
@@ -122,7 +122,7 @@ So, after you've set everything up, it's time to bop some pops, as kids say thes
 
 ![setup11](/pics/setup11.png)
 
-3. Include the ChaiFoxes.FMODAudio namespace and paste the following code into your
+3. Include the `ChaiFoxes.FMODAudio` namespace and paste the following code into your
 Initialize() method:
 ```
 AudioMgr.Init("Content");

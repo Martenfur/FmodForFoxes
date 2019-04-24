@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ChaiFoxes.FMODAudio.Desktop</id>
-    <version>1.0.0</version>
+    <version>1.0.3</version>
     <title>ChaiFoxes.FMODAudio.Desktop</title>
     <authors>gn Fur</authors>
     <owners>Chai Foxes</owners>
@@ -11,8 +11,11 @@
     <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>FMOD library wrapper for Windows and Linux Monogame projects.</description>
-    <releaseNotes>Added foxes.</releaseNotes>
+    <releaseNotes>Fixed streamed sounds crashing everything after GC.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>fmod audio monogame windows linux</tags>
   </metadata>
+	<files>
+		<file src="bin/$configuration$/ChaiFoxes.FMODAudio.Desktop.dll.config" target="lib/net45/" />
+	</files>
 </package>

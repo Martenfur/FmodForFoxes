@@ -87,9 +87,8 @@ namespace ChaiFoxes.FMODAudio
 		/// Loads sound from file.
 		/// Use this function to load short sound effects.
 		/// </summary>
-		public static Sound LoadSound(string name, FMOD.MODE mode = FMOD.MODE.DEFAULT)
+		public static Sound LoadSound(string name)
 		{
-			
 			var buffer = LoadFileAsBuffer(Path.Combine(_rootDir, name));
 			
 			var info = new FMOD.CREATESOUNDEXINFO();
@@ -110,11 +109,14 @@ namespace ChaiFoxes.FMODAudio
 		/// Loads streamed sound stream from file.
 		/// Use this function to load music and long ambience tracks.
 		/// </summary>
-		public static Sound LoadStreamedSound(string name, FMOD.MODE mode = FMOD.MODE.DEFAULT)
+		public static Sound LoadStreamedSound(string name)
 		{
 			
 			var buffer = LoadFileAsBuffer(Path.Combine(_rootDir, name));
-			
+
+			// Internal FMOD pointer points to this memory, so we don't want it to go anywhere.
+			var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+
 			var info = new FMOD.CREATESOUNDEXINFO();
 			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
@@ -126,7 +128,7 @@ namespace ChaiFoxes.FMODAudio
 				out FMOD.Sound newSound
 			);
 
-			return new Sound(newSound);
+			return new Sound(newSound, buffer, handle);
 		}
 		
 	

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Runtime.InteropServices;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -99,11 +100,34 @@ namespace ChaiFoxes.FMODAudio
 		public float MaxDistance3D;
 
 
+		/// <summary>
+		/// Sound buffer. Used for streamed sounds, which point to this memory.
+		/// In otehr words, we need to just reference it somewhere to prevent
+		/// garbage collector from collecting it.
+		/// This memory is also pinned, so GC won't move it anywhere.
+		/// 
+		/// If any unexpected crashes emerge, this is the first suspect.
+		/// </summary>
+		private byte[] _buffer;
+
+		/// <summary>
+		/// Buffer's handle.
+		/// </summary>
+		private GCHandle _bufferHandle;
+
+
+		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
+		{
+			_FMODSound = sound;
+			_buffer = buffer;
+			_bufferHandle = bufferHandle;
+		}
+
 		public Sound(FMOD.Sound sound)
 		{
 			_FMODSound = sound;
+			_buffer = null;
 		}
-
 
 		public SoundChannel Play(bool paused = false) =>
 			Play(ChannelGroup, paused);
@@ -116,8 +140,17 @@ namespace ChaiFoxes.FMODAudio
 		}
 
 
-		public void Unload() =>
+		/// <summary>
+		/// Unloads the sound and frees its handles.
+		/// </summary>
+		public void Unload()
+		{
 			_FMODSound.release();
+			if (_buffer != null)
+			{
+				_bufferHandle.Free();
+			}
+		}
 		
 
 	}
