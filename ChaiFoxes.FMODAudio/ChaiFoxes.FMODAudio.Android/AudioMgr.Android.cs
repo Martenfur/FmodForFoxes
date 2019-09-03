@@ -11,6 +11,7 @@
 		public static void LoadNativeLibrary()
 		{
 			Java.Lang.JavaSystem.LoadLibrary("fmod");
+			Java.Lang.JavaSystem.LoadLibrary("fmodstudio");
 		}
 	}
 }

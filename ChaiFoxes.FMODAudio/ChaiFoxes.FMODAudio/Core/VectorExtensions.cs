@@ -45,6 +45,5 @@ namespace ChaiFoxes.FMODAudio
 				Y = v.y,
 			};
 		}
-
 	}
 }

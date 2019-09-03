@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework;
 namespace ChaiFoxes.FMODAudio
 {
 	/// <summary>
-	/// Sound listener in 3D space. Listens to positioned 3D sounds.
-	/// 
+	/// Sound listener in 3D space. Listens to positioned 3D sounds.<para/>
+    /// 
 	/// NOTE: Do not mess with low-level listeners if you're using those.
 	/// It *probably* should be fine, but you're doing that at your own risk.
 	/// </summary>
@@ -20,7 +20,6 @@ namespace ChaiFoxes.FMODAudio
 		/// Listener index. Used to communicate with low-level API.
 		/// </summary>
 		private int _index;
-
 
 		/// <summary>
 		/// Listener position in 3D space. Used for panning and attenuation
@@ -73,7 +72,6 @@ namespace ChaiFoxes.FMODAudio
 				SetAttributes(position, velocity, value, upVector);
 			}
 		}
-
 		
 		/// <summary>
 		/// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
@@ -92,14 +90,13 @@ namespace ChaiFoxes.FMODAudio
 				SetAttributes(position, velocity, forwardVector, value);
 			}
 		}
-		
 
 		/// <summary>
 		/// Gets all listener attributes at once.
 		/// </summary>
 		public void GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector)
 		{
-			AudioMgr.FMODSystem.get3DListenerAttributes(
+			AudioMgr.FMODCoreSystem.get3DListenerAttributes(
 				_index, 
 				out FMOD.VECTOR pos, 
 				out FMOD.VECTOR vel, 
@@ -111,7 +108,6 @@ namespace ChaiFoxes.FMODAudio
 			forwardVector = forward.ToVector3();
 			upVector = up.ToVector3();
 		}
-
 		
 		/// <summary>
 		/// Sets all listener attributes at once.
@@ -122,7 +118,7 @@ namespace ChaiFoxes.FMODAudio
 			var vel = velocity.ToFmodVector();
 			var forw = forwardVector.ToFmodVector();
 			var up = upVector.ToFmodVector();
-			AudioMgr.FMODSystem.set3DListenerAttributes(
+			AudioMgr.FMODCoreSystem.set3DListenerAttributes(
 				_index,
 				ref pos,
 				ref vel, 
@@ -130,13 +126,11 @@ namespace ChaiFoxes.FMODAudio
 				ref up
 			);
 		}
-
-
 		private Listener3D()
 		{
 			_index = _listeners.Count;
 			_listeners.Add(this);
-			AudioMgr.FMODSystem.set3DNumListeners(_listeners.Count);
+			AudioMgr.FMODCoreSystem.set3DNumListeners(_listeners.Count);
 
 			SetAttributes(Vector3.Zero, Vector3.Zero, Vector3.UnitY, Vector3.UnitZ);
 		}
@@ -144,7 +138,6 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Creates a new listener.
 		/// </summary>
-		/// <returns></returns>
 		public static Listener3D Create()
 		{
 			return new Listener3D();
@@ -179,11 +172,9 @@ namespace ChaiFoxes.FMODAudio
 			}
 
 			_listeners.Remove(this);
-			AudioMgr.FMODSystem.set3DNumListeners(_listeners.Count);
+			AudioMgr.FMODCoreSystem.set3DNumListeners(_listeners.Count);
 
 			_index = -1;
 		}
-		
-
 	}
 }
