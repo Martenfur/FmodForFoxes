@@ -13,9 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin test.mp3
-/copy:test.mp3
-
 #begin gato.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -27,4 +24,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:gato.png
+
+#begin Master.bank
+/copy:Master.bank
+
+#begin Master.strings.bank
+/copy:Master.strings.bank
+
+#begin test.mp3
+/copy:test.mp3
 

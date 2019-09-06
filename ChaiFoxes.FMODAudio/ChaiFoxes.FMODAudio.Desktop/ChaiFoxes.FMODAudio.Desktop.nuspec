@@ -4,13 +4,13 @@
     <id>ChaiFoxes.FMODAudio.Desktop</id>
     <version>1.0.3</version>
     <title>ChaiFoxes.FMODAudio.Desktop</title>
-    <authors>gn Fur</authors>
-    <owners>Chai Foxes</owners>
+    <authors>gn Fur, StinkBrigade</authors>
+    <owners>Chai Foxes, StinkBrigade</owners>
 		<license type="expression">MPL-2.0</license>
- 	  <projectUrl>https://github.com/gnFur/ChaiFoxes.FMODAudio</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/gnFur/ChaiFoxes.FMODAudio/master/Icon/icon.png</iconUrl>
+ 	  <projectUrl>https://github.com/StinkBrigade/ChaiFoxes.FMODAudio</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/StinkBrigade/ChaiFoxes.FMODAudio/master/Icon/icon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>FMOD library wrapper for Windows and Linux Monogame projects.</description>
+    <description>FMOD library wrapper for Windows and Linux Monogame projects. Now with support for FMOD Studio!</description>
     <releaseNotes>Fixed streamed sounds crashing everything after GC.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>fmod audio monogame windows linux</tags>

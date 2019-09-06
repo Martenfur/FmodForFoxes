@@ -21,7 +21,7 @@ namespace ChaiFoxes.FMODAudio
         /// 0 - Muted.<para/>
         /// This ignores modulation / automation applied to the volume within Studio.
         /// </summary>
-        public float TargetVolume
+        public float Volume
         {
             get
             {
