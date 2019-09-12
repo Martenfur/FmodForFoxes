@@ -6,7 +6,7 @@ using System;
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
-namespace ChaiFoxes.FMODAudio
+namespace ChaiFoxes.FMODAudio.Studio
 {
     /// <summary>
     /// Bank class. Stores event metadata and sound data all in one file.

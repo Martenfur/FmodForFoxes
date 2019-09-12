@@ -131,7 +131,7 @@ namespace ChaiFoxes.FMODAudio
 
 		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
 		{
-			AudioMgr.FMODCoreSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
+			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
 			return new SoundChannel(this, fmodChannel);	
 		}
 

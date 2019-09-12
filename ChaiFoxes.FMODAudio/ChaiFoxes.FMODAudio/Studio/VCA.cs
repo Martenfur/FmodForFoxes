@@ -6,7 +6,7 @@ using System;
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
-namespace ChaiFoxes.FMODAudio
+namespace ChaiFoxes.FMODAudio.Studio
 {
     /// <summary>
     /// VCA class. Allows for grouping multiple buses together over different group buses, returns, and even events.

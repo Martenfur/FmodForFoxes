@@ -7,7 +7,7 @@ using System;
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
-namespace ChaiFoxes.FMODAudio
+namespace ChaiFoxes.FMODAudio.Studio
 {
     /// <summary>
     /// Event description wrapper. Static reference to an event, which is then used to create event instances.<para/>
@@ -64,6 +64,81 @@ namespace ChaiFoxes.FMODAudio
         /// 0 - Muted.
         /// </summary>
         public float Volume = 1;
+
+        /// <summary>
+		/// Event's default channel group.
+		/// </summary>
+		public FMOD.ChannelGroup ChannelGroup;
+
+        /// <summary>
+        /// Returns true if the event is 3D.
+        /// </summary>
+        public bool Is3D
+        {
+            get
+            {
+                _FMODEventDescription.is3D(out bool is3D);
+                return is3D;
+            }
+        }
+
+        /// <summary>
+        /// Event's position in 3D space. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 Position3D = Vector3.Zero;
+
+        /// <summary>
+        /// Event's velocity in 3D space. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 Velocity3D = Vector3.Zero;
+
+        /// <summary>
+        /// Forwards orientation, must be of unit length (1.0) and perpendicular to upward.
+		/// UnitY by default. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 OrientationForward3D = Vector3.UnitY;
+
+        /// <summary>
+        /// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
+		/// UnitZ by default. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 OrientationUpward3D = Vector3.UnitZ;
+
+        /// <summary>
+        /// Returns true if the event is 3D.
+        /// </summary>
+        public bool IsOneshot
+        {
+            get
+            {
+                _FMODEventDescription.isOneshot(out bool isOneshot);
+                return isOneshot;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the event is a snapshot.
+        /// </summary>
+        public bool IsSnapshot
+        {
+            get
+            {
+                _FMODEventDescription.isSnapshot(out bool isSnapshot);
+                return isSnapshot;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the event has any streamed sound.
+        /// </summary>
+        public bool IsStream
+        {
+            get
+            {
+                _FMODEventDescription.isStream(out bool isStream);
+                return isStream;
+            }
+        }
 
         /// <summary>
         /// Number of parameters in the event.
@@ -150,7 +225,7 @@ namespace ChaiFoxes.FMODAudio
         /// <summary>
         /// Gets an event parameter description by its index.
         /// </summary>
-        public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescriptionByIndex(int index)
+        public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(int index)
         {
             _FMODEventDescription.getParameterDescriptionByIndex(index, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
             return parameter;
@@ -159,7 +234,7 @@ namespace ChaiFoxes.FMODAudio
         /// <summary>
         /// Gets an event parameter description by its ID.
         /// </summary>
-        public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescriptionByID(FMOD.Studio.PARAMETER_ID id)
+        public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(FMOD.Studio.PARAMETER_ID id)
         {
             _FMODEventDescription.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
             return parameter;

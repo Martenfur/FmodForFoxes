@@ -161,7 +161,7 @@ namespace ChaiFoxes.FMODAudio
 		}
 		
 		/// <summary>
-		/// Sound's position in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Position3D
 		{
@@ -179,7 +179,7 @@ namespace ChaiFoxes.FMODAudio
 		}
 
 		/// <summary>
-		/// Sound's velocity in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Velocity3D
 		{

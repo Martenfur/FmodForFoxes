@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
+using ChaiFoxes.FMODAudio.Studio;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -15,14 +16,14 @@ namespace ChaiFoxes.FMODAudio
     public static partial class AudioMgr
     {
         /// <summary>
-        /// FMOD Studio sound system.
+        /// FMOD studio sound system.
         /// </summary>
-        public static FMOD.Studio.System FMODSystem;
+        public static FMOD.Studio.System FMODStudioSystem;
 
         /// <summary>
         /// Low level FMOD sound system.
         /// </summary>
-        public static FMOD.System FMODCoreSystem;
+        public static FMOD.System FMODSystem;
 
         /// <summary>
         /// Root directory for banks, music, sounds, etc.
@@ -30,12 +31,20 @@ namespace ChaiFoxes.FMODAudio
         public static string _rootDir;
 
         /// <summary>
+        /// Returns true if initialized with studio, false for the core FMOD system.
+        /// </summary>
+        private static bool _studioLoaded;
+
+        /// <summary>
         /// Initializes FMOD Studio with default parameters.<para/>
+        /// 
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
         /// </summary>
-        public static void Init(string rootDir) =>
-            Init(rootDir, 256, FMOD.Studio.INITFLAGS.NORMAL, FMOD.INITFLAGS.NORMAL);
+        public static void InitStudio(string rootDir) =>
+            InitStudio(rootDir, 256, FMOD.Studio.INITFLAGS.NORMAL, FMOD.INITFLAGS.NORMAL);
+
+        // TODO: Split Studio into its own namespace. Don't touch Core
 
         /// <summary>
         /// Initializes FMOD Studio with custom parameters.<para/>
@@ -43,40 +52,102 @@ namespace ChaiFoxes.FMODAudio
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
         /// </summary>
-        public static void Init(
+        public static void InitStudio(
             string rootDir, 
             int maxChannels, 
             FMOD.Studio.INITFLAGS studioInitFlags,
-            FMOD.INITFLAGS initFlags)
+            FMOD.INITFLAGS initFlags
+        )
         {
             _rootDir = rootDir;
             LoadNativeLibraries();
 
             FMOD.Studio.System.create(out FMOD.Studio.System system);
-            FMODSystem = system;
+            FMODStudioSystem = system;
 
-            FMODSystem.getCoreSystem(out FMOD.System coreSystem);
-            FMODCoreSystem = coreSystem;
+            FMODStudioSystem.getCoreSystem(out FMOD.System coreSystem);
+            FMODSystem = coreSystem;
 
-            FMODSystem.initialize(maxChannels, studioInitFlags, initFlags, (IntPtr) 0);
+            FMODStudioSystem.initialize(maxChannels, studioInitFlags, initFlags, (IntPtr) 0);
+            _studioLoaded = true;
         }
 
-        public static void Update() => FMODSystem.update();
-
-        public static void Unload() => FMODSystem.release();
+        /// <summary>
+        /// Initializes FMOD Core with default parameters.
+        /// Loading this way disables Studio functionality.<para/>
+        /// 
+        /// If you want to exclusively use the default wrapper, call
+        /// LoadNativeLibraries() instead.
+        /// </summary>
+        public static void Init(string rootDir) =>
+            Init(rootDir, 256, 4, 32, FMOD.INITFLAGS.CHANNEL_LOWPASS | FMOD.INITFLAGS.CHANNEL_DISTANCEFILTER);
 
         /// <summary>
+        /// Initializes FMOD Core with custom parameters.
+        /// Loading this way disables Studio functionality.<para/>
+        /// 
+        /// If you want to exclusively use the default wrapper, call
+        /// LoadNativeLibraries() instead.
+        /// </summary>
+        public static void Init(
+            string rootDir,
+            uint dspBufferLength,
+            int dspBufferCount,
+            int maxChannels,
+            FMOD.INITFLAGS initFlags
+        )
+        {
+            _rootDir = rootDir;
+            LoadNativeLibraries(false);
+
+            FMOD.Factory.System_Create(out FMOD.System system);
+            FMODSystem = system;
+
+            // Too high values will cause sound lag.
+            FMODSystem.setDSPBufferSize(dspBufferLength, dspBufferCount);
+
+            FMODSystem.init(maxChannels, initFlags, (IntPtr)0);
+            _studioLoaded = false;
+        }
+
+        public static void Update()
+        {
+            if(_studioLoaded)
+            {
+                FMODStudioSystem.update();
+            }
+            else
+            {
+                FMODSystem.update();
+            }
+        }
+
+        public static void Unload()
+        {
+            if (_studioLoaded)
+            {
+                FMODStudioSystem.release();
+            }
+            else
+            {
+                FMODSystem.release();
+            }
+        }
+
+        /// <summary>
+        /// STUDIO:
 		/// Loads bank from file with the default flag.
 		/// </summary>
         public static Bank LoadBank(string name) =>
             LoadBank(name, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL);
 
         /// <summary>
+        /// STUDIO:
 		/// Loads bank from file with custom flags.
 		/// </summary>
         public static Bank LoadBank(string name, FMOD.Studio.LOAD_BANK_FLAGS flags)
         {
-            FMODSystem.loadBankFile(
+            FMODStudioSystem.loadBankFile(
                 Path.Combine(_rootDir, name),
                 flags,
                 out FMOD.Studio.Bank bank);
@@ -87,41 +158,139 @@ namespace ChaiFoxes.FMODAudio
         }
 
         /// <summary>
-        /// Retrieve an event via internal path, i.e. "event:/UI/Cancel", or ID string, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}".
+        /// STUDIO:
+        /// Retrieves an event via internal path, i.e. "event:/UI/Cancel", or ID string, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}".
         /// </summary>
         public static EventDescription GetEvent(string path)
         {
-            FMODSystem.getEvent(path, out FMOD.Studio.EventDescription eventDescription);
+            FMODStudioSystem.getEvent(path, out FMOD.Studio.EventDescription eventDescription);
             return new EventDescription(eventDescription);
         }
 
         /// <summary>
-        /// Retrieve an event via 128-bit GUID.<para/>
+        /// STUDIO:
+        /// Retrieves an event via 128-bit GUID.<para/>
         /// To parse a GUID from a string id, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}", use FMOD.Studio.Util.parseID().
         /// </summary>
         public static EventDescription GetEvent(Guid id)
         {
-            FMODSystem.getEventByID(id, out FMOD.Studio.EventDescription eventDescription);
+            FMODStudioSystem.getEventByID(id, out FMOD.Studio.EventDescription eventDescription);
             return new EventDescription(eventDescription);
         }
 
         /// <summary>
-        /// Retrieve a VCA via internal path, i.e. "vca:/MyVCA", or ID string, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}".
+        /// STUDIO:
+        /// Retrieves a VCA via internal path, i.e. "vca:/MyVCA", or ID string, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}".
         /// </summary>
         public static VCA GetVCA(string path)
         {
-            FMODSystem.getVCA(path, out FMOD.Studio.VCA vca);
+            FMODStudioSystem.getVCA(path, out FMOD.Studio.VCA vca);
             return new VCA(vca);
         }
 
         /// <summary>
-        /// Retrieve a VCA via 128-bit GUID.<para/>
+        /// STUDIO:
+        /// Retrieves a VCA via 128-bit GUID.<para/>
         /// To parse a GUID from a string id, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}", use FMOD.Studio.Util.parseID().
         /// </summary>
         public static VCA GetVCA(Guid id)
         {
-            FMODSystem.getVCAByID(id, out FMOD.Studio.VCA vca);
+            FMODStudioSystem.getVCAByID(id, out FMOD.Studio.VCA vca);
             return new VCA(vca);
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter description by its name.
+        /// </summary>
+        public static FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(string name)
+        {
+            FMODStudioSystem.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+            return parameter;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter description by its ID.
+        /// </summary>
+        public static FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(FMOD.Studio.PARAMETER_ID id)
+        {
+            FMODStudioSystem.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+            return parameter;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter's current value via its name (case sensitive).<para/>
+        /// This ignores modulation / automation applied to the parameter within Studio.
+        /// </summary>
+        public static float GetParameterTargetValue(string name)
+        {
+            FMODStudioSystem.getParameterByName(name, out float value, out _);
+            return value;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter's current value via its ID.<para/>
+        /// This ignores modulation / automation applied to the parameter within Studio.
+        /// </summary>
+        public static float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
+        {
+            FMODStudioSystem.getParameterByID(id, out float value, out _);
+            return value;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter's current value via its name (case sensitive).<para/>
+        /// This takes into account modulation / automation applied to the parameter within Studio.
+        /// </summary>
+        public static float GetParameterCurrentValue(string name)
+        {
+            FMODStudioSystem.getParameterByName(name, out _, out float finalValue);
+            return finalValue;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Retrieves a global parameter's current value via its ID.<para/>
+        /// This takes into account modulation / automation applied to the parameter within Studio.
+        /// </summary>
+        public static float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
+        {
+            FMODStudioSystem.getParameterByID(id, out _, out float finalValue);
+            return finalValue;
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Sets a global parameter's value via its name (case sensitive).<para/>
+        /// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
+        /// </summary>
+        public static void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false)
+        {
+            FMODStudioSystem.setParameterByName(name, value, ignoreSeekSpeed);
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Sets a global parameter's value via its ID.<para/>
+        /// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
+        /// </summary>
+        public static void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false)
+        {
+            FMODStudioSystem.setParameterByID(id, value, ignoreSeekSpeed);
+        }
+
+        /// <summary>
+        /// STUDIO:
+        /// Sets multiple global parameters' values via their IDs.<para/>
+        /// Enable ignoreSeekSpeed to set the values instantly, ignoring the parameters' seek speeds.
+        /// </summary>
+        public static void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false)
+        {
+            FMODStudioSystem.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
         }
 
         /// <summary>
@@ -130,7 +299,7 @@ namespace ChaiFoxes.FMODAudio
         /// </summary>
         public static FMOD.ChannelGroup CreateChannelGroup(string name)
         {
-            FMODCoreSystem.createChannelGroup(name, out FMOD.ChannelGroup channelGroup);
+            FMODSystem.createChannelGroup(name, out FMOD.ChannelGroup channelGroup);
             return channelGroup;
         }
 
@@ -147,7 +316,7 @@ namespace ChaiFoxes.FMODAudio
             info.length = (uint)buffer.Length;
             info.cbsize = Marshal.SizeOf(info);
 
-            FMODCoreSystem.createSound(
+            FMODSystem.createSound(
                 buffer,
                 FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESAMPLE,
                 ref info,
@@ -173,7 +342,7 @@ namespace ChaiFoxes.FMODAudio
             info.length = (uint)buffer.Length;
             info.cbsize = Marshal.SizeOf(info);
 
-            FMODCoreSystem.createStream(
+            FMODSystem.createStream(
                 buffer,
                 FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESTREAM,
                 ref info,

@@ -6,7 +6,7 @@ using System;
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
-namespace ChaiFoxes.FMODAudio
+namespace ChaiFoxes.FMODAudio.Studio
 {
     /// <summary>
     /// Event instance wrapper.
@@ -75,6 +75,111 @@ namespace ChaiFoxes.FMODAudio
         }
 
         /// <summary>
+		/// Retrieves whether or not the event is 3D.
+		/// </summary>
+		public bool Is3D
+        {
+            get => Description.Is3D;
+        }
+
+        /// <summary>
+        /// Event's position in 3D space. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 Position3D
+        {
+            get
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                return position;
+            }
+            set
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                SetAttributes(value, velocity, forwardVector, upVector);
+            }
+        }
+
+        /// <summary>
+        /// Event's velocity in 3D space. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 Velocity3D
+        {
+            get
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                return velocity;
+            }
+            set
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                SetAttributes(position, value, forwardVector, upVector);
+            }
+        }
+
+        /// <summary>
+        /// Forwards orientation, must be of unit length (1.0) and perpendicular to up.
+		/// UnitY by default. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 OrientationForward3D
+        {
+            get
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                return forwardVector;
+            }
+            set
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                SetAttributes(position, velocity, value, upVector);
+            }
+        }
+
+        /// <summary>
+        /// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
+		/// UnitZ by default. Will only have an effect if the event is 3D.
+        /// </summary>
+        public Vector3 OrientationUpward3D
+        {
+            get
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                return upVector;
+            }
+            set
+            {
+                GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+                SetAttributes(position, velocity, forwardVector, value);
+            }
+        }
+        /// <summary>
+		/// Gets all 3D attributes at once.
+		/// </summary>
+		public void GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector)
+        {
+            _FMODEventInstance.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+
+            position = attributes.position.ToVector3();
+            velocity = attributes.velocity.ToVector3();
+            forwardVector = attributes.forward.ToVector3();
+            upVector = attributes.up.ToVector3();
+        }
+
+        /// <summary>
+        /// Sets all 3D attributes at once.
+        /// </summary>
+        public void SetAttributes(Vector3 position, Vector3 velocity, Vector3 forwardVector, Vector3 upVector)
+        {
+            var attributes = new FMOD.ATTRIBUTES_3D();
+
+            attributes.position = position.ToFmodVector();
+            attributes.velocity = velocity.ToFmodVector();
+            attributes.forward = forwardVector.ToFmodVector();
+            attributes.up = upVector.ToFmodVector();
+
+            _FMODEventInstance.set3DAttributes(attributes);
+        }
+
+        /// <summary>
 		/// Timeline position in milliseconds.
 		/// </summary>
         public int TimelinePosition
@@ -138,6 +243,12 @@ namespace ChaiFoxes.FMODAudio
 
             Volume = eventDescription.Volume;
             Pitch = eventDescription.Pitch;
+            SetAttributes(
+                eventDescription.Position3D,
+                eventDescription.Velocity3D,
+                eventDescription.OrientationForward3D,
+                eventDescription.OrientationUpward3D
+            );
         }
 
         /// <summary>
@@ -199,7 +310,7 @@ namespace ChaiFoxes.FMODAudio
         }
 
         /// <summary>
-        /// Sets multiple parameter's value via their IDs.<para/>
+        /// Sets multiple parameters' values via their IDs.<para/>
         /// Enable ignoreSeekSpeed to set the values instantly, ignoring the parameters' seek speeds.
         /// </summary>
         public void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false)

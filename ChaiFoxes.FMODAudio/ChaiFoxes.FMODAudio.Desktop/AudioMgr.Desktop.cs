@@ -19,19 +19,25 @@ namespace ChaiFoxes.FMODAudio
         /// <summary>
         /// Loads Windows or Linux native library.
         /// </summary>
-        public static void LoadNativeLibraries()
+        public static void LoadNativeLibraries(bool loadStudio = true)
         {
             if (Environment.OSVersion.Platform != PlatformID.Unix)
             {
                 if (Environment.Is64BitProcess)
                 {
                     LoadLibrary(Path.GetFullPath("x64/fmod.dll"));
-                    LoadLibrary(Path.GetFullPath("x64/fmodstudio.dll"));
+                    if(loadStudio)
+                    {
+                        LoadLibrary(Path.GetFullPath("x64/fmodstudio.dll"));
+                    }
                 }
                 else
                 {
                     LoadLibrary(Path.GetFullPath("x86/fmod.dll"));
-                    LoadLibrary(Path.GetFullPath("x86/fmodstudio.dll"));
+                    if (loadStudio)
+                    {
+                        LoadLibrary(Path.GetFullPath("x86/fmodstudio.dll"));
+                    }
                 }
             }
             else
@@ -39,12 +45,18 @@ namespace ChaiFoxes.FMODAudio
                 if (Environment.Is64BitProcess)
                 {
                     dlopen(Path.GetFullPath("/x64/libfmod.so"), RTLD_LAZY);
-                    dlopen(Path.GetFullPath("/x64/libfmodstudio.so"), RTLD_LAZY);
+                    if (loadStudio)
+                    {
+                        dlopen(Path.GetFullPath("/x64/libfmodstudio.so"), RTLD_LAZY);
+                    }
                 }
                 else
                 {
                     dlopen(Path.GetFullPath("/x86/libfmod.so"), RTLD_LAZY);
-                    dlopen(Path.GetFullPath("/x86/libfmodstudio.so"), RTLD_LAZY);
+                    if (loadStudio)
+                    {
+                        dlopen(Path.GetFullPath("/x86/libfmodstudio.so"), RTLD_LAZY);
+                    }
                 }
             }
         }
