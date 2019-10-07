@@ -16,15 +16,15 @@ namespace FMOD.Studio
     public class STUDIO_VERSION
     {
 
-        // NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
+		// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
 
 #if ANDROID
-        public const string dll     = "libfmodstudio";
+		public const string dll     = "libfmodstudio";
 #else
-        public const string dll     = "fmodstudio.dll";
+		public const string dll     = "fmodstudio.dll";
 #endif
 
-        // NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
+		// NOTE: This is the only modified part of the wrapper. Don't forget to copy it over when updating.
     }
 
     public enum STOP_MODE : int

@@ -125,7 +125,7 @@ namespace ChaiFoxes.FMODAudio
 			_FMODSound = sound;
 			_buffer = null;
 		}
-        
+		
 		public SoundChannel Play(bool paused = false) =>
 			Play(ChannelGroup, paused);
 

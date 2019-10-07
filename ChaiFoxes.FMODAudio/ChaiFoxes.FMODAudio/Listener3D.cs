@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework;
 namespace ChaiFoxes.FMODAudio
 {
 	/// <summary>
-	/// Sound listener in 3D space. Listens to positioned 3D sounds.<para/>
-    /// 
+	/// Sound listener in 3D space. Listens to positioned 3D sounds.
+	/// 
 	/// NOTE: Do not mess with low-level listeners if you're using those.
 	/// It *probably* should be fine, but you're doing that at your own risk.
 	/// </summary>

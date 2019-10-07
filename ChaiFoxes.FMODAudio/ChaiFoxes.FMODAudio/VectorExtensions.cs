@@ -19,7 +19,7 @@ namespace ChaiFoxes.FMODAudio
 
 		public static FMOD.VECTOR ToFmodVector(this Vector2 v)
 		{
-			return new FMOD.VECTOR 
+			return new FMOD.VECTOR
 			{
 				x = v.X,
 				y = v.Y,

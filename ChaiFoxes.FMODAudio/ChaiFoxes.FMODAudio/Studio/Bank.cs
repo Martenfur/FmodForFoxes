@@ -8,46 +8,46 @@ using System;
 
 namespace ChaiFoxes.FMODAudio.Studio
 {
-    /// <summary>
-    /// Bank class. Stores event metadata and sound data all in one file.
-    /// </summary>
-    public class Bank
-    {
-        protected FMOD.Studio.Bank _FMODBank { get; private set; }
+	/// <summary>
+	/// Bank class. Stores event metadata and sound data all in one file.
+	/// </summary>
+	public class Bank
+	{
+		protected FMOD.Studio.Bank _FMODBank { get; private set; }
 
-        /// <summary>
-        /// The bank's arbitrary user data.
-        /// </summary>
-        public IntPtr UserData
-        {
-            set =>
-                 _FMODBank.setUserData(value);
+		/// <summary>
+		/// The bank's arbitrary user data.
+		/// </summary>
+		public IntPtr UserData
+		{
+			set =>
+				 _FMODBank.setUserData(value);
 
-            get
-            {
-                _FMODBank.getUserData(out IntPtr userData);
-                return userData;
-            }
-        }
+			get
+			{
+				_FMODBank.getUserData(out IntPtr userData);
+				return userData;
+			}
+		}
 
-        public Bank(FMOD.Studio.Bank bank)
-        {
-            _FMODBank = bank;
-        }
+		public Bank(FMOD.Studio.Bank bank)
+		{
+			_FMODBank = bank;
+		}
 
-        /// <summary>
-        /// Loads all non-streaming sounds in the bank.
-        /// </summary>
-        public void LoadSampleData() => _FMODBank.loadSampleData();
+		/// <summary>
+		/// Loads all non-streaming sounds in the bank.
+		/// </summary>
+		public void LoadSampleData() => _FMODBank.loadSampleData();
 
-        /// <summary>
-        /// Unloads all non-streaming sounds in the bank.
-        /// </summary>
-        public void UnloadSampleData() => _FMODBank.unloadSampleData();
+		/// <summary>
+		/// Unloads all non-streaming sounds in the bank.
+		/// </summary>
+		public void UnloadSampleData() => _FMODBank.unloadSampleData();
 
-        /// <summary>
-        /// Unloads the bank, invalidating all related event descriptions and destroying associated instances.
-        /// </summary>
+		/// <summary>
+		/// Unloads the bank, invalidating all related event descriptions and destroying associated instances.
+		/// </summary>
 		public void Unload() => _FMODBank.unload();
 	}
 }

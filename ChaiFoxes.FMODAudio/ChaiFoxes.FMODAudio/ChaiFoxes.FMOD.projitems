@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AudioMgr.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\Attributes3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Bank.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\EventDescription.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\EventInstance.cs" />
