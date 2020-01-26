@@ -17,8 +17,8 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// FMOD event instance using the default wrapper. Use this if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Studio.EventInstance Instance => _FMODEventInstance;
-		protected FMOD.Studio.EventInstance _FMODEventInstance;
+		public FMOD.Studio.EventInstance Instance => _instance;
+		protected FMOD.Studio.EventInstance _instance;
 
 		/// <summary>
 		/// Event description, from which this instance was created.
@@ -35,11 +35,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getPitch(out float pitch);
+				_instance.getPitch(out float pitch);
 				return pitch;
 			}
 			set =>
-				_FMODEventInstance.setPitch(value);
+				_instance.setPitch(value);
 		}
 
 		/// <summary>
@@ -52,11 +52,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getVolume(out float targetVolume);
+				_instance.getVolume(out float targetVolume);
 				return targetVolume;
 			}
 			set =>
-				_FMODEventInstance.setVolume(value);
+				_instance.setVolume(value);
 		}
 
 		/// <summary>
@@ -69,7 +69,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getVolume(out _, out float currentVolume);
+				_instance.getVolume(out _, out float currentVolume);
 				return currentVolume;
 			}
 		}
@@ -89,13 +89,13 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+				_instance.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
 
 				return attributes.ToAttributes3D();
 			}
 			set
 			{
-				_FMODEventInstance.set3DAttributes(value.ToFmodAttributes());
+				_instance.set3DAttributes(value.ToFmodAttributes());
 			}
 		}
 
@@ -106,11 +106,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getTimelinePosition(out int position);
+				_instance.getTimelinePosition(out int position);
 				return position;
 			}
 			set =>
-				_FMODEventInstance.setTimelinePosition(value);
+				_instance.setTimelinePosition(value);
 		}
 
 		/// <summary>
@@ -121,7 +121,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+				_instance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
 				return state;
 			}
 		}
@@ -133,12 +133,12 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventInstance.getPaused(out bool paused);
+				_instance.getPaused(out bool paused);
 				return paused;
 			}
 
 			set =>
-				_FMODEventInstance.setPaused(value);
+				_instance.setPaused(value);
 		}
 
 		/// <summary>
@@ -147,11 +147,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public IntPtr UserData
 		{
 			set =>
-				 _FMODEventInstance.setUserData(value);
+				 _instance.setUserData(value);
 
 			get
 			{
-				_FMODEventInstance.getUserData(out IntPtr userData);
+				_instance.getUserData(out IntPtr userData);
 				return userData;
 			}
 		}
@@ -159,7 +159,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
 		{
 			Description = eventDescription;
-			_FMODEventInstance = eventInstance;
+			_instance = eventInstance;
 
 			Volume = eventDescription.Volume;
 			Pitch = eventDescription.Pitch;
@@ -172,7 +172,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(string name)
 		{
-			_FMODEventInstance.getParameterByName(name, out float value, out _);
+			_instance.getParameterByName(name, out float value, out _);
 			return value;
 		}
 
@@ -182,7 +182,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_FMODEventInstance.getParameterByID(id, out float value, out _);
+			_instance.getParameterByID(id, out float value, out _);
 			return value;
 		}
 
@@ -192,7 +192,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(string name)
 		{
-			_FMODEventInstance.getParameterByName(name, out _, out float finalValue);
+			_instance.getParameterByName(name, out _, out float finalValue);
 			return finalValue;
 		}
 
@@ -202,7 +202,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_FMODEventInstance.getParameterByID(id, out _, out float finalValue);
+			_instance.getParameterByID(id, out _, out float finalValue);
 			return finalValue;
 		}
 
@@ -212,7 +212,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false)
 		{
-			_FMODEventInstance.setParameterByName(name, value, ignoreSeekSpeed);
+			_instance.setParameterByName(name, value, ignoreSeekSpeed);
 		}
 
 		/// <summary>
@@ -221,7 +221,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false)
 		{
-			_FMODEventInstance.setParameterByID(id, value, ignoreSeekSpeed);
+			_instance.setParameterByID(id, value, ignoreSeekSpeed);
 		}
 
 		/// <summary>
@@ -230,28 +230,28 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false)
 		{
-			_FMODEventInstance.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
+			_instance.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
 		}
 
 		/// <summary>
 		/// Assigns a user callback for this specific event instance.
 		/// </summary>
 		public void SetCallback(FMOD.Studio.EVENT_CALLBACK callback, FMOD.Studio.EVENT_CALLBACK_TYPE callbackMask) =>
-			_FMODEventInstance.setCallback(callback, callbackMask);
+			_instance.setCallback(callback, callbackMask);
 
 		public void Start() =>
-			_FMODEventInstance.start();
+			_instance.start();
 
 		public void Stop(bool immediate = false) =>
-			_FMODEventInstance.stop(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			_instance.stop(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 		/// <summary>
 		/// Allows the timeline cursor to move past sustain points.
 		/// </summary>
 		public void TriggerCue() =>
-			_FMODEventInstance.triggerCue();
+			_instance.triggerCue();
 
 		public void Release() =>
-			_FMODEventInstance.release();
+			_instance.release();
 	}
 }

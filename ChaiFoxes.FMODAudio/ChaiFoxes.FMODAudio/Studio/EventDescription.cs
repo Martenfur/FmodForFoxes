@@ -18,8 +18,8 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// FMOD event description using the default wrapper. Use this if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Studio.EventDescription Description => _FMODEventDescription;
-		protected FMOD.Studio.EventDescription _FMODEventDescription;
+		public FMOD.Studio.EventDescription Description => _description;
+		protected FMOD.Studio.EventDescription _description;
 
 		/// <summary>
 		/// Number of instances of the event currently in existence.
@@ -28,7 +28,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.getInstanceCount(out int instanceCount);
+				_description.getInstanceCount(out int instanceCount);
 				return instanceCount;
 			}
 		}
@@ -40,7 +40,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.getInstanceList(out FMOD.Studio.EventInstance[] instanceArray);
+				_description.getInstanceList(out FMOD.Studio.EventInstance[] instanceArray);
 				EventInstance[] returnArray = new EventInstance[instanceArray.Length];
 				for (int i = 0; i < instanceArray.Length; i++)
 				{
@@ -77,7 +77,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.is3D(out bool is3D);
+				_description.is3D(out bool is3D);
 				return is3D;
 			}
 		}
@@ -100,7 +100,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.isOneshot(out bool isOneshot);
+				_description.isOneshot(out bool isOneshot);
 				return isOneshot;
 			}
 		}
@@ -112,7 +112,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.isSnapshot(out bool isSnapshot);
+				_description.isSnapshot(out bool isSnapshot);
 				return isSnapshot;
 			}
 		}
@@ -124,7 +124,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.isStream(out bool isStream);
+				_description.isStream(out bool isStream);
 				return isStream;
 			}
 		}
@@ -136,7 +136,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.getParameterDescriptionCount(out int count);
+				_description.getParameterDescriptionCount(out int count);
 				return count;
 			}
 		}
@@ -148,7 +148,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.getPath(out string path);
+				_description.getPath(out string path);
 				return path;
 			}
 		}
@@ -160,7 +160,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_FMODEventDescription.getID(out Guid id);
+				_description.getID(out Guid id);
 				return id;
 			}
 		}
@@ -171,18 +171,18 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public IntPtr UserData
 		{
 			set =>
-				 _FMODEventDescription.setUserData(value);
+				 _description.setUserData(value);
 
 			get
 			{
-				_FMODEventDescription.getUserData(out IntPtr userData);
+				_description.getUserData(out IntPtr userData);
 				return userData;
 			}
 		}
 
 		public EventDescription(FMOD.Studio.EventDescription eventDescription)
 		{
-			_FMODEventDescription = eventDescription;
+			_description = eventDescription;
 		}
 
 		/// <summary>
@@ -192,7 +192,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public EventInstance CreateInstance()
 		{
-			_FMODEventDescription.createInstance(out FMOD.Studio.EventInstance eventInstance);
+			_description.createInstance(out FMOD.Studio.EventInstance eventInstance);
 			return new EventInstance(this, eventInstance);
 		}
 
@@ -200,14 +200,14 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Immediately stops and releases all instances of this event.
 		/// </summary>
 		public void ReleaseAllInstances() =>
-			_FMODEventDescription.releaseAllInstances();
+			_description.releaseAllInstances();
 
 		/// <summary>
 		/// Gets an event parameter description by its name.
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(string name)
 		{
-			_FMODEventDescription.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			_description.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
 			return parameter;
 		}
 
@@ -216,7 +216,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(int index)
 		{
-			_FMODEventDescription.getParameterDescriptionByIndex(index, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			_description.getParameterDescriptionByIndex(index, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
 			return parameter;
 		}
 
@@ -225,7 +225,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(FMOD.Studio.PARAMETER_ID id)
 		{
-			_FMODEventDescription.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			_description.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
 			return parameter;
 		}
 
@@ -233,16 +233,16 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Assigns a user callback for every subsequent instance of this event.
 		/// </summary>
 		public void SetCallback(FMOD.Studio.EVENT_CALLBACK callback, FMOD.Studio.EVENT_CALLBACK_TYPE callbackMask) =>
-			_FMODEventDescription.setCallback(callback, callbackMask);
+			_description.setCallback(callback, callbackMask);
 
 		/// <summary>
 		/// Loads all non-streaming sounds for the event.
 		/// </summary>
-		public void LoadSampleData() => _FMODEventDescription.loadSampleData();
+		public void LoadSampleData() => _description.loadSampleData();
 
 		/// <summary>
 		/// Unloads all non-streaming sounds for the event.
 		/// </summary>
-		public void UnloadSampleData() => _FMODEventDescription.unloadSampleData();
+		public void UnloadSampleData() => _description.unloadSampleData();
 	}
 }

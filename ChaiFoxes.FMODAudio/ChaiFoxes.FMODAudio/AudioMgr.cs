@@ -31,12 +31,12 @@ namespace ChaiFoxes.FMODAudio
         public static string _rootDir;
 
         /// <summary>
-        /// Returns true if initialized with studio, false for the core FMOD system.
+        /// Returns true if initialized with Studio, false for the core FMOD system.
         /// </summary>
         private static bool _studioLoaded;
 
         /// <summary>
-        /// Initializes FMOD Studio with default parameters.<para/>
+        /// Initializes FMOD Studio with default parameters.
         /// 
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
@@ -47,7 +47,7 @@ namespace ChaiFoxes.FMODAudio
         // TODO: Split Studio into its own namespace. Don't touch Core
 
         /// <summary>
-        /// Initializes FMOD Studio with custom parameters.<para/>
+        /// Initializes FMOD Studio with custom parameters.
         /// 
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
@@ -74,7 +74,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// Initializes FMOD Core with default parameters.
-        /// Loading this way disables Studio functionality.<para/>
+        /// Loading this way disables Studio functionality.
         /// 
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
@@ -84,7 +84,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// Initializes FMOD Core with custom parameters.
-        /// Loading this way disables Studio functionality.<para/>
+        /// Loading this way disables Studio functionality.
         /// 
         /// If you want to exclusively use the default wrapper, call
         /// LoadNativeLibraries() instead.
@@ -169,7 +169,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves an event via 128-bit GUID.<para/>
+        /// Retrieves an event via 128-bit GUID.
         /// To parse a GUID from a string id, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}", use FMOD.Studio.Util.parseID().
         /// </summary>
         public static EventDescription GetEvent(Guid id)
@@ -190,7 +190,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves a VCA via 128-bit GUID.<para/>
+        /// Retrieves a VCA via 128-bit GUID.
         /// To parse a GUID from a string id, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}", use FMOD.Studio.Util.parseID().
         /// </summary>
         public static VCA GetVCA(Guid id)
@@ -221,7 +221,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves a global parameter's current value via its name (case sensitive).<para/>
+        /// Retrieves a global parameter's current value via its name (case sensitive).
         /// This ignores modulation / automation applied to the parameter within Studio.
         /// </summary>
         public static float GetParameterTargetValue(string name)
@@ -232,7 +232,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves a global parameter's current value via its ID.<para/>
+        /// Retrieves a global parameter's current value via its ID.
         /// This ignores modulation / automation applied to the parameter within Studio.
         /// </summary>
         public static float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
@@ -243,7 +243,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves a global parameter's current value via its name (case sensitive).<para/>
+        /// Retrieves a global parameter's current value via its name (case sensitive).
         /// This takes into account modulation / automation applied to the parameter within Studio.
         /// </summary>
         public static float GetParameterCurrentValue(string name)
@@ -254,7 +254,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Retrieves a global parameter's current value via its ID.<para/>
+        /// Retrieves a global parameter's current value via its ID.
         /// This takes into account modulation / automation applied to the parameter within Studio.
         /// </summary>
         public static float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
@@ -265,7 +265,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Sets a global parameter's value via its name (case sensitive).<para/>
+        /// Sets a global parameter's value via its name (case sensitive).
         /// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
         /// </summary>
         public static void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false)
@@ -275,7 +275,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Sets a global parameter's value via its ID.<para/>
+        /// Sets a global parameter's value via its ID.
         /// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
         /// </summary>
         public static void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false)
@@ -285,7 +285,7 @@ namespace ChaiFoxes.FMODAudio
 
         /// <summary>
         /// STUDIO:
-        /// Sets multiple global parameters' values via their IDs.<para/>
+        /// Sets multiple global parameters' values via their IDs.
         /// Enable ignoreSeekSpeed to set the values instantly, ignoring the parameters' seek speeds.
         /// </summary>
         public static void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false)

@@ -13,7 +13,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// </summary>
 	public class Bank
 	{
-		protected FMOD.Studio.Bank _FMODBank { get; private set; }
+		protected FMOD.Studio.Bank _bank { get; private set; }
 
 		/// <summary>
 		/// The bank's arbitrary user data.
@@ -21,33 +21,33 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public IntPtr UserData
 		{
 			set =>
-				 _FMODBank.setUserData(value);
+				 _bank.setUserData(value);
 
 			get
 			{
-				_FMODBank.getUserData(out IntPtr userData);
+				_bank.getUserData(out IntPtr userData);
 				return userData;
 			}
 		}
 
 		public Bank(FMOD.Studio.Bank bank)
 		{
-			_FMODBank = bank;
+			_bank = bank;
 		}
 
 		/// <summary>
 		/// Loads all non-streaming sounds in the bank.
 		/// </summary>
-		public void LoadSampleData() => _FMODBank.loadSampleData();
+		public void LoadSampleData() => _bank.loadSampleData();
 
 		/// <summary>
 		/// Unloads all non-streaming sounds in the bank.
 		/// </summary>
-		public void UnloadSampleData() => _FMODBank.unloadSampleData();
+		public void UnloadSampleData() => _bank.unloadSampleData();
 
 		/// <summary>
 		/// Unloads the bank, invalidating all related event descriptions and destroying associated instances.
 		/// </summary>
-		public void Unload() => _FMODBank.unload();
+		public void Unload() => _bank.unload();
 	}
 }

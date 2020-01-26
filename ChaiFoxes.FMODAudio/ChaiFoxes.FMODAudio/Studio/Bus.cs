@@ -14,7 +14,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// </summary>
 	public class Bus
 	{
-		protected FMOD.Studio.Bus _Bus { get; private set; }
+		protected FMOD.Studio.Bus _bus { get; private set; }
 
 		/// <summary>
 		/// Bus target volume.
@@ -27,11 +27,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getVolume(out float volume);
+				_bus.getVolume(out float volume);
 				return volume;
 			}
 			set =>
-				_Bus.setVolume(value);
+				_bus.setVolume(value);
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getVolume(out _, out float finalVolume);
+				_bus.getVolume(out _, out float finalVolume);
 				return finalVolume;
 			}
 		}
@@ -59,11 +59,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getMute(out bool mute);
+				_bus.getMute(out bool mute);
 				return mute;
 			}
 			set =>
-				_Bus.setMute(value);
+				_bus.setMute(value);
 		}
 
 		/// <summary>
@@ -74,7 +74,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getChannelGroup(out FMOD.ChannelGroup channelGroup);
+				_bus.getChannelGroup(out FMOD.ChannelGroup channelGroup);
 				return channelGroup;
 			}
 		}
@@ -88,12 +88,12 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getPaused(out bool paused);
+				_bus.getPaused(out bool paused);
 				return paused;
 			}
 
 			set =>
-				_Bus.setPaused(value);
+				_bus.setPaused(value);
 		}
 
 		/// <summary>
@@ -103,7 +103,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getPath(out string path);
+				_bus.getPath(out string path);
 				return path;
 			}
 		}
@@ -115,14 +115,14 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_Bus.getID(out Guid id);
+				_bus.getID(out Guid id);
 				return id;
 			}
 		}
 
 		public Bus(FMOD.Studio.Bus bus)
 		{
-			_Bus = bus;
+			_bus = bus;
 		}
 
 		/// <summary>
@@ -130,18 +130,18 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// as well as forcing it to stay loaded.
 		/// </summary>
 		public void LockChannelGroup() =>
-			_Bus.lockChannelGroup();
+			_bus.lockChannelGroup();
 
 		/// <summary>
 		/// Allows FMOD to destroy the channel group when it isn't needed.
 		/// </summary>
 		public void UnlockChannelGroup() =>
-			_Bus.unlockChannelGroup();
+			_bus.unlockChannelGroup();
 
 		/// <summary>
 		/// Stop all events routed to the bus.
 		/// </summary>
 		public void StopAllEvents(bool immediate = false) =>
-			_Bus.stopAllEvents(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			_bus.stopAllEvents(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 }
