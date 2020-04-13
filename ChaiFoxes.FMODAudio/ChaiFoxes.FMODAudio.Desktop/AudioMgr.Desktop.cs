@@ -19,7 +19,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Loads Windows or Linux native library.
 		/// </summary>
-		public static void LoadNativeLibraries(bool loadStudio = true)
+		public static void LoadNativeLibrary(bool loadStudio = true)
 		{
 			if (Environment.OSVersion.Platform != PlatformID.Unix)
 			{

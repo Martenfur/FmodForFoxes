@@ -60,7 +60,7 @@ namespace ChaiFoxes.FMODAudio
         )
         {
             _rootDir = rootDir;
-            LoadNativeLibraries();
+            LoadNativeLibrary();
 
             FMOD.Studio.System.create(out FMOD.Studio.System system);
             FMODStudioSystem = system;
@@ -98,7 +98,7 @@ namespace ChaiFoxes.FMODAudio
         )
         {
             _rootDir = rootDir;
-            LoadNativeLibraries(false);
+            LoadNativeLibrary(false);
 
             FMOD.Factory.System_Create(out FMOD.System system);
             FMODSystem = system;
