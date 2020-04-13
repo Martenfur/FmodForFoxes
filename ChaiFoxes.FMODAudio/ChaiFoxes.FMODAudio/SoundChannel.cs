@@ -161,7 +161,7 @@ namespace ChaiFoxes.FMODAudio
 		}
 		
 		/// <summary>
-		/// Sound's position in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Position3D
 		{
@@ -179,7 +179,7 @@ namespace ChaiFoxes.FMODAudio
 		}
 
 		/// <summary>
-		/// Sound's velocity in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Velocity3D
 		{
@@ -224,8 +224,6 @@ namespace ChaiFoxes.FMODAudio
 				_channel.set3DMinMaxDistance(MinDistance3D, value);
 		}
 
-
-
 		/// <summary>
 		/// Tells if sound is playing.
 		/// </summary>
@@ -252,8 +250,6 @@ namespace ChaiFoxes.FMODAudio
 				_channel.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
-
-
 		public SoundChannel(Sound sound, FMOD.Channel channel)
 		{
 			Sound = sound;
@@ -270,7 +266,6 @@ namespace ChaiFoxes.FMODAudio
 			MinDistance3D = sound.MinDistance3D;
 			MaxDistance3D = sound.MaxDistance3D;
 		}
-
 		
 		public void Pause() =>
 			_channel.setPaused(true);
@@ -280,6 +275,5 @@ namespace ChaiFoxes.FMODAudio
 
 		public void Stop() =>
 			_channel.stop();
-
 	}
 }

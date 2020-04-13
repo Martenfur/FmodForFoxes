@@ -8,9 +8,13 @@
 		/// <summary>
 		/// Loads Android version of FMOD library.
 		/// </summary>
-		public static void LoadNativeLibrary()
+		public static void LoadNativeLibrary(bool loadStudio = true)
 		{
 			Java.Lang.JavaSystem.LoadLibrary("fmod");
+            if(loadStudio)
+            {
+                Java.Lang.JavaSystem.LoadLibrary("fmodstudio");
+            }
 		}
 	}
 }

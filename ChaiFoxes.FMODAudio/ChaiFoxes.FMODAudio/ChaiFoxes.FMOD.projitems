@@ -10,11 +10,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AudioMgr.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\Attributes3D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\Bank.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\EventDescription.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\EventInstance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_dsp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_studio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioListener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Listener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundChannel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\Bus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\VCA.cs" />
   </ItemGroup>
 </Project>

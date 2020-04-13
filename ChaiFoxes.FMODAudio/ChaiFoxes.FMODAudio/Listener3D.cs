@@ -21,7 +21,6 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		private int _index;
 
-
 		/// <summary>
 		/// Listener position in 3D space. Used for panning and attenuation
 		/// </summary>
@@ -73,7 +72,6 @@ namespace ChaiFoxes.FMODAudio
 				SetAttributes(position, velocity, value, upVector);
 			}
 		}
-
 		
 		/// <summary>
 		/// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
@@ -92,7 +90,6 @@ namespace ChaiFoxes.FMODAudio
 				SetAttributes(position, velocity, forwardVector, value);
 			}
 		}
-		
 
 		/// <summary>
 		/// Gets all listener attributes at once.
@@ -111,7 +108,6 @@ namespace ChaiFoxes.FMODAudio
 			forwardVector = forward.ToVector3();
 			upVector = up.ToVector3();
 		}
-
 		
 		/// <summary>
 		/// Sets all listener attributes at once.
@@ -130,8 +126,6 @@ namespace ChaiFoxes.FMODAudio
 				ref up
 			);
 		}
-
-
 		private Listener3D()
 		{
 			_index = _listeners.Count;
@@ -144,7 +138,6 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Creates a new listener.
 		/// </summary>
-		/// <returns></returns>
 		public static Listener3D Create()
 		{
 			return new Listener3D();
@@ -183,7 +176,5 @@ namespace ChaiFoxes.FMODAudio
 
 			_index = -1;
 		}
-		
-
 	}
 }

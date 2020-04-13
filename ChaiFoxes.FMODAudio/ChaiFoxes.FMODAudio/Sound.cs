@@ -13,7 +13,6 @@ namespace ChaiFoxes.FMODAudio
 	public class Sound
 	{
 		protected FMOD.Sound _FMODSound {get; private set;}
-
 		
 		/// <summary>
 		/// Tells if sound is looping.
@@ -80,12 +79,12 @@ namespace ChaiFoxes.FMODAudio
 		public bool Is3D = false;
 
 		/// <summary>
-		/// Sound's position in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Position3D = Vector3.Zero;
 		
 		/// <summary>
-		/// Sound's velocity in 3D space. Can be used only id 3D positioning is enabled.
+		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Velocity3D = Vector3.Zero;
 		
@@ -99,10 +98,9 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public float MaxDistance3D;
 
-
 		/// <summary>
 		/// Sound buffer. Used for streamed sounds, which point to this memory.
-		/// In otehr words, we need to just reference it somewhere to prevent
+		/// In other words, we need to just reference it somewhere to prevent
 		/// garbage collector from collecting it.
 		/// This memory is also pinned, so GC won't move it anywhere.
 		/// 
@@ -114,7 +112,6 @@ namespace ChaiFoxes.FMODAudio
 		/// Buffer's handle.
 		/// </summary>
 		private GCHandle _bufferHandle;
-
 
 		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 		{
@@ -128,17 +125,15 @@ namespace ChaiFoxes.FMODAudio
 			_FMODSound = sound;
 			_buffer = null;
 		}
-
+		
 		public SoundChannel Play(bool paused = false) =>
 			Play(ChannelGroup, paused);
-		
 
 		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
 		{
 			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
 			return new SoundChannel(this, fmodChannel);	
 		}
-
 
 		/// <summary>
 		/// Unloads the sound and frees its handles.
@@ -151,7 +146,5 @@ namespace ChaiFoxes.FMODAudio
 				_bufferHandle.Free();
 			}
 		}
-		
-
 	}
 }
