@@ -45,10 +45,6 @@
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChaiFoxes.FMODAudio.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Android\bin\Debug\ChaiFoxes.FMODAudio.Android.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
     <Reference Include="OpenTK-1.0" />
@@ -96,6 +92,12 @@
     <AndroidNativeLibrary Include="libs\armeabi\libfmod.so" />
     <AndroidNativeLibrary Include="libs\x86\libfmod.so" />
     <AndroidNativeLibrary Include="libs\x86_64\libfmod.so" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj">
+      <Project>{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}</Project>
+      <Name>ChaiFoxes.FMODAudio.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />

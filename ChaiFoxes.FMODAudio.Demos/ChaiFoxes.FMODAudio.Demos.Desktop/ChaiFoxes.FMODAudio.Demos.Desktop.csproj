@@ -13,7 +13,7 @@
     <AssemblyName>ChaiFoxes.FMODAudio.Demos.Desktop</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -62,9 +62,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ChaiFoxes.FMODAudio.Desktop">
-      <HintPath>..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Desktop\bin\Debug\ChaiFoxes.FMODAudio.Desktop.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -163,6 +160,12 @@
     <Content Include="x86\fmod.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj">
+      <Project>{f712bf21-58f9-448c-bef5-286cec991ebb}</Project>
+      <Name>ChaiFoxes.FMODAudio.Desktop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
