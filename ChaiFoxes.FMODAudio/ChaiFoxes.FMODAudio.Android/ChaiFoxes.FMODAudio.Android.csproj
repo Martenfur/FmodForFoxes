@@ -62,7 +62,7 @@
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
@@ -76,7 +76,12 @@
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
   </ItemGroup>
-  <Import Project="..\ChaiFoxes.FMODAudio\ChaiFoxes.FMOD.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj">
+      <Project>{0bd3faee-2eb9-4b28-8cc0-d22b6b3c5a43}</Project>
+      <Name>ChaiFoxes.FMODAudio</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

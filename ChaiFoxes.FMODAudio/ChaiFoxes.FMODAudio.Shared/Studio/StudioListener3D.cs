@@ -28,13 +28,13 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				IAudioMgr.FMODStudioSystem.getListenerAttributes(_index, out FMOD.ATTRIBUTES_3D attributes);
+				AudioMgr.FMODStudioSystem.getListenerAttributes(_index, out FMOD.ATTRIBUTES_3D attributes);
 
 				return attributes.ToAttributes3D();
 			}
 			set
 			{
-				IAudioMgr.FMODStudioSystem.setListenerAttributes(_index, value.ToFmodAttributes());
+				AudioMgr.FMODStudioSystem.setListenerAttributes(_index, value.ToFmodAttributes());
 			}
 		}
 
@@ -42,7 +42,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			_index = _listeners.Count;
 			_listeners.Add(this);
-			IAudioMgr.FMODStudioSystem.setNumListeners(_listeners.Count);
+			AudioMgr.FMODStudioSystem.setNumListeners(_listeners.Count);
 
 			Attributes = new Attributes3D
 			{
@@ -90,7 +90,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 			}
 
 			_listeners.Remove(this);
-			IAudioMgr.FMODStudioSystem.setNumListeners(_listeners.Count);
+			AudioMgr.FMODStudioSystem.setNumListeners(_listeners.Count);
 
 			_index = -1;
 		}

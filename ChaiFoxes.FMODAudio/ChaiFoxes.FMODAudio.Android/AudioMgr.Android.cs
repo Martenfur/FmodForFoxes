@@ -11,10 +11,10 @@
 		public static void LoadNativeLibrary(bool loadStudio = true)
 		{
 			Java.Lang.JavaSystem.LoadLibrary("fmod");
-            if(loadStudio)
-            {
-                Java.Lang.JavaSystem.LoadLibrary("fmodstudio");
-            }
+			if (loadStudio)
+			{
+				//Java.Lang.JavaSystem.LoadLibrary("fmodstudio");
+			}
 		}
 	}
 }
