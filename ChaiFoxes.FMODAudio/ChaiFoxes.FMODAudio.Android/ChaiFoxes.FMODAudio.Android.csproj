@@ -42,7 +42,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Android\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
@@ -76,12 +76,7 @@
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj">
-      <Project>{0bd3faee-2eb9-4b28-8cc0-d22b6b3c5a43}</Project>
-      <Name>ChaiFoxes.FMODAudio</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

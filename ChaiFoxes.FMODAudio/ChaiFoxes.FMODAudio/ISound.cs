@@ -51,7 +51,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Sound's default channel group.
 		/// </summary>
-		FMOD.ChannelGroup ChannelGroup { get; set; }
+		IChannelGroup ChannelGroup { get; set; }
 
 		/// <summary>
 		/// If true, allows sound to be positioned in 3D space.

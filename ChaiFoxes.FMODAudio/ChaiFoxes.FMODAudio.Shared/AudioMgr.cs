@@ -13,7 +13,7 @@ namespace ChaiFoxes.FMODAudio
 	/// <summary>
 	/// Audio manager. Contains main audiosystem parameters.
 	/// </summary>
-	public static class AudioMgr
+	public static partial class AudioMgr
 	{
 		/// <summary>
 		/// FMOD studio sound system.
