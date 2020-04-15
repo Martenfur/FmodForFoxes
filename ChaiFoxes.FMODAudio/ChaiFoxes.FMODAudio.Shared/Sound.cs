@@ -12,7 +12,7 @@ namespace ChaiFoxes.FMODAudio
 	/// </summary>
 	public class Sound
 	{
-		protected FMOD.Sound _FMODSound {get; private set;}
+		public FMOD.Sound FMODSound {get; private set;}
 		
 		/// <summary>
 		/// Tells if sound is looping.
@@ -115,14 +115,14 @@ namespace ChaiFoxes.FMODAudio
 
 		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 		{
-			_FMODSound = sound;
+			FMODSound = sound;
 			_buffer = buffer;
 			_bufferHandle = bufferHandle;
 		}
 
 		public Sound(FMOD.Sound sound)
 		{
-			_FMODSound = sound;
+			FMODSound = sound;
 			_buffer = null;
 		}
 		
@@ -131,7 +131,7 @@ namespace ChaiFoxes.FMODAudio
 
 		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
 		{
-			AudioMgr.FMODSystem.playSound(_FMODSound, group, paused, out FMOD.Channel fmodChannel);
+			AudioMgr.FMODSystem.playSound(FMODSound, group, paused, out FMOD.Channel fmodChannel);
 			return new SoundChannel(this, fmodChannel);	
 		}
 
@@ -140,7 +140,7 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public void Unload()
 		{
-			_FMODSound.release();
+			FMODSound.release();
 			if (_buffer != null)
 			{
 				_bufferHandle.Free();

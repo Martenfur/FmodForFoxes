@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AudioMgr.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_dsp.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_studio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FMOD\Studio\fmod_studio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Listener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundChannel.cs" />
@@ -24,5 +24,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioListener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\VCA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)FMOD\Studio\" />
   </ItemGroup>
 </Project>
