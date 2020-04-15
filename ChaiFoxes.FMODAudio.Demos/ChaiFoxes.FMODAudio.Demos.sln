@@ -11,17 +11,20 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Demos",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fmod", "fmod", "{F2AB0DE1-F671-431F-ACF2-1F68749AB21F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Desktop", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj", "{F712BF21-58F9-448C-BEF5-286CEC991EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Desktop", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj", "{F712BF21-58F9-448C-BEF5-286CEC991EBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Android", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj", "{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj", "{0BD3FAEE-2EB9-4B28-8CC0-D22B6B3C5A43}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Shared", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.shproj", "{B5933BD7-E07E-4EB2-99BE-2814508425A1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 4
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{16ca3ccc-663f-40b2-b9c8-a910ce35c7a9}*SharedItemsImports = 4
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{1ac29f42-1a31-4213-9c36-37ff51ae5b1b}*SharedItemsImports = 4
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{4fc7a6b9-6d95-4d0b-b748-3edd39fc97db}*SharedItemsImports = 13
+		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{b5933bd7-e07e-4eb2-99be-2814508425a1}*SharedItemsImports = 13
+		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{f712bf21-58f9-448c-bef5-286cec991ebb}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,10 +49,6 @@ Global
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0BD3FAEE-2EB9-4B28-8CC0-D22B6B3C5A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0BD3FAEE-2EB9-4B28-8CC0-D22B6B3C5A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0BD3FAEE-2EB9-4B28-8CC0-D22B6B3C5A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0BD3FAEE-2EB9-4B28-8CC0-D22B6B3C5A43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +56,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F712BF21-58F9-448C-BEF5-286CEC991EBB} = {F2AB0DE1-F671-431F-ACF2-1F68749AB21F}
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858} = {F2AB0DE1-F671-431F-ACF2-1F68749AB21F}
+		{B5933BD7-E07E-4EB2-99BE-2814508425A1} = {F2AB0DE1-F671-431F-ACF2-1F68749AB21F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0E082C2-1837-4496-9124-1243364D2CFF}

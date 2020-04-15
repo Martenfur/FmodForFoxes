@@ -13,7 +13,7 @@ namespace ChaiFoxes.FMODAudio
 	/// <summary>
 	/// Audio manager. Contains main audiosystem parameters.
 	/// </summary>
-	public static partial class AudioMgr
+	public static class AudioMgr
 	{
 		/// <summary>
 		/// FMOD studio sound system.
@@ -60,8 +60,8 @@ namespace ChaiFoxes.FMODAudio
 		)
 		{
 			_rootDir = rootDir;
-			LoadNativeLibrary();
-
+			NativeLibraryLoader.LoadNativeLibrary("fmod");
+			
 			FMOD.Studio.System.create(out FMOD.Studio.System system);
 			FMODStudioSystem = system;
 
@@ -98,7 +98,7 @@ namespace ChaiFoxes.FMODAudio
 		)
 		{
 			_rootDir = rootDir;
-			LoadNativeLibrary(false);
+			NativeLibraryLoader.LoadNativeLibrary("fmod");
 
 			FMOD.Factory.System_Create(out FMOD.System system);
 			FMODSystem = system;
