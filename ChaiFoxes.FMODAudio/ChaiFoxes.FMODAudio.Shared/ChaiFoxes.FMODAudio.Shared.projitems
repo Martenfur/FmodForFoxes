@@ -9,9 +9,10 @@
     <Import_RootNamespace>ChaiFoxes.FMODAudio.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AudioStudioSystem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AudioSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioSystem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CoreSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FMODManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\fmod_dsp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\Studio\fmod_studio.cs" />

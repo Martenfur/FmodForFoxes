@@ -1,55 +1,14 @@
 ﻿using ChaiFoxes.FMODAudio.Studio;
 using System;
-using System.IO;
 
-namespace ChaiFoxes.FMODAudio.Shared
+namespace ChaiFoxes.FMODAudio.Studio
 {
-	public static class AudioStudioSystem
+	public static class StudioSystem
 	{
 		/// <summary>
 		/// FMOD studio sound system.
 		/// </summary>
-		public static FMOD.Studio.System FMODStudioSystem;
-
-		/// <summary>
-		/// Initializes FMOD Studio with default parameters.
-		/// 
-		/// If you want to exclusively use the default wrapper, call
-		/// LoadNativeLibraries() instead.
-		/// </summary>
-		public static void Init(string rootDir) =>
-				Init(rootDir, 256, FMOD.Studio.INITFLAGS.NORMAL, FMOD.INITFLAGS.NORMAL);
-
-		/// <summary>
-		/// Initializes FMOD Studio with custom parameters.
-		/// 
-		/// If you want to exclusively use the default wrapper, call
-		/// LoadNativeLibraries() instead.
-		/// </summary>
-		public static void Init(
-				string rootDir,
-				int maxChannels,
-				FMOD.Studio.INITFLAGS studioInitFlags,
-				FMOD.INITFLAGS initFlags
-		)
-		{
-			FileLoader.RootDirectory = rootDir;
-			NativeLibraryLoader.LoadNativeLibrary("fmod");
-			NativeLibraryLoader.LoadNativeLibrary("fmodstudio");
-
-			FMOD.Studio.System.create(out FMOD.Studio.System system);
-			FMODStudioSystem = system;
-
-			FMODStudioSystem.getCoreSystem(out FMOD.System coreSystem);
-
-			FMODStudioSystem.initialize(maxChannels, studioInitFlags, initFlags, (IntPtr)0);
-		}
-
-		public static void Update() =>
-			FMODStudioSystem.update();
-
-		public static void Unload() =>
-			FMODStudioSystem.update();
+		public static FMOD.Studio.System Native;
 
 		/// <summary>
 		/// Loads bank from file with the default flag.
@@ -62,7 +21,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static Bank LoadBank(string path, FMOD.Studio.LOAD_BANK_FLAGS flags)
 		{
-			FMODStudioSystem.loadBankMemory(
+			Native.loadBankMemory(
 				FileLoader.LoadFileAsBuffer(path),
 				flags,
 				out FMOD.Studio.Bank bank
@@ -76,7 +35,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static EventDescription GetEvent(string path)
 		{
-			FMODStudioSystem.getEvent(path, out FMOD.Studio.EventDescription eventDescription);
+			Native.getEvent(path, out FMOD.Studio.EventDescription eventDescription);
 			return new EventDescription(eventDescription);
 		}
 
@@ -86,7 +45,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static EventDescription GetEvent(Guid id)
 		{
-			FMODStudioSystem.getEventByID(id, out FMOD.Studio.EventDescription eventDescription);
+			Native.getEventByID(id, out FMOD.Studio.EventDescription eventDescription);
 			return new EventDescription(eventDescription);
 		}
 
@@ -95,7 +54,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static VCA GetVCA(string path)
 		{
-			FMODStudioSystem.getVCA(path, out FMOD.Studio.VCA vca);
+			Native.getVCA(path, out FMOD.Studio.VCA vca);
 			return new VCA(vca);
 		}
 
@@ -105,7 +64,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static VCA GetVCA(Guid id)
 		{
-			FMODStudioSystem.getVCAByID(id, out FMOD.Studio.VCA vca);
+			Native.getVCAByID(id, out FMOD.Studio.VCA vca);
 			return new VCA(vca);
 		}
 
@@ -114,7 +73,7 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(string name)
 		{
-			FMODStudioSystem.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			Native.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
 			return parameter;
 		}
 
@@ -123,77 +82,70 @@ namespace ChaiFoxes.FMODAudio.Shared
 		/// </summary>
 		public static FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(FMOD.Studio.PARAMETER_ID id)
 		{
-			FMODStudioSystem.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			Native.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
 			return parameter;
 		}
 
 		/// <summary>
-		/// STUDIO:
 		/// Retrieves a global parameter's current value via its name (case sensitive).
 		/// This ignores modulation / automation applied to the parameter within Studio.
 		/// </summary>
 		public static float GetParameterTargetValue(string name)
 		{
-			FMODStudioSystem.getParameterByName(name, out float value, out _);
+			Native.getParameterByName(name, out float value, out _);
 			return value;
 		}
 
 		/// <summary>
-		/// STUDIO:
 		/// Retrieves a global parameter's current value via its ID.
 		/// This ignores modulation / automation applied to the parameter within Studio.
 		/// </summary>
 		public static float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			FMODStudioSystem.getParameterByID(id, out float value, out _);
+			Native.getParameterByID(id, out float value, out _);
 			return value;
 		}
 
 		/// <summary>
-		/// STUDIO:
 		/// Retrieves a global parameter's current value via its name (case sensitive).
 		/// This takes into account modulation / automation applied to the parameter within Studio.
 		/// </summary>
 		public static float GetParameterCurrentValue(string name)
 		{
-			FMODStudioSystem.getParameterByName(name, out _, out float finalValue);
+			Native.getParameterByName(name, out _, out float finalValue);
 			return finalValue;
 		}
 
 		/// <summary>
-		/// STUDIO:
 		/// Retrieves a global parameter's current value via its ID.
 		/// This takes into account modulation / automation applied to the parameter within Studio.
 		/// </summary>
 		public static float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			FMODStudioSystem.getParameterByID(id, out _, out float finalValue);
+			Native.getParameterByID(id, out _, out float finalValue);
 			return finalValue;
 		}
 
 		/// <summary>
-		/// STUDIO:
 		/// Sets a global parameter's value via its name (case sensitive).
 		/// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
 		/// </summary>
 		public static void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false) =>
-			FMODStudioSystem.setParameterByName(name, value, ignoreSeekSpeed);
+			Native.setParameterByName(name, value, ignoreSeekSpeed);
 
 		/// <summary>
-		/// STUDIO:
 		/// Sets a global parameter's value via its ID.
 		/// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
 		/// </summary>
 		public static void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false) =>
-			FMODStudioSystem.setParameterByID(id, value, ignoreSeekSpeed);
+			Native.setParameterByID(id, value, ignoreSeekSpeed);
 
 		/// <summary>
-		/// STUDIO:
 		/// Sets multiple global parameters' values via their IDs.
 		/// Enable ignoreSeekSpeed to set the values instantly, ignoring the parameters' seek speeds.
 		/// </summary>
 		public static void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false) =>
-			FMODStudioSystem.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
+			Native.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
 		
 	}
 }

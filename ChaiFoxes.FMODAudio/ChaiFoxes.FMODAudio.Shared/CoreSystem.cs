@@ -1,8 +1,4 @@
-using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework;
-using ChaiFoxes.FMODAudio.Studio;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -13,68 +9,19 @@ namespace ChaiFoxes.FMODAudio
 	/// <summary>
 	/// Audio manager. Contains main audiosystem parameters.
 	/// </summary>
-	public static class AudioSystem
+	public static class CoreSystem
 	{
 		/// <summary>
 		/// Low level FMOD sound system.
 		/// </summary>
-		public static FMOD.System FMODSystem;
-
-		/// <summary>
-		/// Returns true if initialized with Studio, false for the core FMOD system.
-		/// </summary>
-		private static bool _studioLoaded;
-
-		/// <summary>
-		/// Initializes FMOD Core with default parameters.
-		/// Loading this way disables Studio functionality.
-		/// 
-		/// If you want to exclusively use the default wrapper, call
-		/// LoadNativeLibraries() instead.
-		/// </summary>
-		public static void Init(string rootDir) =>
-				Init(rootDir, 256, 4, 32, FMOD.INITFLAGS.CHANNEL_LOWPASS | FMOD.INITFLAGS.CHANNEL_DISTANCEFILTER);
-
-		/// <summary>
-		/// Initializes FMOD Core with custom parameters.
-		/// Loading this way disables Studio functionality.
-		/// 
-		/// If you want to exclusively use the default wrapper, call
-		/// LoadNativeLibrary("fmod") instead.
-		/// </summary>
-		public static void Init(
-				string rootDir,
-				uint dspBufferLength,
-				int dspBufferCount,
-				int maxChannels,
-				FMOD.INITFLAGS initFlags
-		)
-		{
-			FileLoader.RootDirectory = rootDir;
-			NativeLibraryLoader.LoadNativeLibrary("fmod");
-
-			FMOD.Factory.System_Create(out FMOD.System system);
-			FMODSystem = system;
-
-			// Too high values will cause sound lag.
-			FMODSystem.setDSPBufferSize(dspBufferLength, dspBufferCount);
-
-			FMODSystem.init(maxChannels, initFlags, (IntPtr)0);
-			_studioLoaded = false;
-		}
-
-		public static void Update() =>
-			FMODSystem.update();
-
-		public static void Unload() =>
-			FMODSystem.release();
+		public static FMOD.System Native;
 
 		/// <summary>
 		/// Creates new channel group with given name.
 		/// </summary>
 		public static FMOD.ChannelGroup CreateChannelGroup(string name)
 		{
-			FMODSystem.createChannelGroup(name, out FMOD.ChannelGroup channelGroup);
+			Native.createChannelGroup(name, out FMOD.ChannelGroup channelGroup);
 			return channelGroup;
 		}
 
@@ -90,7 +37,7 @@ namespace ChaiFoxes.FMODAudio
 			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
 
-			FMODSystem.createSound(
+			Native.createSound(
 					buffer,
 					FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESAMPLE,
 					ref info,
@@ -115,7 +62,7 @@ namespace ChaiFoxes.FMODAudio
 			info.length = (uint)buffer.Length;
 			info.cbsize = Marshal.SizeOf(info);
 
-			FMODSystem.createStream(
+			Native.createStream(
 					buffer,
 					FMOD.MODE.OPENMEMORY | FMOD.MODE.CREATESTREAM,
 					ref info,
