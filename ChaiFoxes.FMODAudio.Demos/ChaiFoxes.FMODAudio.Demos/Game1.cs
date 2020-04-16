@@ -41,11 +41,11 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Initialize()
 		{
 			// All our music files reside in Content directory.
-			AudioMgr.Init("Content");
+			AudioSystem.Init("Content");
 		
 			// You can load pretty much any popular audio format.
 			// I'd recommend .ogg for music, tho.
-			var sound = AudioMgr.LoadStreamedSound("test.mp3");
+			var sound = AudioSystem.LoadStreamedSound("test.mp3");
 			sound.Looping = true;
 			//sound.LowPass = 0.1f;
 			//sound.Volume = 2;
@@ -80,7 +80,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void UnloadContent()
 		{
-			AudioMgr.Unload();
+			AudioSystem.Unload();
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 				Exit();
 			}
 
-			AudioMgr.Update();
+			AudioSystem.Update();
 
 			rotation += rotationSpeed;
 			if (rotation > MathHelper.TwoPi)

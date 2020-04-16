@@ -96,7 +96,7 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public void GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector)
 		{
-			AudioMgr.FMODSystem.get3DListenerAttributes(
+			AudioSystem.FMODSystem.get3DListenerAttributes(
 				_index, 
 				out FMOD.VECTOR pos, 
 				out FMOD.VECTOR vel, 
@@ -118,7 +118,7 @@ namespace ChaiFoxes.FMODAudio
 			var vel = velocity.ToFmodVector();
 			var forw = forwardVector.ToFmodVector();
 			var up = upVector.ToFmodVector();
-			AudioMgr.FMODSystem.set3DListenerAttributes(
+			AudioSystem.FMODSystem.set3DListenerAttributes(
 				_index,
 				ref pos,
 				ref vel, 
@@ -130,7 +130,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			_index = _listeners.Count;
 			_listeners.Add(this);
-			AudioMgr.FMODSystem.set3DNumListeners(_listeners.Count);
+			AudioSystem.FMODSystem.set3DNumListeners(_listeners.Count);
 
 			SetAttributes(Vector3.Zero, Vector3.Zero, Vector3.UnitY, Vector3.UnitZ);
 		}
@@ -172,7 +172,7 @@ namespace ChaiFoxes.FMODAudio
 			}
 
 			_listeners.Remove(this);
-			AudioMgr.FMODSystem.set3DNumListeners(_listeners.Count);
+			AudioSystem.FMODSystem.set3DNumListeners(_listeners.Count);
 
 			_index = -1;
 		}
