@@ -126,21 +126,14 @@ namespace ChaiFoxes.FMODAudio
 				ref up
 			);
 		}
-		private Listener3D()
+
+		public Listener3D()
 		{
 			_index = _listeners.Count;
 			_listeners.Add(this);
 			CoreSystem.Native.set3DNumListeners(_listeners.Count);
 
 			SetAttributes(Vector3.Zero, Vector3.Zero, Vector3.UnitY, Vector3.UnitZ);
-		}
-
-		/// <summary>
-		/// Creates a new listener.
-		/// </summary>
-		public static Listener3D Create()
-		{
-			return new Listener3D();
 		}
 
 		/// <summary>
