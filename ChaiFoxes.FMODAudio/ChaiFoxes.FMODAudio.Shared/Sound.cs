@@ -12,22 +12,22 @@ namespace ChaiFoxes.FMODAudio
 	/// </summary>
 	public class Sound
 	{
-		public FMOD.Sound FMODSound {get; private set;}
-		
+		public readonly FMOD.Sound Native;
+
 		/// <summary>
 		/// Tells if sound is looping.
 		/// </summary>
 		public bool Looping
 		{
 			get => (Loops == -1);
-			set 
+			set
 			{
 				if (value)
 				{
 					Loops = -1;
 				}
 				else
-				{	
+				{
 					Loops = 0;
 				}
 			}
@@ -40,7 +40,7 @@ namespace ChaiFoxes.FMODAudio
 		/// -1 - Infinite loops.
 		/// </summary>
 		public int Loops = 0;
-		
+
 		/// <summary>
 		/// Sound pitch. Affects speed too.
 		/// 1 - Normal pitch.
@@ -48,14 +48,14 @@ namespace ChaiFoxes.FMODAudio
 		/// Less than 1 - Lower pitch.
 		/// </summary>
 		public float Pitch = 1;
-		
+
 		/// <summary>
 		/// Sound volume.
 		/// 1 - Normal volume.
 		/// 0 - Muted.
 		/// </summary>
 		public float Volume = 1;
-		
+
 		/// <summary>
 		/// Low pass filter. Makes sound muffled.
 		/// 1 - No filtering.
@@ -66,7 +66,18 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Sound mode.
 		/// </summary>
-		public FMOD.MODE Mode = FMOD.MODE.DEFAULT;
+		public FMOD.MODE Mode
+		{ 
+			get
+			{
+				Native.getMode(out var mode);
+				return mode;
+			}
+			set
+			{ 
+				Native.setMode(value);
+			}
+		}
 
 		/// <summary>
 		/// Sound's default channel group.
@@ -82,21 +93,39 @@ namespace ChaiFoxes.FMODAudio
 		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Position3D = Vector3.Zero;
-		
+
 		/// <summary>
 		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
 		public Vector3 Velocity3D = Vector3.Zero;
-		
+
 		/// <summary>
 		/// Distance from the source where attenuation begins.
 		/// </summary>
-		public float MinDistance3D;
-		
+		public float MinDistance3D
+		{
+			get
+			{
+				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				return minDistance;
+			}
+			set =>
+				Native.set3DMinMaxDistance(value, MaxDistance3D);
+		}
+
 		/// <summary>
 		/// Distance from the source where attenuation ends.
 		/// </summary>
-		public float MaxDistance3D;
+		public float MaxDistance3D
+		{
+			get
+			{
+				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				return maxDistance;
+			}
+			set =>
+				Native.set3DMinMaxDistance(MinDistance3D, value);
+		}
 
 		/// <summary>
 		/// Sound buffer. Used for streamed sounds, which point to this memory.
@@ -115,24 +144,24 @@ namespace ChaiFoxes.FMODAudio
 
 		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 		{
-			FMODSound = sound;
+			Native = sound;
 			_buffer = buffer;
 			_bufferHandle = bufferHandle;
 		}
 
 		public Sound(FMOD.Sound sound)
 		{
-			FMODSound = sound;
+			Native = sound;
 			_buffer = null;
 		}
-		
+
 		public SoundChannel Play(bool paused = false) =>
 			Play(ChannelGroup, paused);
 
 		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
 		{
-			CoreSystem.Native.playSound(FMODSound, group, paused, out FMOD.Channel fmodChannel);
-			return new SoundChannel(this, fmodChannel);	
+			CoreSystem.Native.playSound(Native, group, paused, out FMOD.Channel fmodChannel);
+			return new SoundChannel(this, fmodChannel);
 		}
 
 		/// <summary>
@@ -140,11 +169,103 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public void Unload()
 		{
-			FMODSound.release();
+			Native.release();
 			if (_buffer != null)
 			{
 				_bufferHandle.Free();
 			}
 		}
+
+		public FMOD.TIMEUNIT LengthTimeunit = FMOD.TIMEUNIT.MS;
+
+		/// <summary>
+		/// Sound length in specified time units
+		/// </summary>
+		public uint Length
+		{
+			get
+			{
+				Native.getLength(out var length, LengthTimeunit);
+				return length; 
+			}
+		}
+
+		public int LoopCount 
+		{
+			get
+			{ 
+				Native.getLoopCount(out var loopCount);
+				return loopCount;
+			}
+			set
+			{ 
+				Native.setLoopCount(value);
+			}
+		}
+
+		public float DefaultFrequency 
+		{ 
+			get
+			{ 
+				Native.getDefaults(out var frequency, out var priority);
+				return frequency;
+			}
+			set =>
+				Native.setDefaults(value, DefaultPriority);
+		}
+
+		public int DefaultPriority
+		{
+			get
+			{
+				Native.getDefaults(out var frequency, out var priority);
+				return priority;
+			}
+			set =>
+				Native.setDefaults(DefaultFrequency, value);
+		}
+
+		public ConeSettings3D ConeSettings
+		{
+			get
+			{
+				var cone = new ConeSettings3D();
+				Native.get3DConeSettings(out cone.InsideConeAngle, out cone.OutsideVolume, out cone.OutsideVolume);
+				return cone;
+			}
+			set =>
+				Native.set3DConeSettings(value.InsideConeAngle, value.OutsideConeAngle, value.OutsideVolume);
+		}
+
+		public Vector3[] CustomRolloff
+		{
+			get
+			{
+				Native.get3DCustomRolloff(out var pointer, out var vectorsCount);
+
+				var sizeInBytes = Marshal.SizeOf(typeof(FMOD.VECTOR));
+				var output = new Vector3[vectorsCount];
+
+				for (var i = 0; i < vectorsCount; i += 1)
+				{
+					pointer += i * sizeInBytes;
+					output[i] = ((FMOD.VECTOR)Marshal.PtrToStructure(pointer, typeof(FMOD.VECTOR))).ToVector3();
+				}
+
+				return output;
+			}
+			set
+			{
+				var vectors = new FMOD.VECTOR[value.Length];
+
+				for(var i = 0; i < value.Length; i += 1)
+				{ 
+					vectors[i] = value[i].ToFmodVector();
+				}
+
+				Native.set3DCustomRolloff(ref vectors[0], vectors.Length);
+			}
+		}
+
 	}
 }
