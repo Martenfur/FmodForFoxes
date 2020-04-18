@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace ChaiFoxes.FMODAudio
-{
+{/*
 	public class ChannelGroup : IDisposable, IChannelControl
 	{
 		public readonly FMOD.ChannelGroup Native;
@@ -9,7 +9,7 @@ namespace ChaiFoxes.FMODAudio
 		// Nested channel groups.
 		FMOD.RESULT AddGroup(ChannelGroup group, bool propagatedspclock = true);
 
-		FMOD.RESULT AddGroup(ChannelGroup group, bool propagatedspclock, out IDspConnection connection);
+		FMOD.RESULT AddGroup(ChannelGroup group, bool propagatedspclock, out FMOD.DSPConnection connection);
 
 		FMOD.RESULT getNumGroups(out int numgroups);
 
@@ -23,15 +23,17 @@ namespace ChaiFoxes.FMODAudio
 
 		FMOD.RESULT getNumChannels(out int numchannels);
 
-		Channel GetChannel(int index, out Channel channel)
-		{ 
-		
+		Channel GetChannel(int index)
+		{ ulong.MaxValue
+			Native.getChannel(index, out channel);
+			channel.
+			return new Channel(channel);
 		}
 
 		public void Dispose()
 		{
 			throw new NotImplementedException();
 		}
-	}
+	}*/
 
 }

@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -53,6 +54,8 @@ namespace ChaiFoxes.FMODAudio.Demos
 			
 			var channel = sound.Play();
 			
+			Console.WriteLine(channel.Sound == sound);
+
 			/*
 			// Add some effects to the sound! :0
 			channel.LowPass = 0.5f;

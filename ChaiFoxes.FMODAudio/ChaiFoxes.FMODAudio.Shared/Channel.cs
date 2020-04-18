@@ -15,12 +15,22 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// FMOD channel object. Use it if you need full FMOD functionality.
 		/// </summary>
-		protected readonly FMOD.Channel Native;
+		public readonly FMOD.Channel Native;
+
+		internal readonly PointerLinker<Channel> _channelLinker = new PointerLinker<Channel>();
 
 		/// <summary>
 		/// Sound, from which this channel has been created.
 		/// </summary>
-		public readonly Sound Sound;
+		public Sound Sound 
+		{ 
+			get
+			{ 
+				Native.getCurrentSound(out var sound);
+				sound.getUserData(out var ptr);
+				return Sound._soundLinker.Get(ptr);
+			}
+		}
 
 
 		/// <summary>
@@ -251,7 +261,6 @@ namespace ChaiFoxes.FMODAudio
 
 		public Channel(Sound sound, FMOD.Channel channel)
 		{
-			Sound = sound;
 			Native = channel;
 
 			Loops = Sound.Loops;
