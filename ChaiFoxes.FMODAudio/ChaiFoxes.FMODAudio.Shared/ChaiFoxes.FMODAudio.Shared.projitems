@@ -11,7 +11,10 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ChannelGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConeSettings3D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)I3DControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IChannelControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Occlusion3D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReverbProperties.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileLoader.cs" />
@@ -21,7 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)FMOD\Studio\fmod_studio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Listener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SoundChannel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Channel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Attributes3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Bank.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Bus.cs" />

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 using System.Runtime.InteropServices;
 
 // DO NOT include FMOD namespace in ANY of your classes.
@@ -10,7 +11,7 @@ namespace ChaiFoxes.FMODAudio
 	/// <summary>
 	/// Sound class. Can play sound with given attributes.
 	/// </summary>
-	public class Sound
+	public class Sound : I3DControl, IDisposable
 	{
 		public readonly FMOD.Sound Native;
 
@@ -92,12 +93,13 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
-		public Vector3 Position3D = Vector3.Zero;
+		public Vector3 Position3D { get; set; } = Vector3.Zero;
+
 
 		/// <summary>
 		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
 		/// </summary>
-		public Vector3 Velocity3D = Vector3.Zero;
+		public Vector3 Velocity3D { get; set; } = Vector3.Zero;
 
 		/// <summary>
 		/// Distance from the source where attenuation begins.
@@ -126,57 +128,6 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DMinMaxDistance(MinDistance3D, value);
 		}
-
-		/// <summary>
-		/// Sound buffer. Used for streamed sounds, which point to this memory.
-		/// In other words, we need to just reference it somewhere to prevent
-		/// garbage collector from collecting it.
-		/// This memory is also pinned, so GC won't move it anywhere.
-		/// 
-		/// If any unexpected crashes emerge, this is the first suspect.
-		/// </summary>
-		private byte[] _buffer;
-
-		/// <summary>
-		/// Buffer's handle.
-		/// </summary>
-		private GCHandle _bufferHandle;
-
-		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
-		{
-			Native = sound;
-			_buffer = buffer;
-			_bufferHandle = bufferHandle;
-		}
-
-		public Sound(FMOD.Sound sound)
-		{
-			Native = sound;
-			_buffer = null;
-		}
-
-		public SoundChannel Play(bool paused = false) =>
-			Play(ChannelGroup, paused);
-
-		public SoundChannel Play(FMOD.ChannelGroup group, bool paused = false)
-		{
-			CoreSystem.Native.playSound(Native, group, paused, out FMOD.Channel fmodChannel);
-			return new SoundChannel(this, fmodChannel);
-		}
-
-		/// <summary>
-		/// Unloads the sound and frees its handles.
-		/// </summary>
-		public void Unload()
-		{
-			Native.release();
-			if (_buffer != null)
-			{
-				_bufferHandle.Free();
-			}
-		}
-
-		public FMOD.TIMEUNIT LengthTimeunit = FMOD.TIMEUNIT.MS;
 
 		/// <summary>
 		/// Sound length in specified time units
@@ -266,5 +217,78 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DCustomRolloff(ref vectors[0], vectors.Length);
 			}
 		}
+
+		public ConeSettings3D ConeSettings3D 
+		{ 
+			get 
+			{ 
+				var coneSettings = new ConeSettings3D();
+				Native.get3DConeSettings(
+					out coneSettings.InsideConeAngle, 
+					out coneSettings.OutsideConeAngle, 
+					out coneSettings.OutsideVolume
+				);
+				return coneSettings;
+			}
+			set
+			{
+				Native.set3DConeSettings(
+					value.InsideConeAngle,
+					value.OutsideConeAngle,
+					value.OutsideVolume
+				);
+			}
+		}
+
+		/// <summary>
+		/// Sound buffer. Used for streamed sounds, which point to this memory.
+		/// In other words, we need to just reference it somewhere to prevent
+		/// garbage collector from collecting it.
+		/// This memory is also pinned, so GC won't move it anywhere.
+		/// 
+		/// If any unexpected crashes emerge, this is the first suspect.
+		/// </summary>
+		private byte[] _buffer;
+
+		/// <summary>
+		/// Buffer's handle.
+		/// </summary>
+		private GCHandle _bufferHandle;
+
+		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
+		{
+			Native = sound;
+			_buffer = buffer;
+			_bufferHandle = bufferHandle;
+		}
+
+		public Sound(FMOD.Sound sound)
+		{
+			Native = sound;
+			_buffer = null;
+		}
+
+		public Channel Play(bool paused = false) =>
+			Play(ChannelGroup, paused);
+
+		public Channel Play(FMOD.ChannelGroup group, bool paused = false)
+		{
+			CoreSystem.Native.playSound(Native, group, paused, out FMOD.Channel fmodChannel);
+			return new Channel(this, fmodChannel);
+		}
+
+		/// <summary>
+		/// Unloads the sound and frees its handles.
+		/// </summary>
+		public void Dispose()
+		{
+			Native.release();
+			if (_buffer != null)
+			{
+				_bufferHandle.Free();
+			}
+		}
+
+		public FMOD.TIMEUNIT LengthTimeunit = FMOD.TIMEUNIT.MS;
 	}
 }
