@@ -10,12 +10,12 @@ namespace ChaiFoxes.FMODAudio
 	/// FMOD sound channel wrapper. Takes horrible FMOD wrapper and makes it look pretty.
 	/// Basically, a playing sound instance.
 	/// </summary>
-	public class SoundChannel
+	public class Channel
 	{
 		/// <summary>
 		/// FMOD channel object. Use it if you need full FMOD functionality.
 		/// </summary>
-		protected readonly FMOD.Channel Channel;
+		protected readonly FMOD.Channel Native;
 
 		/// <summary>
 		/// Sound, from which this channel has been created.
@@ -30,7 +30,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.getLoopCount(out int loops);
+				Native.getLoopCount(out int loops);
 				return (loops == -1);
 			}
 			set 
@@ -57,7 +57,7 @@ namespace ChaiFoxes.FMODAudio
 			get
 			{
 				// Do you have some lööps, bröther?
-				Channel.getLoopCount(out int loops);
+				Native.getLoopCount(out int loops);
 				return loops;
 			}
 			set
@@ -71,7 +71,7 @@ namespace ChaiFoxes.FMODAudio
 					Mode = FMOD.MODE.LOOP_NORMAL;
 				}
 
-				Channel.setLoopCount(value);
+				Native.setLoopCount(value);
 			}
 		}
 
@@ -85,11 +85,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.getPitch(out float pitch);
+				Native.getPitch(out float pitch);
 				return pitch;
 			}
 			set => 
-				Channel.setPitch(value);
+				Native.setPitch(value);
 		}
 
 		/// <summary>
@@ -101,11 +101,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.getVolume(out float volume);
+				Native.getVolume(out float volume);
 				return volume;
 			}
 			set => 
-				Channel.setVolume(value);
+				Native.setVolume(value);
 		}
 
 		/// <summary>
@@ -117,11 +117,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.getLowPassGain(out float lowPassGain);
+				Native.getLowPassGain(out float lowPassGain);
 				return lowPassGain;
 			}
 			set => 
-				Channel.setLowPassGain(value);
+				Native.setLowPassGain(value);
 		}
 
 		/// <summary>
@@ -131,11 +131,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.getMode(out FMOD.MODE mode);
+				Native.getMode(out FMOD.MODE mode);
 				return mode;
 			}
 			set =>
-				Channel.setMode(value);
+				Native.setMode(value);
 		}
 
 
@@ -166,14 +166,14 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				Native.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
 				return pos.ToVector3();
 			}
 			set
 			{
 				var fmodPos = value.ToFmodVector();
 				var fmodVel = Velocity3D.ToFmodVector();
-				Channel.set3DAttributes(ref fmodPos, ref fmodVel);
+				Native.set3DAttributes(ref fmodPos, ref fmodVel);
 			}
 		}
 
@@ -184,14 +184,14 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				Native.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
 				return vel.ToVector3();
 			}
 			set
 			{
 				var fmodPos = Position3D.ToFmodVector();
 				var fmodVel = value.ToFmodVector();
-				Channel.set3DAttributes(ref fmodPos, ref fmodVel);
+				Native.set3DAttributes(ref fmodPos, ref fmodVel);
 			}
 		}
 
@@ -202,11 +202,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
 				return minDistance;
 			}
 			set =>
-				Channel.set3DMinMaxDistance(value, MaxDistance3D);
+				Native.set3DMinMaxDistance(value, MaxDistance3D);
 		}
 		
 		/// <summary>
@@ -216,11 +216,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
 				return maxDistance;
 			}
 			set =>
-				Channel.set3DMinMaxDistance(MinDistance3D, value);
+				Native.set3DMinMaxDistance(MinDistance3D, value);
 		}
 
 		/// <summary>
@@ -230,7 +230,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Channel.isPlaying(out bool isPlaying);
+				Native.isPlaying(out bool isPlaying);
 				return isPlaying;
 			}
 		}
@@ -241,18 +241,18 @@ namespace ChaiFoxes.FMODAudio
 		public uint TrackPosition
 		{
 			get
-			{
-				Channel.getPosition(out uint position, FMOD.TIMEUNIT.MS);
+			{ // TODO: Add adjustible timeunit.
+				Native.getPosition(out uint position, FMOD.TIMEUNIT.MS);
 				return position;
 			}
 			set => 
-				Channel.setPosition(value, FMOD.TIMEUNIT.MS);
+				Native.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
-		public SoundChannel(Sound sound, FMOD.Channel channel)
+		public Channel(Sound sound, FMOD.Channel channel)
 		{
 			Sound = sound;
-			Channel = channel;
+			Native = channel;
 
 			Loops = Sound.Loops;
 			Volume = Sound.Volume;
@@ -264,15 +264,16 @@ namespace ChaiFoxes.FMODAudio
 			Velocity3D = sound.Velocity3D;
 			MinDistance3D = sound.MinDistance3D;
 			MaxDistance3D = sound.MaxDistance3D;
+			// TODO: Add missing properties.
 		}
 		
 		public void Pause() =>
-			Channel.setPaused(true);
+			Native.setPaused(true);
 
 		public void Resume() =>
-			Channel.setPaused(false);
+			Native.setPaused(false);
 
 		public void Stop() =>
-			Channel.stop();
+			Native.stop();
 	}
 }
