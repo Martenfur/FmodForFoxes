@@ -15,8 +15,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// FMOD channel object. Use it if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Channel Channel => _channel;
-		protected FMOD.Channel _channel; // Can't use "out" on properties. 
+		protected readonly FMOD.Channel Channel;
 
 		/// <summary>
 		/// Sound, from which this channel has been created.
@@ -31,7 +30,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getLoopCount(out int loops);
+				Channel.getLoopCount(out int loops);
 				return (loops == -1);
 			}
 			set 
@@ -58,7 +57,7 @@ namespace ChaiFoxes.FMODAudio
 			get
 			{
 				// Do you have some lööps, bröther?
-				_channel.getLoopCount(out int loops);
+				Channel.getLoopCount(out int loops);
 				return loops;
 			}
 			set
@@ -72,7 +71,7 @@ namespace ChaiFoxes.FMODAudio
 					Mode = FMOD.MODE.LOOP_NORMAL;
 				}
 
-				_channel.setLoopCount(value);
+				Channel.setLoopCount(value);
 			}
 		}
 
@@ -86,11 +85,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getPitch(out float pitch);
+				Channel.getPitch(out float pitch);
 				return pitch;
 			}
 			set => 
-				_channel.setPitch(value);
+				Channel.setPitch(value);
 		}
 
 		/// <summary>
@@ -102,11 +101,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getVolume(out float volume);
+				Channel.getVolume(out float volume);
 				return volume;
 			}
 			set => 
-				_channel.setVolume(value);
+				Channel.setVolume(value);
 		}
 
 		/// <summary>
@@ -118,11 +117,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getLowPassGain(out float lowPassGain);
+				Channel.getLowPassGain(out float lowPassGain);
 				return lowPassGain;
 			}
 			set => 
-				_channel.setLowPassGain(value);
+				Channel.setLowPassGain(value);
 		}
 
 		/// <summary>
@@ -132,11 +131,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getMode(out FMOD.MODE mode);
+				Channel.getMode(out FMOD.MODE mode);
 				return mode;
 			}
 			set =>
-				_channel.setMode(value);
+				Channel.setMode(value);
 		}
 
 
@@ -167,14 +166,14 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				Channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
 				return pos.ToVector3();
 			}
 			set
 			{
 				var fmodPos = value.ToFmodVector();
 				var fmodVel = Velocity3D.ToFmodVector();
-				_channel.set3DAttributes(ref fmodPos, ref fmodVel);
+				Channel.set3DAttributes(ref fmodPos, ref fmodVel);
 			}
 		}
 
@@ -185,14 +184,14 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
+				Channel.get3DAttributes(out FMOD.VECTOR pos, out FMOD.VECTOR vel);
 				return vel.ToVector3();
 			}
 			set
 			{
 				var fmodPos = Position3D.ToFmodVector();
 				var fmodVel = value.ToFmodVector();
-				_channel.set3DAttributes(ref fmodPos, ref fmodVel);
+				Channel.set3DAttributes(ref fmodPos, ref fmodVel);
 			}
 		}
 
@@ -203,11 +202,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
 				return minDistance;
 			}
 			set =>
-				_channel.set3DMinMaxDistance(value, MaxDistance3D);
+				Channel.set3DMinMaxDistance(value, MaxDistance3D);
 		}
 		
 		/// <summary>
@@ -217,11 +216,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Channel.get3DMinMaxDistance(out float minDistance, out float maxDistance);
 				return maxDistance;
 			}
 			set =>
-				_channel.set3DMinMaxDistance(MinDistance3D, value);
+				Channel.set3DMinMaxDistance(MinDistance3D, value);
 		}
 
 		/// <summary>
@@ -231,7 +230,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.isPlaying(out bool isPlaying);
+				Channel.isPlaying(out bool isPlaying);
 				return isPlaying;
 			}
 		}
@@ -243,17 +242,17 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				_channel.getPosition(out uint position, FMOD.TIMEUNIT.MS);
+				Channel.getPosition(out uint position, FMOD.TIMEUNIT.MS);
 				return position;
 			}
 			set => 
-				_channel.setPosition(value, FMOD.TIMEUNIT.MS);
+				Channel.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
 		public SoundChannel(Sound sound, FMOD.Channel channel)
 		{
 			Sound = sound;
-			_channel = channel;
+			Channel = channel;
 
 			Loops = Sound.Loops;
 			Volume = Sound.Volume;
@@ -268,12 +267,12 @@ namespace ChaiFoxes.FMODAudio
 		}
 		
 		public void Pause() =>
-			_channel.setPaused(true);
+			Channel.setPaused(true);
 
 		public void Resume() =>
-			_channel.setPaused(false);
+			Channel.setPaused(false);
 
 		public void Stop() =>
-			_channel.stop();
+			Channel.stop();
 	}
 }
