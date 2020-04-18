@@ -17,8 +17,6 @@ namespace ChaiFoxes.FMODAudio
 		/// </summary>
 		public readonly FMOD.Channel Native;
 
-		internal readonly PointerLinker<Channel> _channelLinker = new PointerLinker<Channel>();
-
 		/// <summary>
 		/// Sound, from which this channel has been created.
 		/// </summary>
@@ -28,7 +26,7 @@ namespace ChaiFoxes.FMODAudio
 			{ 
 				Native.getCurrentSound(out var sound);
 				sound.getUserData(out var ptr);
-				return Sound._soundLinker.Get(ptr);
+				return Sound._linker.Get(ptr);
 			}
 		}
 
@@ -259,10 +257,9 @@ namespace ChaiFoxes.FMODAudio
 				Native.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
-		public Channel(Sound sound, FMOD.Channel channel)
+		public Channel(Sound sound, FMOD.Channel channel) 
+			: this(channel)
 		{
-			Native = channel;
-
 			Loops = Sound.Loops;
 			Volume = Sound.Volume;
 			Pitch = Sound.Pitch;
@@ -275,7 +272,12 @@ namespace ChaiFoxes.FMODAudio
 			MaxDistance3D = sound.MaxDistance3D;
 			// TODO: Add missing properties.
 		}
-		
+
+		public Channel(FMOD.Channel channel)
+		{
+			Native = channel;
+		}
+
 		public void Pause() =>
 			Native.setPaused(true);
 
@@ -284,5 +286,6 @@ namespace ChaiFoxes.FMODAudio
 
 		public void Stop() =>
 			Native.stop();
+
 	}
 }

@@ -18,7 +18,7 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Contains all references to all sound objects.
 		/// </summary>
-		internal static readonly PointerLinker<Sound> _soundLinker = new PointerLinker<Sound>();
+		internal static readonly PointerLinker<Sound> _linker = new PointerLinker<Sound>();
 
 		/// <summary>
 		/// Tells if sound is looping.
@@ -272,7 +272,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			Native = sound;
 
-			Native.setUserData(_soundLinker.Add(this));
+			Native.setUserData(_linker.Add(this));
 		}
 
 		public Channel Play(bool paused = false) =>
@@ -290,7 +290,7 @@ namespace ChaiFoxes.FMODAudio
 		public void Dispose()
 		{
 			Native.getUserData(out var ptr);
-			_soundLinker.Remove(ptr);
+			_linker.Remove(ptr);
 
 			Native.release();
 			if (_buffer != null)
