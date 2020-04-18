@@ -1,10 +1,10 @@
-﻿using ChaiFoxes.FMODAudio.DigitalSoundProcessing;
-using System;
+﻿using System;
 
 namespace ChaiFoxes.FMODAudio
 {
 	public class ChannelGroup : IDisposable, IChannelControl
 	{
+		public readonly FMOD.ChannelGroup Native;
 
 		// Nested channel groups.
 		FMOD.RESULT AddGroup(ChannelGroup group, bool propagatedspclock = true);
@@ -23,11 +23,15 @@ namespace ChaiFoxes.FMODAudio
 
 		FMOD.RESULT getNumChannels(out int numchannels);
 
-		SoundChannel GetChannel(int index, out SoundChannel channel)
+		Channel GetChannel(int index, out Channel channel)
 		{ 
 		
 		}
 
+		public void Dispose()
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 }
