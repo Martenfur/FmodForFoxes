@@ -266,6 +266,5 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DCustomRolloff(ref vectors[0], vectors.Length);
 			}
 		}
-
 	}
 }

@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Android
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Shared", "..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.shproj", "{B5933BD7-E07E-4EB2-99BE-2814508425A1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4AC19750-0192-466E-B5DB-D1391270E608}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 4

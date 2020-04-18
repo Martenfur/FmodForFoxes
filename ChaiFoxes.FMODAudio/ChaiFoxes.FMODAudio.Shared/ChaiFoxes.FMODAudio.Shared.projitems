@@ -9,7 +9,9 @@
     <Import_RootNamespace>ChaiFoxes.FMODAudio</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ChannelGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConeSettings3D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IChannelControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileLoader.cs" />
