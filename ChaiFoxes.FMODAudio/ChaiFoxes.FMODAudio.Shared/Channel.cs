@@ -10,7 +10,7 @@ namespace ChaiFoxes.FMODAudio
 	/// FMOD sound channel wrapper. Takes horrible FMOD wrapper and makes it look pretty.
 	/// Basically, a playing sound instance.
 	/// </summary>
-	public class Channel
+	public struct Channel : IChannelControl
 	{
 		/// <summary>
 		/// FMOD channel object. Use it if you need full FMOD functionality.
@@ -257,6 +257,23 @@ namespace ChaiFoxes.FMODAudio
 				Native.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
+		public bool Paused { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public bool VolumeRamp { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+		public float Audibility => throw new System.NotImplementedException();
+
+		public bool Mute { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public ReverbProperties ReverbProperties { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public float LowpassGain { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public Vector3 ConeOrientation3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public Occlusion3D Occlusion3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public float Spread3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public float Level3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public float DopplerLevel3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public ConeSettings3D ConeSettings3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public Vector3[] CustomRolloff { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public DistanceFilter3D DistanceFilter3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
 		public Channel(Sound sound, FMOD.Channel channel) 
 			: this(channel)
 		{
@@ -286,6 +303,5 @@ namespace ChaiFoxes.FMODAudio
 
 		public void Stop() =>
 			Native.stop();
-
 	}
 }

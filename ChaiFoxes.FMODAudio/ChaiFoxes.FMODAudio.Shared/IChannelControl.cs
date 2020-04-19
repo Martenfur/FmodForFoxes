@@ -28,8 +28,6 @@ namespace ChaiFoxes.FMODAudio
 		float Level3D { get; set; }
 		float DopplerLevel3D { get; set; }
 
-		FMOD.RESULT Set3DDistanceFilter(bool custom, float customLevel, float centerFreq);
-
-		FMOD.RESULT Get3DDistanceFilter(out bool custom, out float customLevel, out float centerFreq);
+		DistanceFilter3D DistanceFilter3D { get; set; }
 	}
 }
