@@ -193,36 +193,6 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DConeSettings(value.InsideConeAngle, value.OutsideConeAngle, value.OutsideVolume);
 		}
 
-		public Vector3[] CustomRolloff
-		{
-			get
-			{
-				Native.get3DCustomRolloff(out var pointer, out var vectorsCount);
-
-				var sizeInBytes = Marshal.SizeOf(typeof(FMOD.VECTOR));
-				var output = new Vector3[vectorsCount];
-
-				for (var i = 0; i < vectorsCount; i += 1)
-				{
-					pointer += i * sizeInBytes;
-					output[i] = ((FMOD.VECTOR)Marshal.PtrToStructure(pointer, typeof(FMOD.VECTOR))).ToVector3();
-				}
-
-				return output;
-			}
-			set
-			{
-				var vectors = new FMOD.VECTOR[value.Length];
-
-				for(var i = 0; i < value.Length; i += 1)
-				{ 
-					vectors[i] = value[i].ToFmodVector();
-				}
-				Native.set3DCustomRolloff(ref vectors[0], vectors.Length);
-			}
-		}
-
-
 		/// <summary>
 		/// Sound buffer. Used for streamed sounds, which point to this memory.
 		/// In other words, we need to just reference it somewhere to prevent

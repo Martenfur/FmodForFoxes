@@ -243,6 +243,8 @@ namespace ChaiFoxes.FMODAudio
 			}
 		}
 		
+		public FMOD.TIMEUNIT TrackPositionTimeunit;
+
 		/// <summary>
 		/// Track position in milliseconds.
 		/// </summary>
@@ -250,11 +252,11 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{ // TODO: Add adjustible timeunit.
-				Native.getPosition(out uint position, FMOD.TIMEUNIT.MS);
+				Native.getPosition(out uint position, TrackPositionTimeunit);
 				return position;
 			}
 			set => 
-				Native.setPosition(value, FMOD.TIMEUNIT.MS);
+				Native.setPosition(value, TrackPositionTimeunit);
 		}
 
 		public bool Paused 
@@ -375,8 +377,6 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DConeSettings(value.InsideConeAngle, value.OutsideConeAngle, value.OutsideVolume);
 		}
 
-		public Vector3[] CustomRolloff { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		
 		public DistanceFilter3D DistanceFilter3D
 		{
 			get
@@ -408,6 +408,7 @@ namespace ChaiFoxes.FMODAudio
 		public Channel(FMOD.Channel channel)
 		{
 			Native = channel;
+			TrackPositionTimeunit = FMOD.TIMEUNIT.MS;
 		}
 
 		public void Pause() =>

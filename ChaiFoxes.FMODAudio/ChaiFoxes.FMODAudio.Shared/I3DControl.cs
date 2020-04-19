@@ -18,7 +18,5 @@ namespace ChaiFoxes.FMODAudio
 		float MaxDistance3D { get; set; }
 
 		ConeSettings3D ConeSettings3D { get; set; }
-
-		Vector3[] CustomRolloff { get; set; }
 	}
 }
