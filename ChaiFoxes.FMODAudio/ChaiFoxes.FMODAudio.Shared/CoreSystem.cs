@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -15,15 +15,6 @@ namespace ChaiFoxes.FMODAudio
 		/// Low level FMOD sound system.
 		/// </summary>
 		public static FMOD.System Native;
-
-		/// <summary>
-		/// Creates new channel group with given name.
-		/// </summary>
-		public static FMOD.ChannelGroup CreateChannelGroup(string name)
-		{
-			Native.createChannelGroup(name, out FMOD.ChannelGroup channelGroup);
-			return channelGroup;
-		}
 
 		/// <summary>
 		/// Loads sound from file.

@@ -29,8 +29,15 @@ namespace ChaiFoxes.FMODAudio
 
 		public T Get(IntPtr ptr)
 		{
-			var index = (ulong)Marshal.PtrToStructure(ptr, typeof(ulong));
-			return _items[index];
+			try
+			{
+				var index = (ulong)Marshal.PtrToStructure(ptr, typeof(ulong));
+				return _items[index];
+			}
+			catch(Exception)
+			{ 
+				return null;	
+			}
 		}
 		
 		public void Remove(IntPtr ptr)

@@ -231,7 +231,7 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DMinMaxDistance(MinDistance3D, value);
 		}
 
-		/// <summary>
+		/// <summary> 
 		/// Tells if sound is playing.
 		/// </summary>
 		public bool IsPlaying
@@ -243,22 +243,6 @@ namespace ChaiFoxes.FMODAudio
 			}
 		}
 		
-		public FMOD.TIMEUNIT TrackPositionTimeunit;
-
-		/// <summary>
-		/// Track position in milliseconds.
-		/// </summary>
-		public uint TrackPosition
-		{
-			get
-			{ // TODO: Add adjustible timeunit.
-				Native.getPosition(out uint position, TrackPositionTimeunit);
-				return position;
-			}
-			set => 
-				Native.setPosition(value, TrackPositionTimeunit);
-		}
-
 		public bool Paused 
 		{
 			get
@@ -311,6 +295,7 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.setLowPassGain(value);
 		}
+
 		public Vector3 ConeOrientation3D
 		{
 			get
@@ -324,6 +309,7 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DConeOrientation(ref v);
 			}
 		}
+
 		public Occlusion3D Occlusion3D
 		{
 			get
@@ -335,6 +321,7 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DOcclusion(value.DirectOcclusion, value.ReverbOcclusion);
 		}
+
 		public float Spread3D
 		{
 			get
@@ -345,6 +332,7 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DSpread(value);
 		}
+
 		public float Level3D
 		{
 			get
@@ -355,6 +343,7 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DLevel(value);
 		}
+
 		public float DopplerLevel3D
 		{
 			get
@@ -365,6 +354,7 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DDopplerLevel(value);
 		}
+
 		public ConeSettings3D ConeSettings3D
 		{
 			get
@@ -388,6 +378,24 @@ namespace ChaiFoxes.FMODAudio
 			set =>
 				Native.set3DDistanceFilter(value.Custom, value.CustomLevel, value.CenterFreqency);
 		}
+
+
+
+		/// <summary>
+		/// Track position in milliseconds.
+		/// </summary>
+		public uint TrackPosition
+		{
+			get
+			{
+				Native.getPosition(out uint position, TrackPositionTimeunit);
+				return position;
+			}
+			set => 
+				Native.setPosition(value, TrackPositionTimeunit);
+		}
+
+		public FMOD.TIMEUNIT TrackPositionTimeunit;
 
 		public Channel(Sound sound, FMOD.Channel channel) 
 			: this(channel)
