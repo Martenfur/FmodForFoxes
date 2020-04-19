@@ -181,7 +181,7 @@ namespace ChaiFoxes.FMODAudio
 				Native.setDefaults(DefaultFrequency, value);
 		}
 
-		public ConeSettings3D ConeSettings
+		public ConeSettings3D ConeSettings3D
 		{
 			get
 			{
@@ -218,32 +218,10 @@ namespace ChaiFoxes.FMODAudio
 				{ 
 					vectors[i] = value[i].ToFmodVector();
 				}
-
 				Native.set3DCustomRolloff(ref vectors[0], vectors.Length);
 			}
 		}
 
-		public ConeSettings3D ConeSettings3D 
-		{ 
-			get 
-			{ 
-				var coneSettings = new ConeSettings3D();
-				Native.get3DConeSettings(
-					out coneSettings.InsideConeAngle, 
-					out coneSettings.OutsideConeAngle, 
-					out coneSettings.OutsideVolume
-				);
-				return coneSettings;
-			}
-			set
-			{
-				Native.set3DConeSettings(
-					value.InsideConeAngle,
-					value.OutsideConeAngle,
-					value.OutsideVolume
-				);
-			}
-		}
 
 		/// <summary>
 		/// Sound buffer. Used for streamed sounds, which point to this memory.

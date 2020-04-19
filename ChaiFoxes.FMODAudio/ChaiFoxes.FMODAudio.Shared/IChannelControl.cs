@@ -13,7 +13,6 @@ namespace ChaiFoxes.FMODAudio
 		float Audibility { get; }
 		float Pitch { get; set; }
 		bool Mute { get; set; }
-		ReverbProperties ReverbProperties { get; set; }
 		float LowpassGain { get; set; }
 		FMOD.MODE Mode { get; set; }
 		bool IsPlaying { get; }

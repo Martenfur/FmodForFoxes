@@ -257,22 +257,137 @@ namespace ChaiFoxes.FMODAudio
 				Native.setPosition(value, FMOD.TIMEUNIT.MS);
 		}
 
-		public bool Paused { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public bool VolumeRamp { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public bool Paused 
+		{
+			get
+			{
+				Native.getPaused(out var paused);
+				return paused;
+			}
+			set =>
+				Native.setPaused(value);
+		}
 
-		public float Audibility => throw new System.NotImplementedException();
+		public bool VolumeRamp
+		{
+			get
+			{
+				Native.getVolumeRamp(out var volumeRamp);
+				return volumeRamp;
+			}
+			set =>
+				Native.setVolumeRamp(value);
+		}
 
-		public bool Mute { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public ReverbProperties ReverbProperties { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float LowpassGain { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public Vector3 ConeOrientation3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public Occlusion3D Occlusion3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float Spread3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float Level3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public float DopplerLevel3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public ConeSettings3D ConeSettings3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		public float Audibility
+		{
+			get
+			{
+				Native.getAudibility(out var audibility);
+				return audibility;
+			}
+		}
+
+		public bool Mute
+		{
+			get
+			{
+				Native.getMute(out var mute);
+				return mute;
+			}
+			set =>
+				Native.setMute(value);
+		}
+
+		public float LowpassGain
+		{
+			get
+			{
+				Native.getLowPassGain(out var lowpassGain);
+				return lowpassGain;
+			}
+			set =>
+				Native.setLowPassGain(value);
+		}
+		public Vector3 ConeOrientation3D
+		{
+			get
+			{
+				Native.get3DConeOrientation(out var orientation);
+				return orientation.ToVector3();
+			}
+			set
+			{
+				var v = value.ToFmodVector();
+				Native.set3DConeOrientation(ref v);
+			}
+		}
+		public Occlusion3D Occlusion3D
+		{
+			get
+			{
+				var occlusion = new Occlusion3D();
+				Native.get3DOcclusion(out occlusion.DirectOcclusion, out occlusion.ReverbOcclusion);
+				return occlusion;
+			}
+			set =>
+				Native.set3DOcclusion(value.DirectOcclusion, value.ReverbOcclusion);
+		}
+		public float Spread3D
+		{
+			get
+			{
+				Native.get3DSpread(out var spread);
+				return spread;
+			}
+			set =>
+				Native.set3DSpread(value);
+		}
+		public float Level3D
+		{
+			get
+			{
+				Native.get3DLevel(out var level);
+				return level;
+			}
+			set =>
+				Native.set3DLevel(value);
+		}
+		public float DopplerLevel3D
+		{
+			get
+			{
+				Native.get3DDopplerLevel(out var doppler);
+				return doppler;
+			}
+			set =>
+				Native.set3DDopplerLevel(value);
+		}
+		public ConeSettings3D ConeSettings3D
+		{
+			get
+			{
+				var cone = new ConeSettings3D();
+				Native.get3DConeSettings(out cone.InsideConeAngle, out cone.OutsideVolume, out cone.OutsideVolume);
+				return cone;
+			}
+			set =>
+				Native.set3DConeSettings(value.InsideConeAngle, value.OutsideConeAngle, value.OutsideVolume);
+		}
+
 		public Vector3[] CustomRolloff { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-		public DistanceFilter3D DistanceFilter3D { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+		
+		public DistanceFilter3D DistanceFilter3D
+		{
+			get
+			{
+				var filter = new DistanceFilter3D();
+				Native.get3DDistanceFilter(out filter.Custom, out filter.CustomLevel, out filter.CenterFreqency);
+				return filter;
+			}
+			set =>
+				Native.set3DDistanceFilter(value.Custom, value.CustomLevel, value.CenterFreqency);
+		}
 
 		public Channel(Sound sound, FMOD.Channel channel) 
 			: this(channel)
