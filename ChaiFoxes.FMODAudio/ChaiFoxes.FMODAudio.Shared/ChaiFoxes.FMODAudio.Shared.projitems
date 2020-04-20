@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LowlevelHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Occlusion3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PointerLinker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SoundGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileLoader.cs" />
