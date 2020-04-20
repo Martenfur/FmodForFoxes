@@ -72,18 +72,19 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Sound mode.
 		/// </summary>
-		public FMOD.MODE Mode
-		{
-			get
-			{
-				Native.getMode(out var mode);
-				return mode;
-			}
-			set
-			{
-				Native.setMode(value);
-			}
-		}
+		public FMOD.MODE Mode; 
+		// For some reason, native getMode doesn't work. Disabled for now.
+		//{
+		//	get
+		//	{
+		//		Native.getMode(out var mode);
+		//		return mode;
+		//	}
+		//	set
+		//	{
+		//		Native.setMode(value);
+		//	}
+		//}
 
 		/// <summary>
 		/// Sound's default channel group.
@@ -243,7 +244,12 @@ namespace ChaiFoxes.FMODAudio
 
 		public Channel Play(ChannelGroup group, bool paused = false)
 		{
-			CoreSystem.Native.playSound(Native, group.Native, paused, out FMOD.Channel fmodChannel);
+			FMOD.ChannelGroup nativeGroup = default;
+			if (group != null)
+			{
+				nativeGroup = group.Native;
+			}
+			CoreSystem.Native.playSound(Native, nativeGroup, paused, out FMOD.Channel fmodChannel);
 			return new Channel(this, fmodChannel);
 		}
 
