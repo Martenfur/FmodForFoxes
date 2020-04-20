@@ -380,7 +380,6 @@ namespace ChaiFoxes.FMODAudio
 		}
 
 
-
 		/// <summary>
 		/// Track position in milliseconds.
 		/// </summary>
@@ -408,9 +407,6 @@ namespace ChaiFoxes.FMODAudio
 			Is3D = sound.Is3D;
 			Position3D = sound.Position3D;
 			Velocity3D = sound.Velocity3D;
-			MinDistance3D = sound.MinDistance3D;
-			MaxDistance3D = sound.MaxDistance3D;
-			// TODO: Add missing properties.
 		}
 
 		internal Channel(FMOD.Channel channel)
