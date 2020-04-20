@@ -7,48 +7,39 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// Position in 3D space. Used for panning and attenuation.
 		/// </summary>
-		public Vector3 position;
+		public Vector3 Position;
 
 		/// <summary>
 		/// Velocity in 3D space. Used for doppler effect.
 		/// </summary>
-		public Vector3 velocity;
+		public Vector3 Velocity;
 
 		/// <summary>
 		/// Forwards orientation, must be of unit length (1.0) and perpendicular to up.
 		/// </summary>
-		public Vector3 forwardVector;
+		public Vector3 ForwardVector;
 
 		/// <summary>
 		/// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
 		/// </summary>
-		public Vector3 upVector;
-	}
+		public Vector3 UpVector;
 
-	/// <summary>
-	/// Extensions to FMOD.ATTRIBUTES_3D and Attributes3D. 
-	/// </summary>
-	public static class AttributeExtensions
-	{
-		public static FMOD.ATTRIBUTES_3D ToFmodAttributes(this Attributes3D attributes)
+		public Attributes3D(FMOD.ATTRIBUTES_3D attributes)
+		{
+			Position = attributes.position.ToVector3();
+			Velocity = attributes.velocity.ToVector3();
+			ForwardVector = attributes.forward.ToVector3();
+			UpVector = attributes.up.ToVector3();
+		}
+
+		public FMOD.ATTRIBUTES_3D ToFmodAttributes()
 		{
 			return new FMOD.ATTRIBUTES_3D
 			{
-				position = attributes.position.ToFmodVector(),
-				velocity = attributes.velocity.ToFmodVector(),
-				forward = attributes.forwardVector.ToFmodVector(),
-				up = attributes.upVector.ToFmodVector()
-			};
-		}
-
-		public static Attributes3D ToAttributes3D(this FMOD.ATTRIBUTES_3D attributes)
-		{
-			return new Attributes3D
-			{
-				position = attributes.position.ToVector3(),
-				velocity = attributes.velocity.ToVector3(),
-				forwardVector = attributes.forward.ToVector3(),
-				upVector = attributes.up.ToVector3()
+				position = Position.ToFmodVector(),
+				velocity = Velocity.ToFmodVector(),
+				forward = ForwardVector.ToFmodVector(),
+				up = UpVector.ToFmodVector()
 			};
 		}
 	}

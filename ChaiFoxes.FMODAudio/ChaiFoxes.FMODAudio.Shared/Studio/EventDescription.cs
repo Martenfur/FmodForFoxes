@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using System;
 
 // DO NOT include FMOD namespace in ANY of your classes.
@@ -18,8 +16,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// FMOD event description using the default wrapper. Use this if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Studio.EventDescription Description => _description;
-		protected FMOD.Studio.EventDescription _description;
+		public readonly FMOD.Studio.EventDescription Native;
 
 		/// <summary>
 		/// Number of instances of the event currently in existence.
@@ -28,7 +25,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getInstanceCount(out var instanceCount);
+				Native.getInstanceCount(out var instanceCount);
 				return instanceCount;
 			}
 		}
@@ -40,9 +37,9 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getInstanceList(out FMOD.Studio.EventInstance[] instanceArray);
-				EventInstance[] returnArray = new EventInstance[instanceArray.Length];
-				for (int i = 0; i < instanceArray.Length; i++)
+				Native.getInstanceList(out FMOD.Studio.EventInstance[] instanceArray);
+				var returnArray = new EventInstance[instanceArray.Length];
+				for (var i = 0; i < instanceArray.Length; i += 1)
 				{
 					returnArray[i] = new EventInstance(this, instanceArray[i]);
 				}
@@ -77,7 +74,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.is3D(out var is3D);
+				Native.is3D(out var is3D);
 				return is3D;
 			}
 		}
@@ -87,20 +84,17 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public Attributes3D Attributes = new Attributes3D
 		{
-			position = Vector3.Zero,
-			velocity = Vector3.Zero,
-			forwardVector = Vector3.UnitY,
-			upVector = Vector3.UnitZ
+			Position = Vector3.Zero,
+			Velocity = Vector3.Zero,
+			ForwardVector = Vector3.UnitY,
+			UpVector = Vector3.UnitZ
 		};
 
-		/// <summary>
-		/// Returns true if the event is 3D.
-		/// </summary>
 		public bool IsOneshot
 		{
 			get
 			{
-				_description.isOneshot(out var isOneshot);
+				Native.isOneshot(out var isOneshot);
 				return isOneshot;
 			}
 		}
@@ -112,7 +106,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.isSnapshot(out var isSnapshot);
+				Native.isSnapshot(out var isSnapshot);
 				return isSnapshot;
 			}
 		}
@@ -124,7 +118,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.isStream(out var isStream);
+				Native.isStream(out var isStream);
 				return isStream;
 			}
 		}
@@ -136,7 +130,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getParameterDescriptionCount(out var count);
+				Native.getParameterDescriptionCount(out var count);
 				return count;
 			}
 		}
@@ -148,7 +142,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getPath(out string path);
+				Native.getPath(out string path);
 				return path;
 			}
 		}
@@ -160,29 +154,15 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getID(out Guid id);
+				Native.getID(out Guid id);
 				return id;
 			}
 		}
 
-		/// <summary>
-		/// The event description's arbitrary user data.
-		/// </summary>
-		public IntPtr UserData
+		internal EventDescription(FMOD.Studio.EventDescription eventDescription)
 		{
-			set =>
-				 _description.setUserData(value);
-
-			get
-			{
-				_description.getUserData(out IntPtr userData);
-				return userData;
-			}
-		}
-
-		public EventDescription(FMOD.Studio.EventDescription eventDescription)
-		{
-			_description = eventDescription;
+			Native = eventDescription;
+			// Figure out a way to create those.
 		}
 
 		/// <summary>
@@ -192,7 +172,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public EventInstance CreateInstance()
 		{
-			_description.createInstance(out FMOD.Studio.EventInstance eventInstance);
+			Native.createInstance(out var eventInstance);
 			return new EventInstance(this, eventInstance);
 		}
 
@@ -200,14 +180,14 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Immediately stops and releases all instances of this event.
 		/// </summary>
 		public void ReleaseAllInstances() =>
-			_description.releaseAllInstances();
+			Native.releaseAllInstances();
 
 		/// <summary>
 		/// Gets an event parameter description by its name.
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(string name)
 		{
-			_description.getParameterDescriptionByName(name, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			Native.getParameterDescriptionByName(name, out var parameter);
 			return parameter;
 		}
 
@@ -216,7 +196,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(int index)
 		{
-			_description.getParameterDescriptionByIndex(index, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			Native.getParameterDescriptionByIndex(index, out var parameter);
 			return parameter;
 		}
 
@@ -225,7 +205,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public FMOD.Studio.PARAMETER_DESCRIPTION GetParameterDescription(FMOD.Studio.PARAMETER_ID id)
 		{
-			_description.getParameterDescriptionByID(id, out FMOD.Studio.PARAMETER_DESCRIPTION parameter);
+			Native.getParameterDescriptionByID(id, out var parameter);
 			return parameter;
 		}
 
@@ -233,16 +213,18 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Assigns a user callback for every subsequent instance of this event.
 		/// </summary>
 		public void SetCallback(FMOD.Studio.EVENT_CALLBACK callback, FMOD.Studio.EVENT_CALLBACK_TYPE callbackMask) =>
-			_description.setCallback(callback, callbackMask);
+			Native.setCallback(callback, callbackMask);
 
 		/// <summary>
 		/// Loads all non-streaming sounds for the event.
 		/// </summary>
-		public void LoadSampleData() => _description.loadSampleData();
+		public void LoadSampleData() => 
+			Native.loadSampleData();
 
 		/// <summary>
 		/// Unloads all non-streaming sounds for the event.
 		/// </summary>
-		public void UnloadSampleData() => _description.unloadSampleData();
+		public void UnloadSampleData() => 
+			Native.unloadSampleData();
 	}
 }

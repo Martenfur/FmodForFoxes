@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Runtime.InteropServices;
-using System;
+﻿using System;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -13,41 +11,44 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// </summary>
 	public class Bank
 	{
-		protected FMOD.Studio.Bank _bank { get; private set; }
+		public readonly FMOD.Studio.Bank Native;
 
 		/// <summary>
 		/// The bank's arbitrary user data.
 		/// </summary>
 		public IntPtr UserData
 		{
-			set =>
-				 _bank.setUserData(value);
-
 			get
 			{
-				_bank.getUserData(out IntPtr userData);
+				Native.getUserData(out IntPtr userData);
 				return userData;
 			}
+
+			set =>
+				 Native.setUserData(value);
 		}
 
-		public Bank(FMOD.Studio.Bank bank)
+		internal Bank(FMOD.Studio.Bank bank)
 		{
-			_bank = bank;
+			Native = bank;
 		}
 
 		/// <summary>
 		/// Loads all non-streaming sounds in the bank.
 		/// </summary>
-		public void LoadSampleData() => _bank.loadSampleData();
+		public void LoadSampleData() => 
+			Native.loadSampleData();
 
 		/// <summary>
 		/// Unloads all non-streaming sounds in the bank.
 		/// </summary>
-		public void UnloadSampleData() => _bank.unloadSampleData();
+		public void UnloadSampleData() => 
+			Native.unloadSampleData();
 
 		/// <summary>
 		/// Unloads the bank, invalidating all related event descriptions and destroying associated instances.
 		/// </summary>
-		public void Unload() => _bank.unload();
+		public void Unload() => 
+			Native.unload();
 	}
 }

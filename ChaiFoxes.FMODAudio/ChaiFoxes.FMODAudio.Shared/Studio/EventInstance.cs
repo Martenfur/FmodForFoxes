@@ -1,8 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Runtime.InteropServices;
-using System;
-
-// DO NOT include FMOD namespace in ANY of your classes.
+﻿// DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
@@ -17,8 +13,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// FMOD event instance using the default wrapper. Use this if you need full FMOD functionality.
 		/// </summary>
-		public FMOD.Studio.EventInstance Instance => _instance;
-		protected FMOD.Studio.EventInstance _instance;
+		public readonly FMOD.Studio.EventInstance Native;
 
 		/// <summary>
 		/// Event description, from which this instance was created.
@@ -35,11 +30,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getPitch(out var pitch);
+				Native.getPitch(out var pitch);
 				return pitch;
 			}
 			set =>
-				_instance.setPitch(value);
+				Native.setPitch(value);
 		}
 
 		/// <summary>
@@ -52,11 +47,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getVolume(out var targetVolume);
+				Native.getVolume(out var targetVolume);
 				return targetVolume;
 			}
 			set =>
-				_instance.setVolume(value);
+				Native.setVolume(value);
 		}
 
 		/// <summary>
@@ -69,7 +64,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getVolume(out _, out var currentVolume);
+				Native.getVolume(out _, out var currentVolume);
 				return currentVolume;
 			}
 		}
@@ -77,10 +72,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// Retrieves whether or not the event is 3D.
 		/// </summary>
-		public bool Is3D
-		{
-			get => Description.Is3D;
-		}
+		public bool Is3D => Description.Is3D;
 
 		/// <summary>
 		/// Event's 3D Attributes.
@@ -89,14 +81,12 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+				Native.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
 
-				return attributes.ToAttributes3D();
+				return new Attributes3D(attributes);
 			}
-			set
-			{
-				_instance.set3DAttributes(value.ToFmodAttributes());
-			}
+			set =>
+				Native.set3DAttributes(value.ToFmodAttributes());
 		}
 
 		/// <summary>
@@ -106,11 +96,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getTimelinePosition(out var position);
+				Native.getTimelinePosition(out var position);
 				return position;
 			}
 			set =>
-				_instance.setTimelinePosition(value);
+				Native.setTimelinePosition(value);
 		}
 
 		/// <summary>
@@ -121,7 +111,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+				Native.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
 				return state;
 			}
 		}
@@ -133,33 +123,19 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getPaused(out var paused);
+				Native.getPaused(out var paused);
 				return paused;
 			}
 
 			set =>
-				_instance.setPaused(value);
+				Native.setPaused(value);
 		}
 
-		/// <summary>
-		/// The event instance's arbitrary user data.
-		/// </summary>
-		public IntPtr UserData
+		internal EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
 		{
-			set =>
-				 _instance.setUserData(value);
-
-			get
-			{
-				_instance.getUserData(out IntPtr userData);
-				return userData;
-			}
-		}
-
-		public EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
-		{
+			// TODO: Figure our a way to craet those.
 			Description = eventDescription;
-			_instance = eventInstance;
+			Native = eventInstance;
 
 			Volume = eventDescription.Volume;
 			Pitch = eventDescription.Pitch;
@@ -172,7 +148,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(string name)
 		{
-			_instance.getParameterByName(name, out var value, out _);
+			Native.getParameterByName(name, out var value, out _);
 			return value;
 		}
 
@@ -182,7 +158,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_instance.getParameterByID(id, out var value, out _);
+			Native.getParameterByID(id, out var value, out _);
 			return value;
 		}
 
@@ -192,7 +168,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(string name)
 		{
-			_instance.getParameterByName(name, out _, out var finalValue);
+			Native.getParameterByName(name, out _, out var finalValue);
 			return finalValue;
 		}
 
@@ -202,7 +178,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_instance.getParameterByID(id, out _, out var finalValue);
+			Native.getParameterByID(id, out _, out var finalValue);
 			return finalValue;
 		}
 
@@ -210,48 +186,42 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Sets a parameter's value via its name (case sensitive).
 		/// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
 		/// </summary>
-		public void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false)
-		{
-			_instance.setParameterByName(name, value, ignoreSeekSpeed);
-		}
+		public void SetParameterValue(string name, float value, bool ignoreSeekSpeed = false) =>
+			Native.setParameterByName(name, value, ignoreSeekSpeed);
 
 		/// <summary>
 		/// Sets a parameter's value via its ID.
 		/// Enable ignoreSeekSpeed to set the value instantly, ignoring the parameter's seek speed.
 		/// </summary>
-		public void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false)
-		{
-			_instance.setParameterByID(id, value, ignoreSeekSpeed);
-		}
+		public void SetParameterValue(FMOD.Studio.PARAMETER_ID id, float value, bool ignoreSeekSpeed = false) =>
+			Native.setParameterByID(id, value, ignoreSeekSpeed);
 
 		/// <summary>
 		/// Sets multiple parameters' values via their IDs.
 		/// Enable ignoreSeekSpeed to set the values instantly, ignoring the parameters' seek speeds.
 		/// </summary>
-		public void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false)
-		{
-			_instance.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
-		}
+		public void SetParameterValues(FMOD.Studio.PARAMETER_ID[] ids, float[] values, bool ignoreSeekSpeed = false) =>
+			Native.setParametersByIDs(ids, values, ids.Length, ignoreSeekSpeed);
 
 		/// <summary>
 		/// Assigns a user callback for this specific event instance.
 		/// </summary>
 		public void SetCallback(FMOD.Studio.EVENT_CALLBACK callback, FMOD.Studio.EVENT_CALLBACK_TYPE callbackMask) =>
-			_instance.setCallback(callback, callbackMask);
+			Native.setCallback(callback, callbackMask);
 
 		public void Start() =>
-			_instance.start();
+			Native.start();
 
 		public void Stop(bool immediate = false) =>
-			_instance.stop(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			Native.stop(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 		/// <summary>
 		/// Allows the timeline cursor to move past sustain points.
 		/// </summary>
 		public void TriggerCue() =>
-			_instance.triggerCue();
+			Native.triggerCue();
 
 		public void Release() =>
-			_instance.release();
+			Native.release();
 	}
 }

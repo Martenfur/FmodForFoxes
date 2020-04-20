@@ -1,5 +1,4 @@
-﻿using ChaiFoxes.FMODAudio.Studio;
-using System;
+﻿using System;
 
 namespace ChaiFoxes.FMODAudio.Studio
 {

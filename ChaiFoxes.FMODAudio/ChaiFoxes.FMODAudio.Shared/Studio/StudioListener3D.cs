@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace ChaiFoxes.FMODAudio.Studio
 {
@@ -30,7 +30,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 			{
 				StudioSystem.Native.getListenerAttributes(_index, out FMOD.ATTRIBUTES_3D attributes);
 
-				return attributes.ToAttributes3D();
+				return new Attributes3D(attributes);
 			}
 			set
 			{
@@ -46,10 +46,10 @@ namespace ChaiFoxes.FMODAudio.Studio
 
 			Attributes = new Attributes3D
 			{
-				position = Vector3.Zero,
-				velocity = Vector3.Zero,
-				forwardVector = Vector3.UnitY,
-				upVector = Vector3.UnitZ
+				Position = Vector3.Zero,
+				Velocity = Vector3.Zero,
+				ForwardVector = Vector3.UnitY,
+				UpVector = Vector3.UnitZ
 			};
 		}
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Runtime.InteropServices;
-using System;
+﻿using System;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -121,9 +119,10 @@ namespace ChaiFoxes.FMODAudio.Studio
 			}
 		}
 
-		public Bus(FMOD.Studio.Bus bus)
+		internal Bus(FMOD.Studio.Bus bus)
 		{
 			Native = bus;
+			// TODO: Figure out where those are created.
 		}
 
 		/// <summary>

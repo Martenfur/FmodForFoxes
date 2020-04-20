@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System.Runtime.InteropServices;
-using System;
+﻿using System;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
