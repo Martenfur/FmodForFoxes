@@ -397,7 +397,7 @@ namespace ChaiFoxes.FMODAudio
 
 		public FMOD.TIMEUNIT TrackPositionTimeunit;
 
-		public Channel(Sound sound, FMOD.Channel channel) 
+		internal Channel(Sound sound, FMOD.Channel channel) 
 			: this(channel)
 		{
 			Loops = Sound.Loops;
@@ -413,7 +413,7 @@ namespace ChaiFoxes.FMODAudio
 			// TODO: Add missing properties.
 		}
 
-		public Channel(FMOD.Channel channel)
+		internal Channel(FMOD.Channel channel)
 		{
 			Native = channel;
 			TrackPositionTimeunit = FMOD.TIMEUNIT.MS;

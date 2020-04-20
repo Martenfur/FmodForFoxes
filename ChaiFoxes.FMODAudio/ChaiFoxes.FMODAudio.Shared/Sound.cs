@@ -224,14 +224,14 @@ namespace ChaiFoxes.FMODAudio
 		private GCHandle _bufferHandle;
 
 
-		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
+		internal Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 			: this(sound)
 		{
 			_buffer = buffer;
 			_bufferHandle = bufferHandle;
 		}
 
-		public Sound(FMOD.Sound sound)
+		internal Sound(FMOD.Sound sound)
 		{
 			Native = sound;
 
