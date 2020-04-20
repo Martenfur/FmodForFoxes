@@ -11,7 +11,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// </summary>
 	public class VCA
 	{
-		protected FMOD.Studio.VCA _vca { get; private set; }
+		public readonly FMOD.Studio.VCA Native;
 
 		/// <summary>
 		/// VCA target volume.
@@ -23,11 +23,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getVolume(out var volume);
+				Native.getVolume(out var volume);
 				return volume;
 			}
 			set =>
-				_vca.setVolume(value);
+				Native.setVolume(value);
 		}
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getVolume(out _, out var finalVolume);
+				Native.getVolume(out _, out var finalVolume);
 				return finalVolume;
 			}
 		}
@@ -52,7 +52,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getPath(out string path);
+				Native.getPath(out string path);
 				return path;
 			}
 		}
@@ -64,14 +64,14 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getID(out Guid id);
+				Native.getID(out Guid id);
 				return id;
 			}
 		}
 
-		public VCA(FMOD.Studio.VCA vca)
+		internal VCA(FMOD.Studio.VCA vca)
 		{
-			_vca = vca;
+			Native = vca;
 		}
 	}
 }

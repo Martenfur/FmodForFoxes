@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
+// TODO: Merge with regular listener.
 namespace ChaiFoxes.FMODAudio.Studio
 {
 	/// <summary>
@@ -20,7 +21,6 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Listener index. Used to communicate with low-level API.
 		/// </summary>
 		private int _index;
-
 		/// <summary>
 		/// Listener's 3D Attributes.
 		/// </summary>

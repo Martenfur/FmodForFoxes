@@ -24,7 +24,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public Vector3 UpVector;
 
-		public Attributes3D(FMOD.ATTRIBUTES_3D attributes)
+		internal Attributes3D(FMOD.ATTRIBUTES_3D attributes)
 		{
 			Position = attributes.position.ToVector3();
 			Velocity = attributes.velocity.ToVector3();

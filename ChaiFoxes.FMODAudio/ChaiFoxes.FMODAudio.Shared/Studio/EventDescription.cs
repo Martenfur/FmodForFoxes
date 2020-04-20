@@ -162,7 +162,6 @@ namespace ChaiFoxes.FMODAudio.Studio
 		internal EventDescription(FMOD.Studio.EventDescription eventDescription)
 		{
 			Native = eventDescription;
-			// Figure out a way to create those.
 		}
 
 		/// <summary>
