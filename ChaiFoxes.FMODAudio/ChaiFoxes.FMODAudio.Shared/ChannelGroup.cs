@@ -7,7 +7,7 @@ namespace ChaiFoxes.FMODAudio
 	{
 		public readonly FMOD.ChannelGroup Native;
 
-		private readonly PointerLinker<ChannelGroup> _linker = new PointerLinker<ChannelGroup>();
+		internal readonly PointerLinker<ChannelGroup> _linker = new PointerLinker<ChannelGroup>();
 
 		/// <summary>
 		/// Sound pitch. Affects speed too.

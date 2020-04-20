@@ -73,14 +73,14 @@ namespace ChaiFoxes.FMODAudio
 		/// Sound mode.
 		/// </summary>
 		public FMOD.MODE Mode
-		{ 
+		{
 			get
 			{
 				Native.getMode(out var mode);
 				return mode;
 			}
 			set
-			{ 
+			{
 				Native.setMode(value);
 			}
 		}
@@ -88,7 +88,21 @@ namespace ChaiFoxes.FMODAudio
 		/// <summary>
 		/// Sound's default channel group.
 		/// </summary>
-		public FMOD.ChannelGroup ChannelGroup;
+		public ChannelGroup ChannelGroup;
+
+		public SoundGroup SoundGroup
+		{
+			get
+			{
+				Native.getSoundGroup(out var sound);
+				sound.getUserData(out var ptr);
+				return SoundGroup._linker.Get(ptr);
+			}
+			set
+			{
+				Native.setSoundGroup(value.Native);
+			}
+		}
 
 		/// <summary>
 		/// If true, allows sound to be positioned in 3D space.
@@ -142,27 +156,27 @@ namespace ChaiFoxes.FMODAudio
 			get
 			{
 				Native.getLength(out var length, LengthTimeunit);
-				return length; 
+				return length;
 			}
 		}
 
-		public int LoopCount 
+		public int LoopCount
 		{
 			get
-			{ 
+			{
 				Native.getLoopCount(out var loopCount);
 				return loopCount;
 			}
 			set
-			{ 
+			{
 				Native.setLoopCount(value);
 			}
 		}
 
-		public float DefaultFrequency 
-		{ 
+		public float DefaultFrequency
+		{
 			get
-			{ 
+			{
 				Native.getDefaults(out var frequency, out var priority);
 				return frequency;
 			}
@@ -193,6 +207,7 @@ namespace ChaiFoxes.FMODAudio
 				Native.set3DConeSettings(value.InsideConeAngle, value.OutsideConeAngle, value.OutsideVolume);
 		}
 
+
 		/// <summary>
 		/// Sound buffer. Used for streamed sounds, which point to this memory.
 		/// In other words, we need to just reference it somewhere to prevent
@@ -209,7 +224,7 @@ namespace ChaiFoxes.FMODAudio
 		private GCHandle _bufferHandle;
 
 
-		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle) 
+		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 			: this(sound)
 		{
 			_buffer = buffer;
@@ -226,9 +241,9 @@ namespace ChaiFoxes.FMODAudio
 		public Channel Play(bool paused = false) =>
 			Play(ChannelGroup, paused);
 
-		public Channel Play(FMOD.ChannelGroup group, bool paused = false)
+		public Channel Play(ChannelGroup group, bool paused = false)
 		{
-			CoreSystem.Native.playSound(Native, group, paused, out FMOD.Channel fmodChannel);
+			CoreSystem.Native.playSound(Native, group.Native, paused, out FMOD.Channel fmodChannel);
 			return new Channel(this, fmodChannel);
 		}
 

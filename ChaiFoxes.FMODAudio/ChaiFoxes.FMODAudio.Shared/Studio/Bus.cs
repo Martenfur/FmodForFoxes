@@ -14,7 +14,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// </summary>
 	public class Bus
 	{
-		protected FMOD.Studio.Bus _bus { get; private set; }
+		public readonly FMOD.Studio.Bus Native;
 
 		/// <summary>
 		/// Bus target volume.
@@ -27,11 +27,11 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getVolume(out var volume);
+				Native.getVolume(out var volume);
 				return volume;
 			}
 			set =>
-				_bus.setVolume(value);
+				Native.setVolume(value);
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getVolume(out _, out var finalVolume);
+				Native.getVolume(out _, out var finalVolume);
 				return finalVolume;
 			}
 		}
@@ -59,23 +59,24 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getMute(out var mute);
+				Native.getMute(out var mute);
 				return mute;
 			}
 			set =>
-				_bus.setMute(value);
+				Native.setMute(value);
 		}
 
 		/// <summary>
 		/// The bus' core channel group.
 		/// Please be aware that, by default, the channel group will be deleted when it isn't needed.
 		/// </summary>
-		public FMOD.ChannelGroup ChannelGroup
+		public ChannelGroup ChannelGroup
 		{
 			get
 			{
-				_bus.getChannelGroup(out FMOD.ChannelGroup channelGroup);
-				return channelGroup;
+				Native.getChannelGroup(out var sound);
+				sound.getUserData(out var ptr);
+				return ChannelGroup._linker.Get(ptr);
 			}
 		}
 
@@ -88,12 +89,12 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getPaused(out var paused);
+				Native.getPaused(out var paused);
 				return paused;
 			}
 
 			set =>
-				_bus.setPaused(value);
+				Native.setPaused(value);
 		}
 
 		/// <summary>
@@ -103,7 +104,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getPath(out string path);
+				Native.getPath(out string path);
 				return path;
 			}
 		}
@@ -115,14 +116,14 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getID(out Guid id);
+				Native.getID(out Guid id);
 				return id;
 			}
 		}
 
 		public Bus(FMOD.Studio.Bus bus)
 		{
-			_bus = bus;
+			Native = bus;
 		}
 
 		/// <summary>
@@ -130,18 +131,18 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// as well as forcing it to stay loaded.
 		/// </summary>
 		public void LockChannelGroup() =>
-			_bus.lockChannelGroup();
+			Native.lockChannelGroup();
 
 		/// <summary>
 		/// Allows FMOD to destroy the channel group when it isn't needed.
 		/// </summary>
 		public void UnlockChannelGroup() =>
-			_bus.unlockChannelGroup();
+			Native.unlockChannelGroup();
 
 		/// <summary>
 		/// Stop all events routed to the bus.
 		/// </summary>
 		public void StopAllEvents(bool immediate = false) =>
-			_bus.stopAllEvents(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			Native.stopAllEvents(immediate ? FMOD.Studio.STOP_MODE.IMMEDIATE : FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 }

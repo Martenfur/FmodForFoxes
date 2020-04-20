@@ -68,7 +68,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// Event's default channel group.
 		/// </summary>
-		public FMOD.ChannelGroup ChannelGroup;
+		public ChannelGroup ChannelGroup;
 
 		/// <summary>
 		/// Returns true if the event is 3D.
