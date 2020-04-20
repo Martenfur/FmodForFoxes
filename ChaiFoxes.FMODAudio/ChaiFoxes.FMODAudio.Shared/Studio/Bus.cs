@@ -27,7 +27,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getVolume(out float volume);
+				_bus.getVolume(out var volume);
 				return volume;
 			}
 			set =>
@@ -45,7 +45,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getVolume(out _, out float finalVolume);
+				_bus.getVolume(out _, out var finalVolume);
 				return finalVolume;
 			}
 		}
@@ -59,7 +59,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getMute(out bool mute);
+				_bus.getMute(out var mute);
 				return mute;
 			}
 			set =>
@@ -88,7 +88,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_bus.getPaused(out bool paused);
+				_bus.getPaused(out var paused);
 				return paused;
 			}
 

@@ -38,7 +38,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.getLoopCount(out int loops);
+				Native.getLoopCount(out var loops);
 				return (loops == -1);
 			}
 			set 
@@ -65,7 +65,7 @@ namespace ChaiFoxes.FMODAudio
 			get
 			{
 				// Do you have some lööps, bröther?
-				Native.getLoopCount(out int loops);
+				Native.getLoopCount(out var loops);
 				return loops;
 			}
 			set
@@ -93,7 +93,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.getPitch(out float pitch);
+				Native.getPitch(out var pitch);
 				return pitch;
 			}
 			set => 
@@ -109,7 +109,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.getVolume(out float volume);
+				Native.getVolume(out var volume);
 				return volume;
 			}
 			set => 
@@ -125,7 +125,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.getLowPassGain(out float lowPassGain);
+				Native.getLowPassGain(out var lowPassGain);
 				return lowPassGain;
 			}
 			set => 
@@ -210,7 +210,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out var minDistance, out var maxDistance);
 				return minDistance;
 			}
 			set =>
@@ -224,7 +224,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out var minDistance, out var maxDistance);
 				return maxDistance;
 			}
 			set =>
@@ -238,7 +238,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.isPlaying(out bool isPlaying);
+				Native.isPlaying(out var isPlaying);
 				return isPlaying;
 			}
 		}

@@ -35,7 +35,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getPitch(out float pitch);
+				_instance.getPitch(out var pitch);
 				return pitch;
 			}
 			set =>
@@ -52,7 +52,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getVolume(out float targetVolume);
+				_instance.getVolume(out var targetVolume);
 				return targetVolume;
 			}
 			set =>
@@ -69,7 +69,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getVolume(out _, out float currentVolume);
+				_instance.getVolume(out _, out var currentVolume);
 				return currentVolume;
 			}
 		}
@@ -106,7 +106,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getTimelinePosition(out int position);
+				_instance.getTimelinePosition(out var position);
 				return position;
 			}
 			set =>
@@ -133,7 +133,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_instance.getPaused(out bool paused);
+				_instance.getPaused(out var paused);
 				return paused;
 			}
 
@@ -172,7 +172,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(string name)
 		{
-			_instance.getParameterByName(name, out float value, out _);
+			_instance.getParameterByName(name, out var value, out _);
 			return value;
 		}
 
@@ -182,7 +182,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_instance.getParameterByID(id, out float value, out _);
+			_instance.getParameterByID(id, out var value, out _);
 			return value;
 		}
 
@@ -192,7 +192,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(string name)
 		{
-			_instance.getParameterByName(name, out _, out float finalValue);
+			_instance.getParameterByName(name, out _, out var finalValue);
 			return finalValue;
 		}
 
@@ -202,7 +202,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			_instance.getParameterByID(id, out _, out float finalValue);
+			_instance.getParameterByID(id, out _, out var finalValue);
 			return finalValue;
 		}
 

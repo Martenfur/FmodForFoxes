@@ -25,7 +25,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getVolume(out float volume);
+				_vca.getVolume(out var volume);
 				return volume;
 			}
 			set =>
@@ -42,7 +42,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_vca.getVolume(out _, out float finalVolume);
+				_vca.getVolume(out _, out var finalVolume);
 				return finalVolume;
 			}
 		}

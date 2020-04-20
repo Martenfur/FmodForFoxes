@@ -28,7 +28,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getInstanceCount(out int instanceCount);
+				_description.getInstanceCount(out var instanceCount);
 				return instanceCount;
 			}
 		}
@@ -77,7 +77,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.is3D(out bool is3D);
+				_description.is3D(out var is3D);
 				return is3D;
 			}
 		}
@@ -100,7 +100,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.isOneshot(out bool isOneshot);
+				_description.isOneshot(out var isOneshot);
 				return isOneshot;
 			}
 		}
@@ -112,7 +112,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.isSnapshot(out bool isSnapshot);
+				_description.isSnapshot(out var isSnapshot);
 				return isSnapshot;
 			}
 		}
@@ -124,7 +124,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.isStream(out bool isStream);
+				_description.isStream(out var isStream);
 				return isStream;
 			}
 		}
@@ -136,7 +136,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		{
 			get
 			{
-				_description.getParameterDescriptionCount(out int count);
+				_description.getParameterDescriptionCount(out var count);
 				return count;
 			}
 		}

@@ -92,7 +92,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public static float GetParameterTargetValue(string name)
 		{
-			Native.getParameterByName(name, out float value, out _);
+			Native.getParameterByName(name, out var value, out _);
 			return value;
 		}
 
@@ -102,7 +102,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public static float GetParameterTargetValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			Native.getParameterByID(id, out float value, out _);
+			Native.getParameterByID(id, out var value, out _);
 			return value;
 		}
 
@@ -112,7 +112,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public static float GetParameterCurrentValue(string name)
 		{
-			Native.getParameterByName(name, out _, out float finalValue);
+			Native.getParameterByName(name, out _, out var finalValue);
 			return finalValue;
 		}
 
@@ -122,7 +122,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public static float GetParameterCurrentValue(FMOD.Studio.PARAMETER_ID id)
 		{
-			Native.getParameterByID(id, out _, out float finalValue);
+			Native.getParameterByID(id, out _, out var finalValue);
 			return finalValue;
 		}
 

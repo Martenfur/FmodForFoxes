@@ -113,7 +113,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out var minDistance, out var maxDistance);
 				return minDistance;
 			}
 			set =>
@@ -127,7 +127,7 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				Native.get3DMinMaxDistance(out float minDistance, out float maxDistance);
+				Native.get3DMinMaxDistance(out var minDistance, out var maxDistance);
 				return maxDistance;
 			}
 			set =>
