@@ -18,6 +18,10 @@ namespace ChaiFoxes.FMODAudio
 		public static bool UsesStudio => 
 			_mode == FMODMode.CoreAndStudio;
 
+		/// <summary>
+		/// Initializes systems and loads the native libraries. Can only be called once. 
+		/// </summary>
+		/// <param name="preInitAction">Executes before initialization, but after the native instance creation.</param>
 		public static void Init(
 			FMODMode mode,
 			string rootDir,

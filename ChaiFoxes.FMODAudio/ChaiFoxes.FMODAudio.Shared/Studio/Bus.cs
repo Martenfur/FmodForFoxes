@@ -122,7 +122,6 @@ namespace ChaiFoxes.FMODAudio.Studio
 		internal Bus(FMOD.Studio.Bus bus)
 		{
 			Native = bus;
-			// TODO: Figure out where those are created.
 		}
 
 		/// <summary>

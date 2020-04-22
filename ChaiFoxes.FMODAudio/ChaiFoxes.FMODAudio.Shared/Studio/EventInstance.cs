@@ -133,7 +133,6 @@ namespace ChaiFoxes.FMODAudio.Studio
 
 		internal EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
 		{
-			// TODO: Figure our a way to craet those.
 			Description = eventDescription;
 			Native = eventInstance;
 
