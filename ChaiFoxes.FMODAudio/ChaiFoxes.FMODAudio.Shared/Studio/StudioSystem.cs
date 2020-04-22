@@ -49,11 +49,32 @@ namespace ChaiFoxes.FMODAudio.Studio
 		}
 
 		/// <summary>
+		/// Retrieves a bus using path.
+		/// Path may be a path, such as bus:/SFX/Ambience, or an ID string, such as {d9982c58-a056-4e6c-b8e3-883854b4bffb}.
+		/// </summary>
+		public static Bus GetBus(string path)
+		{
+			Native.getBus(path, out var bus);
+			return new Bus(bus);
+		}
+
+		/// <summary>
+		/// Retrieves a bus via 128-bit GUID.
+		/// To parse a GUID from a string id, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}", use FMOD.Studio.Util.parseID().
+		/// </summary>
+		public static Bus GetBusByID(Guid id)
+		{
+			Native.getBusByID(id, out var bus);
+			return new Bus(bus);
+		}
+
+
+		/// <summary>
 		/// Retrieves a VCA via internal path, i.e. "vca:/MyVCA", or ID string, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}".
 		/// </summary>
 		public static VCA GetVCA(string path)
 		{
-			Native.getVCA(path, out FMOD.Studio.VCA vca);
+			Native.getVCA(path, out var vca);
 			return new VCA(vca);
 		}
 
@@ -63,7 +84,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// </summary>
 		public static VCA GetVCA(Guid id)
 		{
-			Native.getVCAByID(id, out FMOD.Studio.VCA vca);
+			Native.getVCAByID(id, out var vca);
 			return new VCA(vca);
 		}
 
