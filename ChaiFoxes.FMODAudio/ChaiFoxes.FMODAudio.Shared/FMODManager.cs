@@ -13,7 +13,7 @@ namespace ChaiFoxes.FMODAudio
 	{
 		private static FMODMode _mode;
 
-		private static bool _initialized = false;
+		internal static bool _initialized { get; private set; } = false;
 
 		public static bool UsesStudio => 
 			_mode == FMODMode.CoreAndStudio;

@@ -403,8 +403,8 @@ namespace ChaiFoxes.FMODAudio
 			Volume = Sound.Volume;
 			Pitch = Sound.Pitch;
 			LowPass = sound.LowPass;
-			Mode = sound.Mode;
 			Is3D = sound.Is3D;
+			Mode = sound.Mode;
 			Position3D = sound.Position3D;
 			Velocity3D = sound.Velocity3D;
 		}

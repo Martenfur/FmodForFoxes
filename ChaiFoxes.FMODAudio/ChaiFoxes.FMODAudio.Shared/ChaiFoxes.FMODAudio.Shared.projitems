@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Occlusion3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PointerLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Studio\Attributes3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreSystem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileLoader.cs" />
@@ -28,12 +29,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Listener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sound.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Channel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Studio\Attributes3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Bank.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\Bus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\EventDescription.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\EventInstance.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Studio\StudioListener3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Studio\VCA.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)VectorExtensions.cs" />
   </ItemGroup>

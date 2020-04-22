@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using ChaiFoxes.FMODAudio.Studio;
 using Microsoft.Xna.Framework;
 
 namespace ChaiFoxes.FMODAudio
@@ -28,13 +30,13 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				return position;
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				return p.ToVector3();
 			}
 			set
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				SetAttributes(value, velocity, forwardVector, upVector);
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				SetAttributes(value.ToFmodVector(), v, f, u);
 			}
 		}
 
@@ -45,13 +47,13 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				return velocity;
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				return v.ToVector3();
 			}
 			set
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				SetAttributes(position, value, forwardVector, upVector);
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				SetAttributes(p, value.ToFmodVector(), f, u);
 			}
 		}
 
@@ -63,16 +65,16 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				return forwardVector;
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				return f.ToVector3();
 			}
 			set
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				SetAttributes(position, velocity, value, upVector);
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				SetAttributes(p, v, value.ToFmodVector(), u);
 			}
 		}
-		
+
 		/// <summary>
 		/// Upwards orientation, must be of unit length (1.0) and perpendicular to forward.
 		/// UnitZ by default.
@@ -81,59 +83,32 @@ namespace ChaiFoxes.FMODAudio
 		{
 			get
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				return upVector;
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				return u.ToVector3();
 			}
 			set
 			{
-				GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
-				SetAttributes(position, velocity, forwardVector, value);
+				GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+				SetAttributes(p, v, f, value.ToFmodVector());
 			}
-		}
-
-		/// <summary>
-		/// Gets all listener attributes at once.
-		/// </summary>
-		public void GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector)
-		{
-			CoreSystem.Native.get3DListenerAttributes(
-				_index, 
-				out FMOD.VECTOR pos, 
-				out FMOD.VECTOR vel, 
-				out FMOD.VECTOR forward, 
-				out FMOD.VECTOR up
-			);
-			position = pos.ToVector3();
-			velocity = vel.ToVector3();
-			forwardVector = forward.ToVector3();
-			upVector = up.ToVector3();
-		}
-		
-		/// <summary>
-		/// Sets all listener attributes at once.
-		/// </summary>
-		public void SetAttributes(Vector3 position, Vector3 velocity, Vector3 forwardVector, Vector3 upVector)
-		{
-			var pos = position.ToFmodVector();
-			var vel = velocity.ToFmodVector();
-			var forw = forwardVector.ToFmodVector();
-			var up = upVector.ToFmodVector();
-			CoreSystem.Native.set3DListenerAttributes(
-				_index,
-				ref pos,
-				ref vel, 
-				ref forw, 
-				ref up
-			);
 		}
 
 		public Listener3D()
 		{
+			if (!FMODManager._initialized)
+			{
+				throw new Exception("You cannot create listeners before initializing FMODManager!");
+			}
 			_index = _listeners.Count;
 			_listeners.Add(this);
-			CoreSystem.Native.set3DNumListeners(_listeners.Count);
+			UpdateNumListeners();
 
-			SetAttributes(Vector3.Zero, Vector3.Zero, Vector3.UnitY, Vector3.UnitZ);
+			SetAttributes(
+				Vector3.Zero, 
+				Vector3.Zero, 
+				Vector3.UnitY, 
+				Vector3.UnitZ
+			);
 		}
 
 		/// <summary>
@@ -153,21 +128,121 @@ namespace ChaiFoxes.FMODAudio
 				var last = _listeners[_listeners.Count - 1];
 
 				// Saving attribute.
-				last.GetAttributes(out Vector3 position, out Vector3 velocity, out Vector3 forwardVector, out Vector3 upVector);
+				last.GetAttributes(out FMOD.VECTOR position, out var velocity, out var forwardVector, out var upVector);
 				// Replacing index.
 				last._index = _index;
 				// Copying attributes over.
 				last.SetAttributes(position, velocity, forwardVector, upVector);
-				
+
 				// Changing last element's place in listener list.
 				_listeners.RemoveAt(_listeners.Count - 1);
 				_listeners.Insert(last._index, last);
 			}
 
 			_listeners.Remove(this);
-			CoreSystem.Native.set3DNumListeners(_listeners.Count);
+			UpdateNumListeners();
 
 			_index = -1;
+		}
+
+		/// <summary>
+		/// Gets all listener attributes at once.
+		/// </summary>
+		public void GetAttributes(
+			out Vector3 position,
+			out Vector3 velocity,
+			out Vector3 forward,
+			out Vector3 up
+		)
+		{
+			GetAttributes(out FMOD.VECTOR p, out var v, out var f, out var u);
+			position = p.ToVector3();
+			velocity = v.ToVector3();
+			forward = f.ToVector3();
+			up = u.ToVector3();
+		}
+
+
+		/// <summary>
+		/// Sets all listener attributes at once.
+		/// </summary>
+		public void SetAttributes(
+			Vector3 position,
+			Vector3 velocity,
+			Vector3 forward,
+			Vector3 up
+		)
+		{
+			SetAttributes(
+				position.ToFmodVector(), 
+				velocity.ToFmodVector(), 
+				forward.ToFmodVector(), 
+				up.ToFmodVector()
+			);
+		}
+
+
+		/// <summary>
+		/// Gets all listener attributes at once.
+		/// </summary>
+		private void GetAttributes(
+			out FMOD.VECTOR position,
+			out FMOD.VECTOR velocity,
+			out FMOD.VECTOR forward,
+			out FMOD.VECTOR up
+		)
+		{
+			if (FMODManager.UsesStudio)
+			{
+				StudioSystem.Native.getListenerAttributes(_index, out var attributes);
+
+				position = attributes.position;
+				velocity = attributes.velocity;
+				forward = attributes.forward;
+				up = attributes.up;
+			}
+			else
+			{
+				CoreSystem.Native.get3DListenerAttributes(
+				_index,
+					out position,
+					out velocity,
+					out forward,
+					out up
+				);
+			}
+		}
+
+
+		/// <summary>
+		/// Sets all listener attributes at once.
+		/// </summary>
+		private void SetAttributes(
+			FMOD.VECTOR position,
+			FMOD.VECTOR velocity,
+			FMOD.VECTOR forward,
+			FMOD.VECTOR up
+		)
+		{
+			CoreSystem.Native.set3DListenerAttributes(
+				_index,
+				ref position,
+				ref velocity,
+				ref forward,
+				ref up
+			);
+		}
+
+		private void UpdateNumListeners()
+		{
+			if (FMODManager.UsesStudio)
+			{
+				StudioSystem.Native.setNumListeners(_listeners.Count);
+			}
+			else
+			{
+				CoreSystem.Native.set3DNumListeners(_listeners.Count);
+			}
 		}
 	}
 }
