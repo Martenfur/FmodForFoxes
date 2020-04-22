@@ -25,7 +25,8 @@ namespace ChaiFoxes.FMODAudio
 			uint dspBufferLength = 4,
 			int dspBufferCount = 32,
 			FMOD.INITFLAGS coreInitFlags = FMOD.INITFLAGS.CHANNEL_LOWPASS | FMOD.INITFLAGS.CHANNEL_DISTANCEFILTER,
-			FMOD.Studio.INITFLAGS studioInitFlags = FMOD.Studio.INITFLAGS.NORMAL
+			FMOD.Studio.INITFLAGS studioInitFlags = FMOD.Studio.INITFLAGS.NORMAL,
+			Action preInitAction = null
 		)
 		{
 			if (_initialized)
@@ -46,12 +47,16 @@ namespace ChaiFoxes.FMODAudio
 				
 				StudioSystem.Native.getCoreSystem(out CoreSystem.Native);
 				
+				preInitAction?.Invoke();
+
 				// This also will init core system. 
 				StudioSystem.Native.initialize(maxChannels, studioInitFlags, coreInitFlags, (IntPtr)0);
 			}
 			else
 			{
 				FMOD.Factory.System_Create(out CoreSystem.Native);
+
+				preInitAction?.Invoke();
 
 				CoreSystem.Native.init(maxChannels, coreInitFlags, (IntPtr)0);
 			}

@@ -62,7 +62,5 @@ namespace ChaiFoxes.FMODAudio
 
 			return new Sound(newSound, buffer, handle);
 		}
-
-
 	}
 }
