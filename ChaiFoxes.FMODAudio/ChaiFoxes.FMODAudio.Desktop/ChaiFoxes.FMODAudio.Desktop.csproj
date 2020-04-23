@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
-
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<NoWarn>1591</NoWarn>
+		<Version>2.0.0</Version>
+		<Authors>Martenfur, StinkBrigade</Authors>
+		<Company>ChaiFoxes</Company>
+		<Product>ChaiFoxes.FMODAudio</Product>
+		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
+		<RepositoryUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</RepositoryUrl>
+		<PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Desktop", "ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj", "{F712BF21-58F9-448C-BEF5-286CEC991EBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Android", "ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj", "{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Android", "ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj", "{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio", "ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj", "{2472B999-F9C5-470E-A6AE-C6716EB7361A}"
 EndProject
@@ -13,7 +13,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Shared"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 4
+		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 5
 		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{b5933bd7-e07e-4eb2-99be-2814508425a1}*SharedItemsImports = 13
 		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{f712bf21-58f9-448c-bef5-286cec991ebb}*SharedItemsImports = 5
 	EndGlobalSection
