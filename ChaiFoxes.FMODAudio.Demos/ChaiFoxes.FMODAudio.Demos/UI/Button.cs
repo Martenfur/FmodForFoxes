@@ -58,12 +58,15 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 				if (click)
 				{
 					Click?.Invoke();
+					_animationRunning = true;
 				}
-				if (!click && _oldClick)
+				if (click && !_oldClick) // Press.
+				{ 
+					_animation = 0;
+				}
+				if (!click && _oldClick) // Release.
 				{
 					ClickRelease?.Invoke();
-					_animationRunning = true;
-					_animation = 0;
 				}
 			}
 			_oldClick = click;
@@ -71,6 +74,13 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 			if (_animationRunning)
 			{
 				_animation += _animationSpeed;
+				if (click)
+				{
+					if (_animation > 0.25f)
+					{
+						_animation = 0.25f;	
+					}
+				}
 				if (_animation > 1)
 				{
 					_animationRunning = false;
