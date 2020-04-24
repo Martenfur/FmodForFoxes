@@ -14,7 +14,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 	public class Game1 : Game
 	{
 		GraphicsDeviceManager graphics;
-		
+
 		float rotation;
 		float rotationSpeed = 0.01f;
 
@@ -23,13 +23,13 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			
-			#if ANDROID
-				graphics.IsFullScreen = true;
-				graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-				graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-				graphics.SupportedOrientations = DisplayOrientation.Portrait;
-			#endif
+
+#if ANDROID
+			graphics.IsFullScreen = true;
+			graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			graphics.SupportedOrientations = DisplayOrientation.Portrait;
+#endif
 
 			IsMouseVisible = true;
 		}
@@ -42,6 +42,12 @@ namespace ChaiFoxes.FMODAudio.Demos
 
 		EventInstance musicInstance;
 
+		private Button _selectCore;
+		private Button _selectStudio;
+		private Label _title;
+
+
+
 		Listener3D l;
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -52,9 +58,31 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Initialize()
 		{
 			// All our music files reside in Content directory.
-			///FMODManager.Init(FMODMode.CoreAndStudio, "Content");
+			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
 			UIController.Init(GraphicsDevice);
-			new Button("foxeh", new Vector2(100, 100), new Vector2(64, 64), null, () => Console.WriteLine("kok"));
+
+			new Label(
+				"Choose your destiny",
+				() => new Vector2(ScreenSize.X / 2, ScreenSize.Y / 2f)
+			);
+
+			_selectCore = new Button(
+				"Core Demo",
+				() => new Vector2(ScreenSize.X / 2 - ScreenSize.X / 4, ScreenSize.Y * 0.75f),
+				new Vector2(200, 100),
+				null,
+				() => Console.WriteLine("kok")
+			);
+
+			_selectStudio = new Button(
+				"Studio Demo",
+				() => new Vector2(ScreenSize.X / 2 + ScreenSize.X / 4, ScreenSize.Y * 0.75f),
+				new Vector2(200, 100),
+				null,
+				() => Console.WriteLine("kok")
+			);
+
+
 			/*
 				l = new Listener3D();
 
@@ -136,7 +164,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void LoadContent()
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
-			
+
 			Resources.Load(Content);
 
 		}
@@ -166,8 +194,8 @@ namespace ChaiFoxes.FMODAudio.Demos
 			{
 				Exit();
 			}
-			
-			//FMODManager.Update();
+
+			FMODManager.Update();
 
 			rotation += rotationSpeed;
 			if (rotation > MathHelper.TwoPi)
@@ -178,8 +206,24 @@ namespace ChaiFoxes.FMODAudio.Demos
 			var mouse = Mouse.GetState().Position.ToVector2() * 100;
 			//l.Position3D = new Vector3(mouse.X, mouse.Y, 0);
 
-
 			base.Update(gameTime);
+		}
+
+		public Vector2 ScreenSize
+		{
+			get
+			{
+#if !ANDROID
+				 return new Vector2(
+					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
+				);
+#else
+				return new Vector2(
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+				);
+#endif
+			}
 		}
 
 		/// <summary>
@@ -189,27 +233,20 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(UIController.Backgroud);
-			UIController.Draw();
 
-			#if !ANDROID
-				var screenSize = new Vector2(
-					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
-				) / 2;
-			#else
-				var screenSize = new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
-				) / 2;
-			#endif
 
-			var scale = Math.Min(screenSize.X, screenSize.Y) / (float)Resources.Gato.Width;
+#if !ANDROID
+			var scale = 1;
+#else
+			var scale = Math.Min(ScreenSize.X, ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
+#endif
 
-			UIController.SpriteBatch.Begin();
+			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 			UIController.SpriteBatch.Draw(
 				Resources.Gato,
-				screenSize,
+				ScreenSize / 2,
 				null,
-				Color.White,
+				UIController.Text,
 				rotation,
 				Vector2.One * Resources.Gato.Width / 2,
 				Vector2.One * scale,
@@ -217,6 +254,8 @@ namespace ChaiFoxes.FMODAudio.Demos
 				0
 			);
 			UIController.SpriteBatch.End();
+
+			UIController.Draw();
 
 			base.Draw(gameTime);
 		}

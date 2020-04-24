@@ -9,10 +9,11 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 	public class Button : UIElement
 	{
 		public string Text;
-		public Vector2 Position;
+		public Vector2 Position { get; private set; }
 		public Vector2 Size;
-		public readonly Action Click;
-		public readonly Action ClickRelease;
+		private readonly Func<Vector2> _positionUpdate; 
+		private readonly Action _click;
+		private readonly Action _clickRelease;
 
 		private bool _oldClick = false;
 
@@ -23,21 +24,24 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 
 		public Button(
 			string text,
-			Vector2 position,
+			Func<Vector2> positionUpdate,
 			Vector2 size,
 			Action click,
 			Action clickRelease = null
 		) : base()
 		{
 			Text = text;
-			Position = position;
+			_positionUpdate = positionUpdate;
+			Position = _positionUpdate();
 			Size = size;
-			Click = click;
-			ClickRelease = clickRelease;
+			_click = click;
+			_clickRelease = clickRelease;
 		}
 
 		public override void Update()
 		{
+			_positionUpdate();
+
 #if ANDROID
 			var mousePosition = Vector2.Zero;
 			var click = false;
@@ -57,7 +61,7 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 			{
 				if (click)
 				{
-					Click?.Invoke();
+					_click?.Invoke();
 					_animationRunning = true;
 				}
 				if (click && !_oldClick) // Press.
@@ -66,7 +70,7 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 				}
 				if (!click && _oldClick) // Release.
 				{
-					ClickRelease?.Invoke();
+					_clickRelease?.Invoke();
 				}
 			}
 			_oldClick = click;

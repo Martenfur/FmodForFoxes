@@ -1,24 +1,28 @@
 ﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace ChaiFoxes.FMODAudio.Demos.UI
 {
 	public class Label : UIElement
 	{
 		public string Text;
-		public Vector2 Position;
+		public Vector2 Position { get; private set; }
+
+		private readonly Func<Vector2> _positionUpdate;
 
 		public Label(
 			string text,
-			Vector2 position
+			Func<Vector2> positionUpdate
 		) : base()
 		{
 			Text = text;
-			Position = position;
+			_positionUpdate = positionUpdate;
+			Position = _positionUpdate();
 		}
 
 		public override void Update()
 		{
-
+			_positionUpdate();
 		}
 
 		public override void Draw()
