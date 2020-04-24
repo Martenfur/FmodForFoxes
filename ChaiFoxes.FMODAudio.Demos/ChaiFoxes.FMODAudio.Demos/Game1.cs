@@ -14,22 +14,18 @@ namespace ChaiFoxes.FMODAudio.Demos
 	/// </summary>
 	public class Game1 : Game
 	{
-		private static GraphicsDeviceManager graphics;
-
-		float rotation;
-		float rotationSpeed = 0.01f;
-
+		private static GraphicsDeviceManager _graphics;
 
 		public Game1()
 		{
-			graphics = new GraphicsDeviceManager(this);
+			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
 #if ANDROID
-			graphics.IsFullScreen = true;
-			graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-			graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-			graphics.SupportedOrientations = DisplayOrientation.Portrait;
+			_graphics.IsFullScreen = true;
+			_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			_graphics.SupportedOrientations = DisplayOrientation.Portrait;
 #endif
 
 			IsMouseVisible = true;
@@ -50,7 +46,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 			{
 #if !ANDROID
 				 return new Vector2(
-					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
+					_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
 				);
 #else
 				return new Vector2(
@@ -62,7 +58,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 		}
 
 
-		Listener3D l;
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
 		/// This is where it can query for any required services and load any non-graphic
@@ -72,37 +67,11 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Initialize()
 		{
 			// All our music files reside in Content directory.
-			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
 			UIController.Init(GraphicsDevice);
 			SceneController.ChangeScene(new DemoSelectorScene());
 
 			/*
-				l = new Listener3D();
-
-				// You can load pretty much any popular audio format.
-				// I'd recommend .ogg for music, tho.
-				sound = CoreSystem.LoadStreamedSound("test.mp3");
-				sound.Looping = true;
-				//sound.LowPass = 0.1f;
-				//sound.Volume = 2;
-				//sound.Pitch = 2;
-				sound.MinDistance3D = 100;
-				sound.MaxDistance3D = 20000;
-				//sound.3D
-				sound.Mode = FMOD.MODE._3D;
-				sound.Position3D = new Vector3(0, 0, 0);
-
-				var channel = sound.Play();
-
-				Console.WriteLine(sound.MaxDistance3D + " ---- " + channel.MinDistance3D);
-				Console.WriteLine(channel.Mode);
-
-				/*
-				// Add some effects to the sound! :0
-				channel.LowPass = 0.5f;
-				channel.Pitch = 2f;
-				*/
-
+			
 			/*
 			// You would rather place the following in LoadContent() - it's here more for readability.
 			// Here you load any banks that you're using. This could be a music bank, a SFX bank, etc.
@@ -159,7 +128,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 			// Create a new SpriteBatch, which can be used to draw textures.
 
 			Resources.Load(Content);
-
 		}
 
 		/// <summary>
@@ -190,17 +158,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 				Exit();
 			}
 
-			FMODManager.Update();
-
-			rotation += rotationSpeed;
-			if (rotation > MathHelper.TwoPi)
-			{
-				rotation -= MathHelper.TwoPi;
-			}
-
-			var mouse = Mouse.GetState().Position.ToVector2() * 100;
-			//l.Position3D = new Vector3(mouse.X, mouse.Y, 0);
-
 			base.Update(gameTime);
 		}
 
@@ -212,27 +169,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(UIController.Backgroud);
-
-
-#if !ANDROID
-			var scale = 1;
-#else
-			var scale = Math.Min(ScreenSize.X, ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
-#endif
-
-			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-			UIController.SpriteBatch.Draw(
-				Resources.Gato,
-				ScreenSize / 2,
-				null,
-				UIController.Text,
-				rotation,
-				Vector2.One * Resources.Gato.Width / 2,
-				Vector2.One * scale,
-				SpriteEffects.None,
-				0
-			);
-			UIController.SpriteBatch.End();
 
 			UIController.Draw();
 			SceneController.Draw();
