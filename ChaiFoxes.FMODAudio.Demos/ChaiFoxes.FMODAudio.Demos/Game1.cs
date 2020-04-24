@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using ChaiFoxes.FMODAudio.Demos.Scenes;
 using ChaiFoxes.FMODAudio.Demos.UI;
 using ChaiFoxes.FMODAudio.Studio;
 using Microsoft.Xna.Framework;
@@ -13,7 +14,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 	/// </summary>
 	public class Game1 : Game
 	{
-		GraphicsDeviceManager graphics;
+		private static GraphicsDeviceManager graphics;
 
 		float rotation;
 		float rotationSpeed = 0.01f;
@@ -42,10 +43,23 @@ namespace ChaiFoxes.FMODAudio.Demos
 
 		EventInstance musicInstance;
 
-		private Button _selectCore;
-		private Button _selectStudio;
-		private Label _title;
 
+		public static Vector2 ScreenSize
+		{
+			get
+			{
+#if !ANDROID
+				 return new Vector2(
+					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
+				);
+#else
+				return new Vector2(
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+				);
+#endif
+			}
+		}
 
 
 		Listener3D l;
@@ -60,28 +74,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 			// All our music files reside in Content directory.
 			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
 			UIController.Init(GraphicsDevice);
-
-			new Label(
-				"Choose your destiny",
-				() => new Vector2(ScreenSize.X / 2, ScreenSize.Y / 2f)
-			);
-
-			_selectCore = new Button(
-				"Core Demo",
-				() => new Vector2(ScreenSize.X / 2 - ScreenSize.X / 4, ScreenSize.Y * 0.75f),
-				new Vector2(200, 100),
-				null,
-				() => Console.WriteLine("kok")
-			);
-
-			_selectStudio = new Button(
-				"Studio Demo",
-				() => new Vector2(ScreenSize.X / 2 + ScreenSize.X / 4, ScreenSize.Y * 0.75f),
-				new Vector2(200, 100),
-				null,
-				() => Console.WriteLine("kok")
-			);
-
+			SceneController.ChangeScene(new DemoSelectorScene());
 
 			/*
 				l = new Listener3D();
@@ -211,22 +204,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 			base.Update(gameTime);
 		}
 
-		public Vector2 ScreenSize
-		{
-			get
-			{
-#if !ANDROID
-				 return new Vector2(
-					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
-				);
-#else
-				return new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
-				);
-#endif
-			}
-		}
 
 		/// <summary>
 		/// This is called when the game should draw itself.
