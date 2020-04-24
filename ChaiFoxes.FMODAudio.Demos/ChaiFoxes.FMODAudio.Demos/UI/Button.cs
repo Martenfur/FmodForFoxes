@@ -45,7 +45,7 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 			if (state.Count > 0)
 			{
 				mousePosition = state[0].Position;
-				click = state[0].State == TouchLocationState.Pressed;
+				click = state[0].State == TouchLocationState.Moved;
 			}
 #else
 			var mouse = Mouse.GetState();
