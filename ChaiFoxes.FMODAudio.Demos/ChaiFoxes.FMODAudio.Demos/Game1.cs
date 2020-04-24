@@ -186,6 +186,8 @@ namespace ChaiFoxes.FMODAudio.Demos
 		protected override void Update(GameTime gameTime)
 		{
 			UIController.Update();
+			SceneController.Update();
+
 			if (
 				GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
 				|| GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
@@ -256,6 +258,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 			UIController.SpriteBatch.End();
 
 			UIController.Draw();
+			SceneController.Draw();
 
 			base.Draw(gameTime);
 		}
