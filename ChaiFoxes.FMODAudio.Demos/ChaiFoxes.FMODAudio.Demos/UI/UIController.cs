@@ -6,9 +6,9 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 {
 	public static class UIController
 	{
-		public static readonly Color Backgroud = new Color(82, 45, 91);
-		public static readonly Color Accent = new Color(251, 123, 107);
-		public static readonly Color Text = new Color(231, 211, 159);
+		public static readonly Color Backgroud = new Color(110, 87, 115);
+		public static readonly Color Accent = new Color(234, 144, 133);
+		public static readonly Color Text = new Color(233, 225, 204);
 
 		public static SpriteBatch SpriteBatch { get; private set; }
 
