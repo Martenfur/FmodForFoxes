@@ -18,7 +18,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		private Label _lowPass;
 
 		private Button _pitchUp;
-		private Button _putchDown;
+		private Button _pitchDown;
 		private Label _pitch;
 
 		private Button _pause;
@@ -91,7 +91,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			_lowPass.Destroy();
 
 			_pitchUp.Destroy();
-			_putchDown.Destroy();
+			_pitchDown.Destroy();
 			_pitch.Destroy();
 
 			_pause.Destroy();
@@ -127,7 +127,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 				"low pass",
 				() => new Vector2(Game1.ScreenSize.X / 2 + Game1.ScreenSize.X / 4, Game1.ScreenSize.Y * 0.7f)
 			);
-			_putchDown = new Button(
+			_pitchDown = new Button(
 				"<",
 				() => new Vector2(
 					_pitch.Position.X - 48,
