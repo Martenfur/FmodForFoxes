@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using System;
+using System.Diagnostics;
 
 namespace ChaiFoxes.FMODAudio.Demos.UI
 {
@@ -14,8 +15,6 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 		private readonly Func<Vector2> _positionUpdate; 
 		private readonly Action _click;
 		private readonly Action _clickRelease;
-
-		private bool _oldClick = false;
 
 		private bool _animationRunning = false;
 		private float _animation = 0;
@@ -42,43 +41,27 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 		{
 			_positionUpdate();
 
-#if ANDROID
-			var mousePosition = Vector2.Zero;
-			var click = false;
-			var state = TouchPanel.GetState();
-			if (state.Count > 0)
+			if (PointInRectangleBySize(InputManager.MousePosition, Position, Size))
 			{
-				mousePosition = state[0].Position;
-				click = state[0].State == TouchLocationState.Moved;
-			}
-#else
-			var mouse = Mouse.GetState();
-			var mousePosition = mouse.Position.ToVector2();
-			var click = (mouse.LeftButton == ButtonState.Pressed);
-#endif
-
-			if (PointInRectangleBySize(mousePosition, Position, Size))
-			{
-				if (click)
+				if (InputManager.MouseHeld)
 				{
 					_click?.Invoke();
 					_animationRunning = true;
 				}
-				if (click && !_oldClick) // Press.
+				if (InputManager.MousePressed)
 				{ 
 					_animation = 0;
 				}
-				if (!click && _oldClick) // Release.
+				if (InputManager.MouseReleased)
 				{
 					_clickRelease?.Invoke();
 				}
 			}
-			_oldClick = click;
 
 			if (_animationRunning)
 			{
 				_animation += _animationSpeed;
-				if (click)
+				if (InputManager.MouseHeld)
 				{
 					if (_animation > 0.25f)
 					{

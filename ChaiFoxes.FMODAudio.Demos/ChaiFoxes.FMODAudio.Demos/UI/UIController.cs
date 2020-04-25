@@ -20,8 +20,9 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 		}
 
 		public static void Update()
-		{ 
-			foreach(var element in _elements.ToArray()) // Yeah, yeah, the thing generates garbage, who cares. :S
+		{
+			InputManager.Update();
+			foreach (var element in _elements.ToArray()) // Yeah, yeah, the thing generates garbage, who cares. :S
 			{ 
 				element.Update();
 			}
