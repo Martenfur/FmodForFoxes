@@ -29,6 +29,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			// Initialized here only for the sake of the demo.
 			// Usually has to be initialized right at startup.
 			FMODManager.Init(FMODMode.Core, "Content");
+			InitUI();
 
 			// You can load pretty much any popular audio format.
 			// I'd recommend .ogg for music, tho.
@@ -40,6 +41,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 			_channel = _sound.Play();
 		}
+
 
 		public override void Update()
 		{
@@ -59,6 +61,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 				_rotation -= MathHelper.TwoPi;
 			}
 		}
+
 
 		public override void Draw()
 		{
@@ -83,6 +86,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			UIController.SpriteBatch.End();
 		}
 
+
 		public override void Leave()
 		{
 			_lowPassUp.Destroy();
@@ -95,6 +99,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 			_pause.Destroy();
 		}
+
 
 		private void InitUI()
 		{
