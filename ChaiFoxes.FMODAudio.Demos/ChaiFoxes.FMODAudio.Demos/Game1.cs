@@ -66,6 +66,11 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void Initialize()
 		{
+			// NOTE: You HAVE TO init fmod in the Initialize().
+			// Otherwise, it may not work on some platforms.
+			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
+			//FMODManager.Init(FMODMode.Core, "Content"); // Use this if you don't want Studio functionality.
+
 			UIController.Init(GraphicsDevice);
 			SceneController.ChangeScene(new DemoSelectorScene());
 
@@ -78,7 +83,6 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void LoadContent()
 		{
-
 			Resources.Load(Content);
 		}
 

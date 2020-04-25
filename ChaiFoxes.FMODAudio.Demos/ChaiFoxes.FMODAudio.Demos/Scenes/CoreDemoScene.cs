@@ -26,9 +26,6 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Enter()
 		{
-			// Initialized here only for the sake of the demo.
-			// Usually has to be initialized right at startup.
-			FMODManager.Init(FMODMode.Core, "Content");
 			InitUI();
 
 			// You can load pretty much any popular audio format.
