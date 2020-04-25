@@ -13,7 +13,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Loads bank from file with the default flag.
 		/// </summary>
 		public static Bank LoadBank(string name) =>
-				LoadBank(name, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL);
+			LoadBank(name, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL);
 
 		/// <summary>
 		/// Loads bank from file with custom flags.
