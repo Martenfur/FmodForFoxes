@@ -11,6 +11,14 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Enter()
 		{
+			// If Studio is not loaded, skip the selection screen, 
+			// since we can only select Core.
+			if (!FMODManager.UsesStudio)
+			{
+				SceneController.ChangeScene(new CoreDemoScene());
+				return;
+			}
+
 			_title = new Label(
 				"Choose your destiny",
 				() => new Vector2(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y / 2f)
@@ -46,9 +54,9 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Leave()
 		{
-			_title.Destroy();
-			_selectCore.Destroy();
-			_selectStudio.Destroy();
+			_title?.Destroy();
+			_selectCore?.Destroy();
+			_selectStudio?.Destroy();
 		}
 	}
 }
