@@ -1,5 +1,10 @@
-﻿using ChaiFoxes.FMODAudio.Studio;
+﻿using ChaiFoxes.FMODAudio.Demos.UI;
+using ChaiFoxes.FMODAudio.Studio;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
+using System.Threading.Tasks;
 
 namespace ChaiFoxes.FMODAudio.Demos.Scenes
 {
@@ -8,10 +13,27 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		Bank _masterBank;
 		Bank _masterStringBank;
 
+		EventDescription _engineDescription;
 		EventDescription _musicDescription;
-		EventDescription _sfxDescription;
+		EventDescription _bonkDescription;
 
+		EventInstance _engineInstance;
 		EventInstance _musicInstance;
+
+		int _rpm = 2300;
+
+		private Button _rpmUp;
+		private Button _rpmDown;
+		private Label _rpmLabel;
+		private Button _engineStart;
+
+		private Button _intensityUp;
+		private Button _intensityDown;
+		private Label _musicLabel;
+		private Button _musicStart;
+
+		private Button _bonk;
+
 
 		public override void Enter()
 		{
@@ -22,53 +44,99 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			// The strings bank isn't actually necessary - however if you want to do string lookups, include it.
 			_masterBank = StudioSystem.LoadBank("Master.bank");
 			_masterStringBank = StudioSystem.LoadBank("Master.strings.bank");
+			StudioSystem.LoadBank("Music.bank");
+			StudioSystem.LoadBank("SFX.bank");
+			StudioSystem.LoadBank("Vehicles.bank");
+			StudioSystem.LoadBank("VO.bank");
+			StudioSystem.LoadBank("Dialogue_CN.bank");
+			//StudioSystem.LoadBank("Dialogue_EN.bank");
+			//StudioSystem.LoadBank("Dialogue_JP.bank");
 
 			// Events are split in the code into descriptions and instances.
 			// You may have multiple instances of one event, but the description for it should only be loaded once.
 			// Here is why you want the strings bank loaded, btw. So much more intuitive than Guids.
-			_musicDescription = StudioSystem.GetEvent("event:/Music/Demo");
+
+			_engineDescription = StudioSystem.GetEvent("event:/Vehicles/Car Engine");
+			_musicDescription = StudioSystem.GetEvent("event:/Music/Level 03");
 
 			// Loading an event description by Guid.
 			// FMOD Studio will give you a string like below when you select "Copy Guid". It has to be parsed to be used.
-			FMOD.Studio.Util.parseID("{432d05d4-71d0-49bc-81fc-9c0beeaf217c}", out Guid sfxGuid);
-			_sfxDescription = StudioSystem.GetEvent(sfxGuid);
+			FMOD.Studio.Util.parseID("{be6203d8-c8d8-41c5-8ce6-bce0de95807b}", out Guid sfxGuid);
+			_bonkDescription = StudioSystem.GetEvent(sfxGuid);
 
 			// There are three ways to load sample data (any non-streamed sounds):
 			// -From a bank. This will keep ALL the bank's data in memory until unloaded.
 			// -From an event description. This will just keep the event's necessary data in memory until unloaded.
 			// -From an event instance. Same as above, except the data will only be in memory while an instance is.
 			// Assess when you need memory loaded and for how long, then choose which method to use properly.
-
+			_engineDescription.LoadSampleData();
 			// The music doesn't need its data pre-loaded, since it'll just play right away, continuously.
+			_engineInstance = _engineDescription.CreateInstance();
 			_musicInstance = _musicDescription.CreateInstance();
-
+			
 			// Sound effects could be played whenever, so you don't want them constantly loading / unloading.
-			_sfxDescription.LoadSampleData();
-
-			_musicInstance.Start();
+			_bonkDescription.LoadSampleData();
+			
 			//musicInstance.Paused = true;
-			//musicInstance.Volume = 0.5f;
 			//musicInstance.Pitch = 2f;
 
 			// If you have any parameters set within FMOD Studio, you can change them within the code.
-			//musicInstance.SetParameterValue("Local Parameter", 1);
-			//AudioMgr.SetParameterValue("Global Parameter", 0.5f);
-
-			// FMOD Studio has its own instance of the FMOD Core system, so all normal functions will still work.
-			// AKA: DON'T LOAD BOTH AT THE SAME TIME!!! I don't know, nor do I want to know, what would happen.
-			//var sound = AudioMgr.LoadStreamedSound("test.mp3");
-			//sound.Looping = true;
-			//var channel = sound.Play();
+			_engineInstance.SetParameterValue("RPM", _rpm);
+			_engineInstance.SetParameterValue("Load", -1f);
 
 		}
 
+		private float _rotation;
+		private float _rotationSpeed = 0.0001f;
+
+		private int _musicIntensity = 0;
+
 		public override void Update()
 		{
+			FMODManager.Update();
+			_rpmLabel.Text = "rpm " + _rpm;
+			_musicLabel.Text = "music intensity " + _musicIntensity;
+
+			if (_engineInstance.PlaybackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				_rotation += _rotationSpeed * _rpm;
+			}
+			if (_rotation > MathHelper.TwoPi)
+			{
+				_rotation -= MathHelper.TwoPi;
+			}
+
+			// haxx 
+			// Basically, I am too lazy to look up how 
+			// to detect the end of music properly. : - )
+			if (_musicInstance.TimelinePosition > (60 * 2 + 32) * 1000)
+			{
+				_musicStart.Text = "start";
+				_musicInstance.Stop();
+			}
 		}
 
 		public override void Draw()
 		{
-			FMODManager.Update();
+#if !ANDROID
+			var scale = 1;
+#else
+			var scale = Math.Min(Game1.ScreenSize.X, Game1.ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
+#endif
+
+			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+			UIController.SpriteBatch.Draw(
+				Resources.Gato,
+				new Vector2(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y * 0.3f),
+				null,
+				UIController.Text,
+				_rotation,
+				Vector2.One * Resources.Gato.Width / 2,
+				Vector2.One * scale,
+				SpriteEffects.None,
+				0
+			);
+			UIController.SpriteBatch.End();
 		}
 
 		public override void Leave()
@@ -78,6 +146,145 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		private void InitUI()
 		{
 
+			_rpmLabel = new Label(
+				"rpm",
+				() => new Vector2(Game1.ScreenSize.X / 2 - Game1.ScreenSize.X / 4, Game1.ScreenSize.Y * 0.7f - 64)
+			);
+			_rpmDown = new Button(
+				"<",
+				() => new Vector2(
+					_rpmLabel.Position.X - 48,
+					_rpmLabel.Position.Y + 64
+				),
+				new Vector2(64, 64),
+				() =>
+				{
+					_rpm -= 25;
+					if (_rpm < 0)
+					{
+						_rpm = 0;
+					}
+					_engineInstance.SetParameterValue("RPM", _rpm);
+				}
+			);
+			_rpmUp = new Button(
+				">",
+				() => new Vector2(
+					_rpmLabel.Position.X + 48,
+					_rpmLabel.Position.Y + 64
+				),
+				new Vector2(64, 64),
+				() => 
+				{
+					_rpm += 25;
+					if (_rpm > 10000)
+					{ 
+						_rpm = 10000;	
+					}
+					_engineInstance.SetParameterValue("RPM", _rpm);
+				}
+			);
+
+			_engineStart = new Button(
+				"start",
+				() => new Vector2(
+					_rpmLabel.Position.X,
+					_rpmLabel.Position.Y + 128 + 32
+				),
+				new Vector2(128 + 32, 64),
+				null,
+				() =>
+				{
+					if (_engineInstance.PlaybackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+					{
+						_engineStart.Text = "start";
+						_engineInstance.Stop();
+					}
+					else
+					{
+						_engineStart.Text = "stop";
+						_engineInstance.Start();
+					}
+				}
+			);
+
+			_musicLabel = new Label(
+				"music",
+				() => new Vector2(Game1.ScreenSize.X / 2 + Game1.ScreenSize.X / 4, Game1.ScreenSize.Y * 0.7f - 64)
+			);
+			_intensityDown = new Button(
+				"<",
+				() => new Vector2(
+					_musicLabel.Position.X - 48,
+					_musicLabel.Position.Y + 64
+				),
+				new Vector2(64, 64),
+				null,
+				() =>
+				{
+					_musicIntensity -= 1;
+					if (_musicIntensity < 0)
+					{
+						_musicIntensity = 0;
+					}
+					_musicInstance.SetParameterValue("Intensity", _musicIntensity);
+				}
+			);
+			_intensityUp = new Button(
+				">",
+				() => new Vector2(
+					_musicLabel.Position.X + 48,
+					_musicLabel.Position.Y + 64
+				),
+				new Vector2(64, 64),
+				null,
+				() =>
+				{
+					_musicIntensity += 1;
+					if (_musicIntensity > 4)
+					{
+						_musicIntensity = 4;
+					}
+					_musicInstance.SetParameterValue("Intensity", _musicIntensity);
+				}
+			);
+
+			_musicStart = new Button(
+				"start",
+				() => new Vector2(
+					_musicLabel.Position.X,
+					_musicLabel.Position.Y + 128 + 32
+				),
+				new Vector2(128 + 32, 64),
+				null,
+				() =>
+				{
+					if (_musicInstance.PlaybackState == FMOD.Studio.PLAYBACK_STATE.PLAYING)
+					{
+						_musicStart.Text = "start";
+						_musicInstance.Stop();
+					}
+					else
+					{
+						_musicStart.Text = "stop";
+						_musicInstance.Start();
+					}
+				}
+			);
+
+
+			_bonk = new Button(
+				"bonk",
+				() => new Vector2(Game1.ScreenSize.X / 2, _musicLabel.Position.Y + 128 + 32),
+				new Vector2(128, 64),
+				null,
+				() =>
+				{
+					var i = _bonkDescription.CreateInstance();
+					i.SetParameterValue("Speed", 4);
+					i.Start();
+				}
+			);
 
 		}
 	}

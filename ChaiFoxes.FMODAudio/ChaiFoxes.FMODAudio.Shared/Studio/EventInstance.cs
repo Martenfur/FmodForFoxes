@@ -125,7 +125,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 			{
 				Native.getPaused(out var paused);
 				return paused;
-			}
+			} // TODO: Do the same on core sounds?
 
 			set =>
 				Native.setPaused(value);
@@ -220,7 +220,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public void TriggerCue() =>
 			Native.triggerCue();
 
-		public void Release() =>
+		public void Release() => // TODO: Replace with Dispose.
 			Native.release();
 	}
 }
