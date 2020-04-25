@@ -6,20 +6,31 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 {
 	public class StudioDemoScene : Scene
 	{
+		public override void Enter()
+		{
+			// Initialized here only for the sake of the demo.
+			// Usually has to be initialized right at startup.
+			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
+			InitUI();
+		}
+
 		public override void Update()
 		{
 		}
 
 		public override void Draw()
 		{
+			FMODManager.Update();
 		}
 
 		public override void Leave()
 		{
 		}
 
-		public override void Enter()
+		private void InitUI()
 		{
+
+
 		}
 	}
 }
