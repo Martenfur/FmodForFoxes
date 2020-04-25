@@ -37,15 +37,67 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			//sound.LowPass = 0.1f;
 			//sound.Volume = 2;
 			//sound.Pitch = 2;
-			
+
 			_channel = _sound.Play();
+		}
 
-			/*
-			// Add some effects to the sound! :0
-			channel.LowPass = 0.5f;
-			channel.Pitch = 2f;
-			*/
+		public override void Update()
+		{
+			_lowPass.Text = "low pass " + _channel.LowPass.ToString("0.00");
+			_pitch.Text = "pitch " + _channel.Pitch.ToString("0.00");
 
+			FMODManager.Update();
+
+			if (_channel.Paused)
+			{
+				return;
+			}
+
+			_rotation += _rotationSpeed * _channel.Pitch * _channel.Pitch;
+			if (_rotation > MathHelper.TwoPi)
+			{
+				_rotation -= MathHelper.TwoPi;
+			}
+		}
+
+		public override void Draw()
+		{
+#if !ANDROID
+			var scale = 1;
+#else
+			var scale = Math.Min(Game1.ScreenSize.X, Game1.ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
+#endif
+
+			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+			UIController.SpriteBatch.Draw(
+				Resources.Gato,
+				Game1.ScreenSize / 2,
+				null,
+				UIController.Text,
+				_rotation,
+				Vector2.One * Resources.Gato.Width / 2,
+				Vector2.One * scale,
+				SpriteEffects.None,
+				0
+			);
+			UIController.SpriteBatch.End();
+		}
+
+		public override void Leave()
+		{
+			_lowPassUp.Destroy();
+			_lowPassDown.Destroy();
+			_lowPass.Destroy();
+
+			_pitchUp.Destroy();
+			_putchDown.Destroy();
+			_pitch.Destroy();
+
+			_pause.Destroy();
+		}
+
+		private void InitUI()
+		{
 			_lowPass = new Label(
 				"low pass",
 				() => new Vector2(Game1.ScreenSize.X / 2 - Game1.ScreenSize.X / 4, Game1.ScreenSize.Y * 0.7f)
@@ -100,64 +152,17 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 				() =>
 				{
 					if (_channel.Paused)
-					{ 
+					{
 						_pause.Text = "pause";
-						_channel.Resume();	
+						_channel.Resume();
 					}
 					else
-					{ 
+					{
 						_pause.Text = "resume";
-						_channel.Pause();	
+						_channel.Pause();
 					}
 				}
 			);
-
-		}
-
-		public override void Update()
-		{
-			_lowPass.Text = "low pass " + _channel.LowPass.ToString("0.00");
-			_pitch.Text = "pitch " + _channel.Pitch.ToString("0.00");
-
-			FMODManager.Update();
-
-			if (_channel.Paused)
-			{ 
-				return;	
-			}
-
-			_rotation += _rotationSpeed * _channel.Pitch * _channel.Pitch;
-			if (_rotation > MathHelper.TwoPi)
-			{
-				_rotation -= MathHelper.TwoPi;
-			}
-		}
-
-		public override void Draw()
-		{
-#if !ANDROID
-			var scale = 1;
-#else
-			var scale = Math.Min(Game1.ScreenSize.X, Game1.ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
-#endif
-			
-			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-			UIController.SpriteBatch.Draw(
-				Resources.Gato,
-				Game1.ScreenSize / 2,
-				null,
-				UIController.Text,
-				_rotation,
-				Vector2.One * Resources.Gato.Width / 2,
-				Vector2.One * scale,
-				SpriteEffects.None,
-				0
-			);
-			UIController.SpriteBatch.End();
-		}
-
-		public override void Leave()
-		{
 		}
 
 	}
