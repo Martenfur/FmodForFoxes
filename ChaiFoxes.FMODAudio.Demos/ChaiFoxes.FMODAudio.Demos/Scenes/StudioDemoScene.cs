@@ -265,6 +265,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 					{
 						_musicStart.Text = "stop";
 						_musicInstance.Start();
+						_musicInstance.SetParameterValue("Intensity", _musicIntensity);
 					}
 				}
 			);
