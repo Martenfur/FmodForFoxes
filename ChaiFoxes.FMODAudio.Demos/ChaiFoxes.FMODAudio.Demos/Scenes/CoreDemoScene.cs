@@ -22,7 +22,8 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		private Label _pitch;
 
 		private Button _pause;
-
+		
+		private Button _back;
 
 		public override void Enter()
 		{
@@ -44,8 +45,6 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		{
 			_lowPass.Text = "low pass " + _channel.LowPass.ToString("0.00");
 			_pitch.Text = "pitch " + _channel.Pitch.ToString("0.00");
-
-			FMODManager.Update();
 
 			if (_channel.Paused)
 			{
@@ -95,6 +94,11 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			_pitch.Destroy();
 
 			_pause.Destroy();
+
+			_channel.Stop();
+			_sound.Dispose();
+
+			_back.Destroy();
 		}
 
 
@@ -164,6 +168,15 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 						_channel.Pause();
 					}
 				}
+			);
+
+
+			_back = new Button(
+				"<-",
+				() => new Vector2(32, 32),
+				new Vector2(64, 64),
+				null,
+				() => SceneController.ChangeScene(new DemoSelectorScene())
 			);
 		}
 

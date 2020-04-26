@@ -3,13 +3,13 @@ using ChaiFoxes.FMODAudio.Studio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace ChaiFoxes.FMODAudio.Demos.Scenes
 {
 	public class StudioDemoScene : Scene
 	{
-		Bank _masterBank;
-		Bank _masterStringBank;
+		private List<Bank> _banks = new List<Bank>();
 
 		EventDescription _engineDescription;
 		EventDescription _musicDescription;
@@ -38,6 +38,8 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		private Button _bonk;
 
+		private Button _back;
+
 
 		public override void Enter()
 		{
@@ -46,13 +48,13 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			// You would rather place the following in LoadContent() - it's here more for readability.
 			// Here you load any banks that you're using. This could be a music bank, a SFX bank, etc.
 			// The strings bank isn't actually necessary - however if you want to do string lookups, include it.
-			_masterBank = StudioSystem.LoadBank("Master.bank");
-			_masterStringBank = StudioSystem.LoadBank("Master.strings.bank");
-			StudioSystem.LoadBank("Music.bank");
-			StudioSystem.LoadBank("SFX.bank");
-			StudioSystem.LoadBank("Vehicles.bank");
-			StudioSystem.LoadBank("VO.bank");
-			StudioSystem.LoadBank("Dialogue_EN.bank");
+			_banks.Add(StudioSystem.LoadBank("Master.bank"));
+			_banks.Add(StudioSystem.LoadBank("Master.strings.bank"));
+			_banks.Add(StudioSystem.LoadBank("Music.bank"));
+			_banks.Add(StudioSystem.LoadBank("SFX.bank"));
+			_banks.Add(StudioSystem.LoadBank("Vehicles.bank"));
+			_banks.Add(StudioSystem.LoadBank("VO.bank"));
+			_banks.Add(StudioSystem.LoadBank("Dialogue_EN.bank"));
 
 			// Events are split in the code into descriptions and instances.
 			// You may have multiple instances of one event, but the description for it should only be loaded once.
@@ -88,7 +90,6 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Update()
 		{
-			FMODManager.Update();
 			_rpmLabel.Text = "rpm " + _rpm;
 			_musicLabel.Text = "music intensity " + _musicIntensity;
 
@@ -137,7 +138,30 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Leave()
 		{
+			_engineInstance.Stop();
+			_musicInstance.Stop();
+
 			_engineInstance.Dispose();
+			_musicInstance.Dispose();
+
+			_rpmUp.Destroy();
+			_rpmDown.Destroy();
+			_rpmLabel.Destroy();
+			_engineStart.Destroy();
+
+			_intensityUp.Destroy();
+			_intensityDown.Destroy();
+			_musicLabel.Destroy();
+			_musicStart.Destroy();
+
+			_bonk.Destroy();
+
+			_back.Destroy();
+
+			foreach(var bank in _banks)
+			{ 
+				bank.Unload();
+			}
 		}
 
 		private void InitUI()
@@ -280,10 +304,18 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 				{
 					var i = _bonkDescription.CreateInstance();
 					i.SetParameterValue("Speed", 4);
-					i.Start();
+					i.Start(); // That's actually a memory leak. Event instances should be disposed.
 				}
 			);
 
+
+			_back = new Button(
+				"<-",
+				() => new Vector2(32, 32),
+				new Vector2(64, 64),
+				null,
+				() => SceneController.ChangeScene(new DemoSelectorScene())
+			);
 		}
 	}
 }
