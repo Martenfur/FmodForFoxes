@@ -14,7 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DistanceFilter3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)I3DControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IChannelControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LowlevelHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Occlusion3D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PointerLinker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundGroup.cs" />
