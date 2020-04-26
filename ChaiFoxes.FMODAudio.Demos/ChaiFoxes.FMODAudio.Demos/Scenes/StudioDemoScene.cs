@@ -2,9 +2,7 @@
 using ChaiFoxes.FMODAudio.Studio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Threading.Tasks;
 
 namespace ChaiFoxes.FMODAudio.Demos.Scenes
 {
@@ -21,6 +19,12 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		EventInstance _musicInstance;
 
 		int _rpm = 2300;
+
+		private float _rotation;
+		private float _rotationSpeed = 0.0001f;
+
+		private int _musicIntensity = 1;
+
 
 		private Button _rpmUp;
 		private Button _rpmDown;
@@ -48,9 +52,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			StudioSystem.LoadBank("SFX.bank");
 			StudioSystem.LoadBank("Vehicles.bank");
 			StudioSystem.LoadBank("VO.bank");
-			StudioSystem.LoadBank("Dialogue_CN.bank");
-			//StudioSystem.LoadBank("Dialogue_EN.bank");
-			//StudioSystem.LoadBank("Dialogue_JP.bank");
+			StudioSystem.LoadBank("Dialogue_EN.bank");
 
 			// Events are split in the code into descriptions and instances.
 			// You may have multiple instances of one event, but the description for it should only be loaded once.
@@ -76,9 +78,6 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			
 			// Sound effects could be played whenever, so you don't want them constantly loading / unloading.
 			_bonkDescription.LoadSampleData();
-			
-			//musicInstance.Paused = true;
-			//musicInstance.Pitch = 2f;
 
 			// If you have any parameters set within FMOD Studio, you can change them within the code.
 			_engineInstance.SetParameterValue("RPM", _rpm);
@@ -86,10 +85,6 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		}
 
-		private float _rotation;
-		private float _rotationSpeed = 0.0001f;
-
-		private int _musicIntensity = 0;
 
 		public override void Update()
 		{
@@ -116,6 +111,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 			}
 		}
 
+
 		public override void Draw()
 		{
 #if !ANDROID
@@ -141,6 +137,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Leave()
 		{
+			_engineInstance.Dispose();
 		}
 
 		private void InitUI()

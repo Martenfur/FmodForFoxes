@@ -1,4 +1,6 @@
-﻿// DO NOT include FMOD namespace in ANY of your classes.
+﻿using System;
+
+// DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
 
@@ -8,7 +10,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 	/// Event instance wrapper.
 	/// An event can theoretically have any number of these, but only one event description.
 	/// </summary>
-	public class EventInstance
+	public class EventInstance : IDisposable
 	{
 		/// <summary>
 		/// FMOD event instance using the default wrapper. Use this if you need full FMOD functionality.
@@ -220,7 +222,7 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public void TriggerCue() =>
 			Native.triggerCue();
 
-		public void Release() => // TODO: Replace with Dispose.
+		public void Dispose() =>
 			Native.release();
 	}
 }

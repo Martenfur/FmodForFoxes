@@ -63,11 +63,6 @@ namespace ChaiFoxes.FMODAudio.Studio
 		public float Volume = 1;
 
 		/// <summary>
-		/// Event's default channel group.
-		/// </summary>
-		public ChannelGroup ChannelGroup;
-
-		/// <summary>
 		/// Returns true if the event is 3D.
 		/// </summary>
 		public bool Is3D
