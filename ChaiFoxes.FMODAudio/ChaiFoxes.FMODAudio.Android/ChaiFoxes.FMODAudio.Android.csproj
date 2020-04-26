@@ -19,10 +19,10 @@
 		<PackageTags>Monogame, FMOD, Audio, Music, Android</PackageTags>
 	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>TRACE;DEBUG;ANDROID</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DefineConstants>TRACE;ANDROID</DefineConstants>
+    <DefineConstants>TRACE;ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />

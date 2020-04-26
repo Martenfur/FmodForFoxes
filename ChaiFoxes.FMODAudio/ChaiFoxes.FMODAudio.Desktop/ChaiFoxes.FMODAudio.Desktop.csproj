@@ -11,6 +11,7 @@
 		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
 		<RepositoryUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</RepositoryUrl>
 		<PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
+		<DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
