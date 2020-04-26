@@ -11,6 +11,14 @@ namespace ChaiFoxes.FMODAudio
 
 	public static class FMODManager
 	{
+		/// <summary>
+		/// This is the FMOD version which was tested on this
+		/// version of the library. Other versions may work, 
+		/// but this is not guaranteed.
+		/// Visit https://fmod.com/download
+		/// </summary>
+		public const string RecommendedNativeLibraryVersion = "2.00.08";
+
 		private static FMODMode _mode;
 
 		internal static bool _initialized { get; private set; } = false;
