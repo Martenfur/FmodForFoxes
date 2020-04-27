@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.Windows", "ChaiFoxes.FMODAudio.Demos.Windows\ChaiFoxes.FMODAudio.Demos.Windows.csproj", "{0144A105-BAD8-4EE2-9254-53A02643E360}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.Android.Bindings", "ChaiFoxes.FMODAudio.Demos.Android.Bindings\ChaiFoxes.FMODAudio.Demos.Android.Bindings.csproj", "{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{0144a105-bad8-4ee2-9254-53a02643e360}*SharedItemsImports = 4
@@ -83,6 +85,14 @@ Global
 		{0144A105-BAD8-4EE2-9254-53A02643E360}.Release|Any CPU.ActiveCfg = Release|x86
 		{0144A105-BAD8-4EE2-9254-53A02643E360}.Release|x86.ActiveCfg = Release|x86
 		{0144A105-BAD8-4EE2-9254-53A02643E360}.Release|x86.Build.0 = Release|x86
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Debug|x86.Build.0 = Debug|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Release|x86.ActiveCfg = Release|Any CPU
+		{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
