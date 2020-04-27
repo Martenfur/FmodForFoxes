@@ -12,7 +12,9 @@
 		<RepositoryUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</RepositoryUrl>
 		<PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
 		<DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
-		<DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+		<OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

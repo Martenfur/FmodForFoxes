@@ -6,8 +6,8 @@
     <FileAlignment>512</FileAlignment>
     <TargetFramework>MonoAndroid81</TargetFramework>
 		<TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-	  <OutputPath>bin\$(Configuration)\</OutputPath>
-    <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
+	  <OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+		<DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<NoWarn>1591</NoWarn>
 		<Version>2.0.0</Version>
