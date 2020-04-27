@@ -17,6 +17,7 @@
 		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
 		<RepositoryUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</RepositoryUrl>
 		<PackageTags>Monogame, FMOD, Audio, Music, Android</PackageTags>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
@@ -37,6 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Icon\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="ChaiFoxes.FMODAudio.Android.nuspec">
       <SubType>Designer</SubType>
     </None>

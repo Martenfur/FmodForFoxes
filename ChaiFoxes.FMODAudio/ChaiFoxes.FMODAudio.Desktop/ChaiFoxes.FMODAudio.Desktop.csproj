@@ -15,6 +15,7 @@
 		<OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
 		<DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +27,11 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Icon\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
