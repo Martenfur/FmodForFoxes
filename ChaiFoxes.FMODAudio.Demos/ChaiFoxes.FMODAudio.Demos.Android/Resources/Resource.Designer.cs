@@ -26,6 +26,8 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::ChaiFoxes.FMODAudio.Android.Resource.String.app_name = global::ChaiFoxes.FMODAudio.Demos.Android.Resource.String.app_name;
+			global::ChaiFoxes.FMODAudio.Android.Resource.String.hello = global::ChaiFoxes.FMODAudio.Demos.Android.Resource.String.hello;
 		}
 		
 		public partial class Attribute
@@ -66,8 +68,14 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 			// aapt resource value: 0x7F020000
 			public const int ApplicationName = 2130837504;
 			
+			// aapt resource value: 0x7F020002
+			public const int app_name = 2130837506;
+			
 			// aapt resource value: 0x7F020001
 			public const int Hello = 2130837505;
+			
+			// aapt resource value: 0x7F020003
+			public const int hello = 2130837507;
 			
 			static String()
 			{

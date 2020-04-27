@@ -99,6 +99,10 @@
       <Project>{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}</Project>
       <Name>ChaiFoxes.FMODAudio.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ChaiFoxes.FMODAudio.Demos.Android.Bindings\ChaiFoxes.FMODAudio.Demos.Android.Bindings.csproj">
+      <Project>{4b06addf-e4dc-4f8e-8a1a-0489bfc6a6b4}</Project>
+      <Name>ChaiFoxes.FMODAudio.Demos.Android.Bindings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
