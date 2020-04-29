@@ -1,5 +1,3 @@
-
-
 ![logo](/Icon/icon.png)
 
 *I suffer so you won't have to.*
@@ -25,12 +23,12 @@ Initial setup is a little fiddly. Here's the thing - the FMOD license prohibits 
 
 ### Preparations
 
-Visit the [FMOD Download page](https://www.fmod.com/download) (accessing it requires registration), find the FMOD Studio API downloads and get APIs for Windows, Linux and Android. If you're going to set up all three, of course.
+Visit the [FMOD Download page](https://www.fmod.com/download) (accessing it requires registration), find the FMOD Studio API downloads and get APIs for Windows, Linux, macOS, and Android. If you're going to set up all three, of course.
 
 **NOTE: Current version of the library was tested on FMOD v2.00.08. I really recommend getting it. Later versions will probably also work, but I have no guarantee.**
 
 
-Windows API requires installation, Linux and Android don't. You can drop them near the Windows API just to have everything in one place.
+Windows API requires installation; Linux, macOS and Android don't. You can drop them near the Windows API just to have everything in one place.
 
 ![setup1](/pics/setup1.png)
 
@@ -72,7 +70,16 @@ Again, make sure all the files you've just added will be copied to the output di
 
 ![setup4](/pics/setup4.png)
 
-And that's it - you've gotten yourself cross-platform desktop FMOD! Dllmap for Linux is already done internally, no need to worry about that.
+5. Navigate to the FMOD macOS API installation. Place the files `/api/core/lib/libfmod.dylib` and `/api/studio/lib/libfmodstudio.dylib` in your project's `x64` folder.
+
+![setupMac1](/pics/setupMac1.png)
+
+   Like with the Linux files, make sure the `.dylib` files are set to "Copy if newer" in their properties.
+
+   Finally, add the environment variable `DYLD_LIBRARY_PATH` with the value `./x64/` to your run configuration in *Project Options*. 
+
+
+And that's it - you've gotten yourself cross-platform desktop FMOD! Dllmap for Linux and macOS is already done internally, no need to worry about that.
 
 ### Android
 
