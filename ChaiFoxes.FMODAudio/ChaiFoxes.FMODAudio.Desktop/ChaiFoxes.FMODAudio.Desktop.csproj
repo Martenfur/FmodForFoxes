@@ -18,6 +18,9 @@
 		<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>UNITY_2017_4_OR_NEWER;DEBUG;NETFRAMEWORK;NET45;MONOMAC</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>

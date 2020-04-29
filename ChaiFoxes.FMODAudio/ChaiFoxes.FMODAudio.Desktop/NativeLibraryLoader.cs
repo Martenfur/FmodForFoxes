@@ -10,8 +10,12 @@ namespace ChaiFoxes.FMODAudio
 		[DllImport("kernel32.dll")]
 		private static extern IntPtr LoadLibrary(string dllToLoad);
 
-		// NOTE: To make native libraries work on Linux, we also need <dllmap> entries in App.config.
+	// NOTE: To make native libraries work on Linux, we also need <dllmap> entries in App.config.
+#if MONOMAC
+		[DllImport("libdl")]
+#else
 		[DllImport("libdl.so.2")]
+#endif
 		private static extern IntPtr dlopen(string filename, int flags);
 
 		private const int RTLD_LAZY = 0x0001;
