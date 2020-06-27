@@ -1,37 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<NoWarn>1591</NoWarn>
-		<Version>2.0.0</Version>
-		<Authors>Martenfur, StinkBrigade</Authors>
-		<Company>ChaiFoxes</Company>
-		<Product>ChaiFoxes.FMODAudio</Product>
-		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
-		<RepositoryUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</RepositoryUrl>
-		<PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
-		<DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
-		<OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
-		<DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<PackageIcon>icon.png</PackageIcon>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <NoWarn>1591</NoWarn>
+    <PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
+    <DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
+    <OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
   <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
-  <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Icon\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
   </ItemGroup>
 </Project>
