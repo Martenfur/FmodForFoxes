@@ -38,4 +38,10 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)FMOD\Studio\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)readme.txt">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+  </ItemGroup>
 </Project>
