@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup>
+		<PackageVersion>2.0.0.0</PackageVersion>
+		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+		<Authors>Martenfur, StinkBrigade</Authors>
+		<Company>ChaiFoxes</Company>
+		<Product>ChaiFoxes.FMODAudio</Product>
+		<RepositoryType>git</RepositoryType>
+		<ProjectUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</ProjectUrl>
+		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
+		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
+	</PropertyGroup>
+</Project>
