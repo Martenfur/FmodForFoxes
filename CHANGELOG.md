@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+
+
+## [v2.0.0.0] - *29.06.2020*
+
 ### Added:
 
 - Added FMOD Studio support.
