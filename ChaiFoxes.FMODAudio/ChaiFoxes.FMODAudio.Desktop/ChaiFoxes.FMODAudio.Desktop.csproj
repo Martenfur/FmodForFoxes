@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-    <NoWarn>1591</NoWarn>
+    <NoWarn>1591;1573</NoWarn>
     <PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
     <DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
     <OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PackageIcon>icon.png</PackageIcon>
+    <PackageOutputPath>..\..\Release\</PackageOutputPath>
   </PropertyGroup>
 
   <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
@@ -18,6 +19,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" />
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" >
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
