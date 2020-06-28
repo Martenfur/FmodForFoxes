@@ -1,2 +1,9 @@
 
-msbuild -t:pack -p:Configuration=Release -nologo ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.sln 
+Function Build([string] $target)
+{
+	$solutionPath = "ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.sln"
+	msbuild -t:$target -p:Configuration=Release -nologo $solutionPath
+}
+
+Build("restore")
+Build("pack")
