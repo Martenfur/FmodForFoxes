@@ -8,6 +8,6 @@
 		<RepositoryType>git</RepositoryType>
 		<ProjectUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</ProjectUrl>
 		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
-		<Description>A C# wrapper of FMOD audio library for Monogame. Be sure to check out the repo for proper installation guide.</Description>
+		<Description>A crossplatform FMOD audio wrapper for Monogame.</Description>
 	</PropertyGroup>
 </Project>
