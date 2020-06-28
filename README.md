@@ -134,6 +134,26 @@ channel.Looping = true;
 
 You can also check out the incluided [Demos project](/ChaiFoxes.FMODAudio.Demos). 
 
+## Bait-and-switch
+
+As you could notice, there are only two nugets - Desktop and Android. But what if you want to use FMOD in a netstandard library? Since there is no crossplatform core FMOD library, this becomes a problem, right? Well, yeah. First-party C# bindings are made in a way that makes it impossible to extract core API without rewriting literally everything from scratch. I am not willing to do that. So, instead we will use a little trick. 
+
+Bait-and switch! :0
+
+We don't have a crossplatform library. But *we can fool* the project into thinking we have one. Open up your netstandard library's `csproj` and add this:
+
+```xml
+<PackageReference Include="ChaiFoxes.FMODAudio.Desktop" Version="2.0.0.0" >
+  <PrivateAssets>All</PrivateAssets>
+</PackageReference>
+```
+
+But wait, what's this? We are adding a desktop nuget into the crossplatform project? Why? 
+
+That's the trick - we aren't actually using it! `<PrivateAssets>All</PrivateAssets>` makes it so the nuget's dll file is not copied over to the output directory. We are only using this nuget at compile-time - and then switching it to a platform-specific version, which is installed in your platform project. 
+
+Hacky? Yes. (:
+
 ## But what about other platforms?
 
 I'd like to make console versions of the library - but currently I have no ability
@@ -153,7 +173,7 @@ royalties required. Just leave a credit. ; - )
 But the show's main star is a bit different. FMOD has its own [license](https://fmod.com/licensing#faq), 
 which is much less permissive than mine. 
 
-Demo [music](https://www.youtube.com/watch?v=zZ81qi90E-Y) is provided by Agrofox.
+Demo [music](https://www.youtube.com/watch?v=zZ81qi90E-Y) is provided by Agrofox and FMOD team.
 
 
 
