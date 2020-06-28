@@ -1,0 +1,14 @@
+<Project>
+	<PropertyGroup>
+		<PackageVersion>2.0.0.0</PackageVersion>
+		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+		<Authors>Martenfur, StinkBrigade</Authors>
+		<Company>ChaiFoxes</Company>
+		<Product>ChaiFoxes.FMODAudio</Product>
+		<RepositoryType>git</RepositoryType>
+		<ProjectUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</ProjectUrl>
+		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
+		<Description>A crossplatform FMOD audio wrapper for Monogame.</Description>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+	</PropertyGroup>
+</Project>

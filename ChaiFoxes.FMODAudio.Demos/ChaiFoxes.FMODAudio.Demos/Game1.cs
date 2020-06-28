@@ -1,4 +1,8 @@
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
+using ChaiFoxes.FMODAudio.Demos.Scenes;
+using ChaiFoxes.FMODAudio.Demos.UI;
+using ChaiFoxes.FMODAudio.Studio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,27 +14,49 @@ namespace ChaiFoxes.FMODAudio.Demos
 	/// </summary>
 	public class Game1 : Game
 	{
-		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
-
-		Texture2D gato;
-
-		float rotation;
-		float rotationSpeed = 0.01f;
-
+		private static GraphicsDeviceManager _graphics;
 
 		public Game1()
 		{
-			graphics = new GraphicsDeviceManager(this);
+			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			
-			#if ANDROID
-				graphics.IsFullScreen = true;
-				graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-				graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-				graphics.SupportedOrientations = DisplayOrientation.Portrait;
-			#endif
+
+#if ANDROID
+			_graphics.IsFullScreen = true;
+			_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+			_graphics.SupportedOrientations = DisplayOrientation.Portrait;
+#endif
+
+			IsMouseVisible = true;
 		}
+
+		Bank masterBank;
+		Bank masterStringBank;
+
+		EventDescription musicDescription;
+		EventDescription sfxDescription;
+
+		EventInstance musicInstance;
+
+
+		public static Vector2 ScreenSize
+		{
+			get
+			{
+#if !ANDROID
+				 return new Vector2(
+					_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
+				);
+#else
+				return new Vector2(
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+				);
+#endif
+			}
+		}
+
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -40,24 +66,13 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void Initialize()
 		{
-			// All our music files reside in Content directory.
-			AudioMgr.Init("Content");
-		
-			// You can load pretty much any popular audio format.
-			// I'd recommend .ogg for music, tho.
-			var sound = AudioMgr.LoadStreamedSound("test.mp3");
-			sound.Looping = true;
-			//sound.LowPass = 0.1f;
-			//sound.Volume = 2;
-			//sound.Pitch = 2;
-			
-			var channel = sound.Play();
-			
-			/*
-			// Add some effects to the sound! :0
-			channel.LowPass = 0.5f;
-			channel.Pitch = 2f;
-			*/
+			// NOTE: You HAVE TO init fmod in the Initialize().
+			// Otherwise, it may not work on some platforms.
+			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
+			//FMODManager.Init(FMODMode.Core, "Content"); // Use this if you don't want Studio functionality.
+
+			UIController.Init(GraphicsDevice);
+			SceneController.ChangeScene(new DemoSelectorScene());
 
 			base.Initialize();
 		}
@@ -68,10 +83,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void LoadContent()
 		{
-			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch(GraphicsDevice);
-
-			gato = Content.Load<Texture2D>("gato");
+			Resources.Load(Content);
 		}
 
 		/// <summary>
@@ -80,7 +92,7 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// </summary>
 		protected override void UnloadContent()
 		{
-			AudioMgr.Unload();
+			FMODManager.Unload();
 		}
 
 		/// <summary>
@@ -90,6 +102,10 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
+			FMODManager.Update();
+			UIController.Update();
+			SceneController.Update();
+
 			if (
 				GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
 				|| GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed
@@ -99,16 +115,9 @@ namespace ChaiFoxes.FMODAudio.Demos
 				Exit();
 			}
 
-			AudioMgr.Update();
-
-			rotation += rotationSpeed;
-			if (rotation > MathHelper.TwoPi)
-			{
-				rotation -= MathHelper.TwoPi;
-			}
-
 			base.Update(gameTime);
 		}
+
 
 		/// <summary>
 		/// This is called when the game should draw itself.
@@ -116,34 +125,10 @@ namespace ChaiFoxes.FMODAudio.Demos
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(new Color(187, 163, 255));
+			GraphicsDevice.Clear(UIController.Backgroud);
 
-			#if !ANDROID
-				var screenSize = new Vector2(
-					graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight
-				) / 2;
-			#else
-				var screenSize = new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
-				) / 2;
-			#endif
-
-			var scale = Math.Min(screenSize.X, screenSize.Y) / (float)gato.Width;
-
-			spriteBatch.Begin();
-			spriteBatch.Draw(
-				gato,
-				screenSize,
-				null,
-				Color.White,
-				rotation,
-				Vector2.One * gato.Width / 2,
-				Vector2.One * scale,
-				SpriteEffects.None,
-				0
-			);
-			spriteBatch.End();
+			UIController.Draw();
+			SceneController.Draw();
 
 			base.Draw(gameTime);
 		}

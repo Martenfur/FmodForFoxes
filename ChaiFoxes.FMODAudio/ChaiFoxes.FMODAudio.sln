@@ -1,21 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Desktop", "ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj", "{F712BF21-58F9-448C-BEF5-286CEC991EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Desktop", "ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj", "{F712BF21-58F9-448C-BEF5-286CEC991EBB}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio", "ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.shproj", "{8D82E21D-B9EE-438B-A2CE-7B801BF712EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Android", "ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj", "{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Android", "ChaiFoxes.FMODAudio.Android\ChaiFoxes.FMODAudio.Android.csproj", "{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ChaiFoxes.FMODAudio.Shared", "ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.shproj", "{B5933BD7-E07E-4EB2-99BE-2814508425A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Android.Bindings", "ChaiFoxes.FMODAudio.Android.Bindings\ChaiFoxes.FMODAudio.Android.Bindings.csproj", "{2546D47C-EEA5-41D3-8906-B28A3B819889}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{94EF2A0B-5152-4AD0-8382-897432E2E7AE}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		ChaiFoxes.FMODAudio\ChaiFoxes.FMOD.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 4
-		ChaiFoxes.FMODAudio\ChaiFoxes.FMOD.projitems*{8d82e21d-b9ee-438b-a2ce-7b801bf712ea}*SharedItemsImports = 13
-		ChaiFoxes.FMODAudio\ChaiFoxes.FMOD.projitems*{f712bf21-58f9-448c-bef5-286cec991ebb}*SharedItemsImports = 4
+		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{08d5910f-1ca1-4a7e-a3f7-354ff1b03858}*SharedItemsImports = 5
+		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{b5933bd7-e07e-4eb2-99be-2814508425a1}*SharedItemsImports = 13
+		ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{f712bf21-58f9-448c-bef5-286cec991ebb}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Android = Debug|Android
@@ -40,14 +43,6 @@ Global
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Release|Android.Build.0 = Release|Any CPU
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Debug|Android.ActiveCfg = Debug|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Debug|Android.Build.0 = Debug|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Release|Android.ActiveCfg = Release|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Release|Android.Build.0 = Release|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2546D47C-EEA5-41D3-8906-B28A3B819889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

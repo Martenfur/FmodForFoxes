@@ -1,49 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.Net.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{08D5910F-1CA1-4A7E-A3F7-354FF1B03858}</ProjectGuid>
-    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TemplateGuid>{9ef11e43-1701-4396-8835-8392d57abb70}</TemplateGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChaiFoxes.FMODAudio.Android</RootNamespace>
-    <AssemblyName>ChaiFoxes.FMODAudio.Android</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
+      <AssemblyName>ChaiFoxes.FMODAudio.Android</AssemblyName>
+      <FileAlignment>512</FileAlignment>
+      <TargetFramework>MonoAndroid81</TargetFramework>
+    <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
-  </PropertyGroup>
+     <OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
+      <DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
+      <NoWarn>1591</NoWarn>
+      <PackageTags>Monogame, FMOD, Audio, Music, Android</PackageTags>
+      <PackageOutputPath>..\..\Release\</PackageOutputPath>
+    <PackageIcon>icon.png</PackageIcon>
+	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;ANDROID</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\ChaiFoxes.FMODAudio.Android.xml</DocumentationFile>
+    <DefineConstants>TRACE;DEBUG;ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\ChaiFoxes.FMODAudio.Android.xml</DocumentationFile>
+    <DefineConstants>TRACE;ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android" />
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Android\MonoGame.Framework.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,32 +29,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioMgr.Android.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ChaiFoxes.FMODAudio.Android.nuspec">
-      <SubType>Designer</SubType>
+    <None Include="..\..\Icon\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
-    <None Include="Resources\AboutResources.txt" />
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" >
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\values\strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ChaiFoxes.FMODAudio.Android.Bindings\ChaiFoxes.FMODAudio.Android.Bindings.csproj">
-      <Project>{2546d47c-eea5-41d3-8906-b28a3b819889}</Project>
-      <Name>ChaiFoxes.FMODAudio.Android.Bindings</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="..\ChaiFoxes.FMODAudio\ChaiFoxes.FMOD.projitems" Label="Shared" />
+  <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

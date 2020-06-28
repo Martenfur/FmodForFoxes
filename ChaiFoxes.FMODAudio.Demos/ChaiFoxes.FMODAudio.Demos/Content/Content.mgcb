@@ -1,4 +1,4 @@
-
+﻿
 #----------------------------- Global Properties ----------------------------#
 
 /outputDir:bin/$(Platform)
@@ -16,7 +16,7 @@
 #begin test.mp3
 /copy:test.mp3
 
-#begin gato.png
+#begin Gato.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -26,5 +26,54 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:gato.png
+/build:Gato.png
 
+#begin Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Button.png
+
+#begin Arial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Arial.spritefont
+
+
+#begin Master.bank
+/copy:Master.bank
+
+#begin Master.strings.bank
+/copy:Master.strings.bank
+
+#begin test.mp3
+/copy:test.mp3
+
+#begin Dialogue_CN.bank
+/copy:Dialogue_CN.bank
+
+#begin Dialogue_EN.bank
+/copy:Dialogue_EN.bank
+
+#begin Dialogue_JP.bank
+/copy:Dialogue_JP.bank
+
+#begin Music.bank
+/copy:Music.bank
+
+#begin SFX.bank
+/copy:SFX.bank
+
+#begin Vehicles.bank
+/copy:Vehicles.bank
+
+#begin VO.bank
+/copy:VO.bank

@@ -9,9 +9,23 @@
     <Import_RootNamespace>ChaiFoxes.FMODAudio.Demos</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\DemoSelectorScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\StudioDemoScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\CoreDemoScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\Scene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\InputManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Label.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\SceneController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\UIController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Scenes\" />
   </ItemGroup>
 </Project>
