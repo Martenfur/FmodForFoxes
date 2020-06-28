@@ -9,5 +9,6 @@
 		<ProjectUrl>https://github.com/Martenfur/ChaiFoxes.FMODAudio</ProjectUrl>
 		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
 		<Description>A crossplatform FMOD audio wrapper for Monogame.</Description>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	</PropertyGroup>
 </Project>

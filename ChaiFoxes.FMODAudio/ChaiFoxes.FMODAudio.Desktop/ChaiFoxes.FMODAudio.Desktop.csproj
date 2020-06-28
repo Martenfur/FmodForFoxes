@@ -17,9 +17,13 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="..\..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" >
+    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
