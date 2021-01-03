@@ -24,7 +24,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.Android.Bindings", "ChaiFoxes.FMODAudio.Demos.Android.Bindings\ChaiFoxes.FMODAudio.Demos.Android.Bindings.csproj", "{4B06ADDF-E4DC-4F8E-8A1A-0489BFC6A6B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.DesktopGL", "ChaiFoxes.FMODAudio.Demos.DesktopGL\ChaiFoxes.FMODAudio.Demos.DesktopGL.csproj", "{03D06A79-4386-4310-9844-9587B3D78F96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChaiFoxes.FMODAudio.Demos.DesktopGL", "ChaiFoxes.FMODAudio.Demos.DesktopGL\ChaiFoxes.FMODAudio.Demos.DesktopGL.csproj", "{03D06A79-4386-4310-9844-9587B3D78F96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaiFoxes.FMODAudio.Demos.WindowsDX", "ChaiFoxes.FMODAudio.Demos.WindowsDX\ChaiFoxes.FMODAudio.Demos.WindowsDX.csproj", "{E993B124-1327-40D9-B711-58347F6EC58C}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -34,6 +36,7 @@ Global
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{1ac29f42-1a31-4213-9c36-37ff51ae5b1b}*SharedItemsImports = 4
 		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{4fc7a6b9-6d95-4d0b-b748-3edd39fc97db}*SharedItemsImports = 13
 		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{b5933bd7-e07e-4eb2-99be-2814508425a1}*SharedItemsImports = 13
+		ChaiFoxes.FMODAudio.Demos\ChaiFoxes.FMODAudio.Demos.projitems*{e993b124-1327-40d9-b711-58347f6ec58c}*SharedItemsImports = 5
 		..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems*{f712bf21-58f9-448c-bef5-286cec991ebb}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +96,14 @@ Global
 		{03D06A79-4386-4310-9844-9587B3D78F96}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03D06A79-4386-4310-9844-9587B3D78F96}.Release|x86.ActiveCfg = Release|Any CPU
 		{03D06A79-4386-4310-9844-9587B3D78F96}.Release|x86.Build.0 = Release|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Debug|x86.Build.0 = Debug|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Release|x86.ActiveCfg = Release|Any CPU
+		{E993B124-1327-40D9-B711-58347F6EC58C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
