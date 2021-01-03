@@ -27,7 +27,7 @@ Initial setup is a little fiddly. Here's the thing - the FMOD license prohibits 
 
 Visit the [FMOD Download page](https://www.fmod.com/download) (accessing it requires registration), find the FMOD Studio API downloads and get APIs for Windows, Linux and Android. If you're going to set up all three, of course.
 
-**NOTE: Current version of the library was tested on FMOD v2.00.08. I really recommend getting it. Later versions will probably also work, but I have no guarantee.**
+**NOTE: Current version of the library is made for FMOD v2.01.07. I really recommend getting it. Later versions will probably also work, but I have no guarantee.**
 
 
 Windows API requires installation, Linux and Android don't. You can drop them near the Windows API just to have everything in one place.

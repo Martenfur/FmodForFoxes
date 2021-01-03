@@ -1,6 +1,6 @@
 /* ======================================================================================== */
 /* FMOD Core API - DSP header file.                                                         */
-/* Copyright (c), Firelight Technologies Pty, Ltd. 2004-2019.                               */
+/* Copyright (c), Firelight Technologies Pty, Ltd. 2004-2020.                               */
 /*                                                                                          */
 /* Use this header if you are wanting to develop your own DSP plugin to use with FMODs      */
 /* dsp system.  With this header you can make your own DSP plugin that FMOD can             */
@@ -216,9 +216,9 @@ namespace FMOD
     {
         public DSP_PARAMETER_TYPE   type;            /* [w] Type of this parameter. */
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public char[]               name;            /* [w] Name of the parameter to be displayed (ie "Cutoff frequency"). */
+        public byte[]               name;            /* [w] Name of the parameter to be displayed (ie "Cutoff frequency"). */
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-        public char[]               label;           /* [w] Short string to be put next to value to denote the unit type (ie "hz"). */
+        public byte[]               label;           /* [w] Short string to be put next to value to denote the unit type (ie "hz"). */
         public string               description;     /* [w] Description of the parameter to be displayed as a help item / tooltip for this parameter. */
 
         public DSP_PARAMETER_DESC_UNION desc;
@@ -361,18 +361,18 @@ namespace FMOD
     [StructLayout(LayoutKind.Sequential)]
     public struct DSP_STATE_FUNCTIONS
     {
-        DSP_ALLOC_FUNC                  alloc;                  /* [r] Memory allocation callback. Use this for all dynamic memory allocation within the plugin. */
-        DSP_REALLOC_FUNC                realloc;                /* [r] Memory reallocation callback. */
-        DSP_FREE_FUNC                   free;                   /* [r] Memory free callback. */
-        DSP_GETSAMPLERATE_FUNC          getsamplerate;          /* [r] Callback for getting the system samplerate. */
-        DSP_GETBLOCKSIZE_FUNC           getblocksize;           /* [r] Callback for getting the system's block size.  DSPs will be requested to process blocks of varying length up to this size.*/
-        IntPtr                          dft;                    /* [r] Struct containing callbacks for performing FFTs and inverse FFTs. */
-        IntPtr                          pan;                    /* [r] Pointer to a structure of callbacks for calculating pan, up-mix and down-mix matrices. */
-        DSP_GETSPEAKERMODE_FUNC         getspeakermode;         /* [r] Callback for getting the system's speaker modes.  One is the mixer's default speaker mode, the other is the output mode the system is downmixing or upmixing to.*/
-        DSP_GETCLOCK_FUNC               getclock;               /* [r] Callback for getting the clock of the current DSP, as well as the subset of the input buffer that contains the signal */
-        DSP_GETLISTENERATTRIBUTES_FUNC  getlistenerattributes;  /* [r] Callback for getting the absolute listener attributes set via the API (returned as left-handed co-ordinates). */
-        DSP_LOG_FUNC                    log;                    /* [r] Function to write to the FMOD logging system. */
-        DSP_GETUSERDATA_FUNC            getuserdata;            /* [r] Function to get the user data attached to this DSP. See FMOD_DSP_DESCRIPTION::userdata. */
+        public DSP_ALLOC_FUNC                  alloc;                  /* [r] Memory allocation callback. Use this for all dynamic memory allocation within the plugin. */
+        public DSP_REALLOC_FUNC                realloc;                /* [r] Memory reallocation callback. */
+        public DSP_FREE_FUNC                   free;                   /* [r] Memory free callback. */
+        public DSP_GETSAMPLERATE_FUNC          getsamplerate;          /* [r] Callback for getting the system samplerate. */
+        public DSP_GETBLOCKSIZE_FUNC           getblocksize;           /* [r] Callback for getting the system's block size.  DSPs will be requested to process blocks of varying length up to this size.*/
+        public IntPtr                          dft;                    /* [r] Struct containing callbacks for performing FFTs and inverse FFTs. */
+        public IntPtr                          pan;                    /* [r] Pointer to a structure of callbacks for calculating pan, up-mix and down-mix matrices. */
+        public DSP_GETSPEAKERMODE_FUNC         getspeakermode;         /* [r] Callback for getting the system's speaker modes.  One is the mixer's default speaker mode, the other is the output mode the system is downmixing or upmixing to.*/
+        public DSP_GETCLOCK_FUNC               getclock;               /* [r] Callback for getting the clock of the current DSP, as well as the subset of the input buffer that contains the signal */
+        public DSP_GETLISTENERATTRIBUTES_FUNC  getlistenerattributes;  /* [r] Callback for getting the absolute listener attributes set via the API (returned as left-handed co-ordinates). */
+        public DSP_LOG_FUNC                    log;                    /* [r] Function to write to the FMOD logging system. */
+        public DSP_GETUSERDATA_FUNC            getuserdata;            /* [r] Function to get the user data attached to this DSP. See FMOD_DSP_DESCRIPTION::userdata. */
     }
 
     [StructLayout(LayoutKind.Sequential)]
