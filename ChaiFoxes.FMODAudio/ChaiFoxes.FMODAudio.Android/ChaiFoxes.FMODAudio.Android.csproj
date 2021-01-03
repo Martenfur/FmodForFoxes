@@ -3,9 +3,9 @@
     <RootNamespace>ChaiFoxes.FMODAudio.Android</RootNamespace>
       <AssemblyName>ChaiFoxes.FMODAudio.Android</AssemblyName>
       <FileAlignment>512</FileAlignment>
-      <TargetFramework>MonoAndroid81</TargetFramework>
+      <TargetFramework>MonoAndroid9</TargetFramework>
     <TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
      <OutputPath>..\bin\$(Configuration)\$(AssemblyName)\</OutputPath>
       <DocumentationFile>..\bin\$(Configuration)\$(AssemblyName)\$(AssemblyName).xml</DocumentationFile>
       <NoWarn>1591</NoWarn>
@@ -39,9 +39,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189" >
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.0.1641" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
   </ItemGroup>
   <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
