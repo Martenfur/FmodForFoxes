@@ -1,5 +1,4 @@
-using System;
-using System.IO;
+﻿using System;
 using System.Runtime.InteropServices;
 
 namespace ChaiFoxes.FMODAudio
@@ -7,42 +6,38 @@ namespace ChaiFoxes.FMODAudio
 	/// Windows and Linux-specific part of an audio manager.
 	public static class NativeLibraryLoader
 	{
-		[DllImport("kernel32.dll")]
-		private static extern IntPtr LoadLibrary(string dllToLoad);
-
-		// NOTE: To make native libraries work on Linux, we also need <dllmap> entries in App.config.
-		[DllImport("libdl.so.2")]
-		private static extern IntPtr dlopen(string filename, int flags);
-
-		private const int RTLD_LAZY = 0x0001;
-
 		/// <summary>
 		/// Loads Windows or Linux native library.
 		/// </summary>
 		public static void LoadNativeLibrary(string libName)
 		{
-			if (Environment.OSVersion.Platform != PlatformID.Unix)
+			var prefix = "x86/";
+			if (Environment.Is64BitProcess)
 			{
-				if (Environment.Is64BitProcess)
-				{
-					LoadLibrary(Path.GetFullPath("x64/" + libName + ".dll"));
-				}
-				else
-				{
-					LoadLibrary(Path.GetFullPath("x86/" + libName + ".dll"));
-				}
+				prefix = "x64/";
+			}
+
+			NativeLibrary.Load(prefix + SelectDefaultLibraryName(libName));
+		}
+
+		public static string SelectDefaultLibraryName(string libName, bool loggingEnabled = false)
+		{
+			string name;
+
+			if (OperatingSystem.IsWindows())
+			{
+				name = loggingEnabled ? $"{libName}L.dll" : $"{libName}.dll";
+			}
+			else if (OperatingSystem.IsLinux() || OperatingSystem.IsAndroid())
+			{
+				name = loggingEnabled ? $"lib{libName}L.so" : $"lib{libName}.so";
 			}
 			else
 			{
-				if (Environment.Is64BitProcess)
-				{
-					dlopen(Path.GetFullPath("/x64/lib" + libName + ".so"), RTLD_LAZY);
-				}
-				else
-				{
-					dlopen(Path.GetFullPath("/x86/lib" + libName + ".so"), RTLD_LAZY);
-				}
+				throw new PlatformNotSupportedException();
 			}
+
+			return name;
 		}
 	}
 }
