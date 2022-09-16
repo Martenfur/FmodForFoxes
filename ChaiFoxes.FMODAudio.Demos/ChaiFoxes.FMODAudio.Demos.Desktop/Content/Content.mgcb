@@ -1,0 +1,73 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Android
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../ChaiFoxes.FMODAudio.Demos/Content/Button.png;Button.png
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/gato.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../ChaiFoxes.FMODAudio.Demos/Content/gato.png;gato.png
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/test.mp3
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/test.mp3;test.mp3
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_CN.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_CN.bank;Dialogue_CN.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_EN.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_EN.bank;Dialogue_EN.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_JP.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Dialogue_JP.bank;Dialogue_JP.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Master.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Master.bank;Master.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Master.strings.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Master.strings.bank;Master.strings.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Music.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Music.bank;Music.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/SFX.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/SFX.bank;SFX.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Vehicles.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/Vehicles.bank;Vehicles.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/VO.bank
+/copy:../../ChaiFoxes.FMODAudio.Demos/Content/VO.bank;VO.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Arial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/build:../../ChaiFoxes.FMODAudio.Demos/Content/Arial.spritefont;Arial.spritefont
