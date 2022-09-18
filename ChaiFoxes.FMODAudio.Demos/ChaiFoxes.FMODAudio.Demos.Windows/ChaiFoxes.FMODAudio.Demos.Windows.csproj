@@ -33,16 +33,10 @@
 		<MonoGameContentReference Include="Content\Content.mgcb" />
 	</ItemGroup>
 	<ItemGroup>
-		<None Update="x64\fmod.dll">
+		<None Update="fmod.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<None Update="x64\fmodstudio.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="x86\fmod.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="x86\fmodstudio.dll">
+		<None Update="fmodstudio.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

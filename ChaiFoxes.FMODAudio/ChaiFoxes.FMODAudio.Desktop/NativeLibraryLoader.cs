@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace ChaiFoxes.FMODAudio
@@ -6,18 +8,30 @@ namespace ChaiFoxes.FMODAudio
 	/// Windows and Linux-specific part of an audio manager.
 	public static class NativeLibraryLoader
 	{
+		private static bool _loggingEnabled;
+
+		static NativeLibraryLoader()
+		{
+			NativeLibrary.SetDllImportResolver(
+				Assembly.GetExecutingAssembly(),
+				(libraryName, assembly, dllImportSearchPath) =>
+				{
+					libraryName = Path.GetFileNameWithoutExtension(libraryName);
+					if (dllImportSearchPath == null)
+					{
+						dllImportSearchPath = DllImportSearchPath.AssemblyDirectory;
+					}
+					return NativeLibrary.Load(SelectDefaultLibraryName(libraryName, _loggingEnabled), assembly, dllImportSearchPath);
+				}
+			);
+		}
+
 		/// <summary>
 		/// Loads Windows or Linux native library.
 		/// </summary>
-		public static void LoadNativeLibrary(string libName)
+		public static void LoadNativeLibrary(string libName, bool loggingEnabled = false)
 		{
-			var prefix = "x86/";
-			if (Environment.Is64BitProcess)
-			{
-				prefix = "x64/";
-			}
-
-			NativeLibrary.Load(prefix + SelectDefaultLibraryName(libName));
+			_loggingEnabled = loggingEnabled;
 		}
 
 		public static string SelectDefaultLibraryName(string libName, bool loggingEnabled = false)

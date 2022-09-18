@@ -33,52 +33,28 @@
 		<MonoGameContentReference Include="Content\Content.mgcb" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Update="x64\fmod.dll">
+	  <None Update="fmod.dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\fmodstudio.dll">
+	  <None Update="fmodstudio.dll">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmod.so">
+	  <None Update="libfmod.so">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmod.so.11">
+	  <None Update="libfmod.so.11">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmod.so.11.8">
+	  <None Update="libfmod.so.11.8">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmodstudio.so">
+	  <None Update="libfmodstudio.so">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmodstudio.so.11">
+	  <None Update="libfmodstudio.so.11">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="x64\libfmodstudio.so.11.8">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\fmod.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\fmodstudio.dll">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmod.so">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmod.so.11">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmod.so.11.8">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmodstudio.so">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmodstudio.so.11">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="x86\libfmodstudio.so.11.8">
+	  <None Update="libfmodstudio.so.11.8">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
