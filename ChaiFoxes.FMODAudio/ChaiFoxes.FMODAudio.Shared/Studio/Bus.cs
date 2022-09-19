@@ -110,11 +110,13 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// The Bus's GUID.
 		/// </summary>
-		public Guid ID
+		// TODO: Convert back.
+		public FMOD.GUID ID
 		{
 			get
 			{
-				Native.getID(out Guid id);
+				Native.getID(out var id);
+
 				return id;
 			}
 		}

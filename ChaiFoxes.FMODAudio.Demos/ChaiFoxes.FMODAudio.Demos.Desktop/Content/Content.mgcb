@@ -160,3 +160,15 @@
 
 #begin ../../ChaiFoxes.FMODAudio.Demos/Content/bin/Windows/Content/VO.bank
 /copy:../../ChaiFoxes.FMODAudio.Demos/Content/bin/Windows/Content/VO.bank;bin/Windows/Content/VO.bank
+
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png;Gato.png

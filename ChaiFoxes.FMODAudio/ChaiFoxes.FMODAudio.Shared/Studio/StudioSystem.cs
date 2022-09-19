@@ -42,7 +42,8 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Retrieves an event via 128-bit GUID.
 		/// To parse a GUID from a string id, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}", use FMOD.Studio.Util.parseID().
 		/// </summary>
-		public static EventDescription GetEvent(Guid id)
+		// TODO: Convert back.
+		public static EventDescription GetEvent(FMOD.GUID id)
 		{
 			Native.getEventByID(id, out FMOD.Studio.EventDescription eventDescription);
 			return new EventDescription(eventDescription);
@@ -62,7 +63,8 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Retrieves a bus via 128-bit GUID.
 		/// To parse a GUID from a string id, i.e. "{2a3e48e6-94fc-4363-9468-33d2dd4d7b00}", use FMOD.Studio.Util.parseID().
 		/// </summary>
-		public static Bus GetBusByID(Guid id)
+		// TODO: Convert back.
+		public static Bus GetBusByID(FMOD.GUID id)
 		{
 			Native.getBusByID(id, out var bus);
 			return new Bus(bus);
@@ -82,7 +84,8 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// Retrieves a VCA via 128-bit GUID.
 		/// To parse a GUID from a string id, i.e. "{d9982c58-a056-4e6c-b8e3-883854b4bffb}", use FMOD.Studio.Util.parseID().
 		/// </summary>
-		public static VCA GetVCA(Guid id)
+		// TODO: Convert back.
+		public static VCA GetVCA(FMOD.GUID id)
 		{
 			Native.getVCAByID(id, out var vca);
 			return new VCA(vca);
