@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <NoWarn>1591;1573</NoWarn>
     <PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux</PackageTags>
     <DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
@@ -23,7 +23,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.1.189">
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.*">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>

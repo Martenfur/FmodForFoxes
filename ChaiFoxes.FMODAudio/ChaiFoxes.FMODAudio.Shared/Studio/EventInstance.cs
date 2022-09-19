@@ -219,8 +219,9 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// Allows the timeline cursor to move past sustain points.
 		/// </summary>
-		public void TriggerCue() =>
-			Native.triggerCue();
+		//public void TriggerCue() =>
+		//	Native.triggerCue();
+		// TODO: Do somethign about this.
 
 		public void Dispose() =>
 			Native.release();

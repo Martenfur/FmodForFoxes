@@ -65,7 +65,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 			// Loading an event description by Guid.
 			// FMOD Studio will give you a string like below when you select "Copy Guid". It has to be parsed to be used.
-			FMOD.Studio.Util.parseID("{be6203d8-c8d8-41c5-8ce6-bce0de95807b}", out Guid sfxGuid);
+			FMOD.Studio.Util.parseID("{be6203d8-c8d8-41c5-8ce6-bce0de95807b}", out var sfxGuid);
 			_bonkDescription = StudioSystem.GetEvent(sfxGuid);
 
 			// There are three ways to load sample data (any non-streamed sounds):

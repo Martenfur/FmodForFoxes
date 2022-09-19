@@ -60,11 +60,12 @@ namespace ChaiFoxes.FMODAudio.Studio
 		/// <summary>
 		/// The VCA's GUID.
 		/// </summary>
-		public Guid ID
+		// TODO: Convert back.
+		public FMOD.GUID ID
 		{
 			get
 			{
-				Native.getID(out Guid id);
+				Native.getID(out FMOD.GUID id);
 				return id;
 			}
 		}

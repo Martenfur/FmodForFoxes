@@ -55,8 +55,12 @@ namespace ChaiFoxes.FMODAudio
 			{ 
 				NativeLibraryLoader.LoadNativeLibrary("fmodstudio");
 
-				FMOD.Studio.System.create(out StudioSystem.Native);
+				// On Linux, it seems to be required to also create the core system.
+				// Otherwise, core features refuse to work.
+				FMOD.Factory.System_Create(out CoreSystem.Native);
 				
+				FMOD.Studio.System.create(out StudioSystem.Native);
+
 				StudioSystem.Native.getCoreSystem(out CoreSystem.Native);
 				
 				preInitAction?.Invoke();
