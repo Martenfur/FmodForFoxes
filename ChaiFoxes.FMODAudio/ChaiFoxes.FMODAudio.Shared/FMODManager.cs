@@ -55,12 +55,14 @@ namespace ChaiFoxes.FMODAudio
 			{ 
 				NativeLibraryLoader.LoadNativeLibrary("fmodstudio");
 
-				// On Linux, it seems to be required to also create the core system.
-				// Otherwise, core features refuse to work.
-				FMOD.Factory.System_Create(out CoreSystem.Native);
-				
-				FMOD.Studio.System.create(out StudioSystem.Native);
+				// There is a requirement when using C# to call into the Core API before calling FMOD.Studio.System.create.
+				// This is due to a limitation with dependency loading in the C# runtime.
+				// Any call into the Core API would satisfy this criteria.
+				// FMOD.Memory.GetStats as an innocuous and relatively low overhead way to meet this requirement.
+				// Not doing this results in Linux core system not working correctly.		
+				FMOD.Memory.GetStats(out var currentallocated, out var maxallocated);
 
+				FMOD.Studio.System.create(out StudioSystem.Native);
 				StudioSystem.Native.getCoreSystem(out CoreSystem.Native);
 				
 				preInitAction?.Invoke();
