@@ -1,0 +1,72 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin ../../FmodForFoxes.Samples/Content/Button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../FmodForFoxes.Samples/Content/Button.png;Button.png
+
+#begin ../../FmodForFoxes.Samples/Content/Gato.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../FmodForFoxes.Samples/Content/Gato.png;Gato.png
+
+#begin ../../FmodForFoxes.Samples/Content/test.mp3
+/copy:../../FmodForFoxes.Samples/Content/test.mp3;test.mp3
+
+#begin ../../FmodForFoxes.Samples/Content/Dialogue_CN.bank
+/copy:../../FmodForFoxes.Samples/Content/Dialogue_CN.bank;Dialogue_CN.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Dialogue_EN.bank
+/copy:../../FmodForFoxes.Samples/Content/Dialogue_EN.bank;Dialogue_EN.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Dialogue_JP.bank
+/copy:../../FmodForFoxes.Samples/Content/Dialogue_JP.bank;Dialogue_JP.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Master.bank
+/copy:../../FmodForFoxes.Samples/Content/Master.bank;Master.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Master.strings.bank
+/copy:../../FmodForFoxes.Samples/Content/Master.strings.bank;Master.strings.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Music.bank
+/copy:../../FmodForFoxes.Samples/Content/Music.bank;Music.bank
+
+#begin ../../FmodForFoxes.Samples/Content/SFX.bank
+/copy:../../FmodForFoxes.Samples/Content/SFX.bank;SFX.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Vehicles.bank
+/copy:../../FmodForFoxes.Samples/Content/Vehicles.bank;Vehicles.bank
+
+#begin ../../FmodForFoxes.Samples/Content/VO.bank
+/copy:../../FmodForFoxes.Samples/Content/VO.bank;VO.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Arial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/build:../../FmodForFoxes.Samples/Content/Arial.spritefont;Arial.spritefont

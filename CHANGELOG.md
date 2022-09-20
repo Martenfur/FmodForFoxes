@@ -1,8 +1,16 @@
-# [Changelog](http://keepachangelog.com/en/1.0.0/):
+﻿# [Changelog](http://keepachangelog.com/en/1.0.0/):
 
 ## [Unreleased]
 
+### Breaking:
 
+- Renamed to FmodForFoxes.
+- Migrated to .NET6.
+
+### Changed
+- Removed shared projects.
+- Updated to FMOD 2.02.08
+- Changed the license to MIT.
 
 ## [v2.0.0.0] - *29.06.2020*
 

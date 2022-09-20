@@ -37,7 +37,7 @@ Windows API requires installation, Linux and Android don't. You can drop them ne
 ### Windows & Linux
 
 1. Open your DesktopGL or SharpDX Monogame project.
-2. Install the NuGet package [ChaiFoxes.FMODAudio.Desktop](https://www.nuget.org/packages/ChaiFoxes.FMODAudio.Desktop/). Alternatively, you can plug repo as a submodule and reference projects directly.
+2. Install the NuGet package [FmodForFoxes.Desktop](https://www.nuget.org/packages/FmodForFoxes.Desktop/). Alternatively, you can plug repo as a submodule and reference projects directly.
 3. Navigate to your FMOD Windows API installation. From there navigate to `\api\core\lib`. You will see two directories: `x64` and `x86`. Each one will contain this:
 
 ![setup2](/pics/setup2.png)
@@ -77,7 +77,7 @@ And that's it - you've gotten yourself cross-platform desktop FMOD! Dllmap for L
 ### Android
 
 1. Open your Monogame Android project.
-2. Install NuGet package [ChaiFoxes.FMODAudio.Android](https://www.nuget.org/packages/ChaiFoxes.FMODAudio.Android/). Alternatively, you can plug repo as a submodule and reference projects directly.
+2. Install NuGet package [FmodForFoxes.Android](https://www.nuget.org/packages/FmodForFoxes.Android/). Alternatively, you can plug repo as a submodule and reference projects directly.
 3. Create `libs` directory in the root of your project.
 4. Navigate to your FMOD Android API installation. From there navigate to  `\api\core\lib`. You will see this:
 
@@ -110,7 +110,7 @@ You need only `libfmod.so` from each directory. Copy everything except `.jar` fi
 
 FMOD Studio setup process is exactly the same, but you'll need to look into `studio` instead of `core` directories. **It's also extremely important that ALL your dlls and jar are taken form the same version. FMOD doesn't like version mixup. Foxes don't like version mixup. Nobody does.** 
 
-If you still have questions, take a look at the [Demos project](/ChaiFoxes.FMODAudio.Demos).
+If you still have questions, take a look at the [Demos project](/FmodForFoxes.Samples).
 
 ## Playing some tunes!
 
@@ -121,7 +121,7 @@ So, after you've set everything up, it's time to bop some pops, as kids say thes
 
 ![setup11](/pics/setup11.png)
 
-3. Include the `ChaiFoxes.FMODAudio` namespace and paste the following code into your
+3. Include the `FmodForFoxes` namespace and paste the following code into your
 Initialize() method:
 ```c#
 FMODManager.Init(FMODMode.CoreAndStudio, "Content");
@@ -132,7 +132,7 @@ channel.Looping = true;
 ```
 4. Compile and hope that you (and me) did everything right.
 
-You can also check out the incluided [Demos project](/ChaiFoxes.FMODAudio.Demos). 
+You can also check out the incluided [Demos project](/FmodForFoxes.Samples). 
 
 ## Bait-and-switch
 
@@ -143,7 +143,7 @@ Bait-and switch! :0
 We don't have a crossplatform library. But *we can fool* the project into thinking we have one. Open up your netstandard library's `csproj` and add this:
 
 ```xml
-<PackageReference Include="ChaiFoxes.FMODAudio.Desktop" Version="2.0.0.0" >
+<PackageReference Include="FmodForFoxes.Desktop" Version="2.0.0.0" >
   <PrivateAssets>All</PrivateAssets>
 </PackageReference>
 ```
