@@ -24,7 +24,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Android
 		{
 			base.OnCreate(bundle);
 
-			_game = new Game1();
+			_game = new Game1(new AndroidNativeLibrary());
 			_view = _game.Services.GetService(typeof(View)) as View;
 
 			SetContentView(_view);
