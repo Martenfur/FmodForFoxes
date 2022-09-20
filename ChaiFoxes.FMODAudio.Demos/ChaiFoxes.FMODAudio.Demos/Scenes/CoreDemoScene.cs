@@ -22,7 +22,7 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 		private Label _pitch;
 
 		private Button _pause;
-		
+
 		private Button _back;
 
 		public override void Enter()
@@ -61,11 +61,11 @@ namespace ChaiFoxes.FMODAudio.Demos.Scenes
 
 		public override void Draw()
 		{
-#if !ANDROID
-			var scale = 1;
-#else
-			var scale = Math.Min(Game1.ScreenSize.X, Game1.ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
-#endif
+			var scale = 1f;
+			if (OperatingSystem.IsAndroid())
+			{
+				scale = Math.Min(Game1.ScreenSize.X, Game1.ScreenSize.Y) / 2f / (float)Resources.Gato.Width;
+			}
 
 			UIController.SpriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 			UIController.SpriteBatch.Draw(

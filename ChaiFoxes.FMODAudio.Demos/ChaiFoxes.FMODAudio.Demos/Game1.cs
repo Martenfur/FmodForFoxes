@@ -14,19 +14,22 @@ namespace ChaiFoxes.FMODAudio.Demos
 	/// </summary>
 	public class Game1 : Game
 	{
+		private readonly INativeLibrary _nativeLibrary;
 		private static GraphicsDeviceManager _graphics;
 
-		public Game1()
+		public Game1(INativeLibrary nativeLibrary)
 		{
+			_nativeLibrary = nativeLibrary;
 			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-#if ANDROID
-			_graphics.IsFullScreen = true;
-			_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-			_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-			_graphics.SupportedOrientations = DisplayOrientation.Portrait;
-#endif
+			if (OperatingSystem.IsAndroid())
+			{
+				_graphics.IsFullScreen = true;
+				_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+				_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+				_graphics.SupportedOrientations = DisplayOrientation.Portrait;
+			}
 
 			IsMouseVisible = true;
 		}
@@ -44,16 +47,20 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			get
 			{
-#if !ANDROID
-				 return new Vector2(
-					_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
-				);
-#else
-				return new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
-				);
-#endif
+				if (!OperatingSystem.IsAndroid())
+				{
+					return new Vector2(
+						_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
+					);
+				}
+				else
+				{
+					return new Vector2(
+						GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+						GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+					);
+				}
+
 			}
 		}
 
@@ -68,8 +75,8 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			// NOTE: You HAVE TO init fmod in the Initialize().
 			// Otherwise, it may not work on some platforms.
-			FMODManager.Init(FMODMode.CoreAndStudio, "Content");
-			//FMODManager.Init(FMODMode.Core, "Content"); // Use this if you don't want Studio functionality.
+			FMODManager.Init(_nativeLibrary, FMODMode.CoreAndStudio, "Content");
+			//FMODManager.Init(_nativeLibrary, FMODMode.Core, "Content"); // Use this if you don't want Studio functionality.
 
 			UIController.Init(GraphicsDevice);
 			SceneController.ChangeScene(new DemoSelectorScene());

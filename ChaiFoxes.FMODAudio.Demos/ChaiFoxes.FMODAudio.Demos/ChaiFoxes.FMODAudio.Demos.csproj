@@ -8,8 +8,6 @@
 		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.Desktop\ChaiFoxes.FMODAudio.Desktop.csproj" >
-			<PrivateAssets>All</PrivateAssets>
-		</ProjectReference>
+		<ProjectReference Include="..\..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj" />
 	</ItemGroup>
 </Project>

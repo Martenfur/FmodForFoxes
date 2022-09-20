@@ -1,19 +1,19 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace ChaiFoxes.FMODAudio
 {
 	/// Windows and Linux-specific part of an audio manager.
-	public static class NativeLibraryLoader
+	public class DesktopNativeLibrary : INativeLibrary
 	{
-		private static bool _loggingEnabled;
+		private bool _loggingEnabled;
 
-		static NativeLibraryLoader()
+		public void Init(FMODMode mode, bool loggingEnabled = false)
 		{
+			_loggingEnabled = loggingEnabled;
 			NativeLibrary.SetDllImportResolver(
-				Assembly.GetExecutingAssembly(),
+				mode.GetType().Assembly, // Scoping the dllimport switcher for the crossplatform fmod lib.
 				(libraryName, assembly, dllImportSearchPath) =>
 				{
 					libraryName = Path.GetFileNameWithoutExtension(libraryName);
@@ -26,15 +26,8 @@ namespace ChaiFoxes.FMODAudio
 			);
 		}
 
-		/// <summary>
-		/// Loads Windows or Linux native library.
-		/// </summary>
-		public static void LoadNativeLibrary(string libName, bool loggingEnabled = false)
-		{
-			_loggingEnabled = loggingEnabled;
-		}
 
-		public static string SelectDefaultLibraryName(string libName, bool loggingEnabled = false)
+		private string SelectDefaultLibraryName(string libName, bool loggingEnabled = false)
 		{
 			string name;
 

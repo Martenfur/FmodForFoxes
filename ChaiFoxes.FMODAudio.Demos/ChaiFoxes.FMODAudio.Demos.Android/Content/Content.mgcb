@@ -24,7 +24,7 @@
 /processorParam:TextureFormat=Color
 /build:../../ChaiFoxes.FMODAudio.Demos/Content/Button.png;Button.png
 
-#begin ../../ChaiFoxes.FMODAudio.Demos/Content/gato.png
+#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -34,7 +34,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../../ChaiFoxes.FMODAudio.Demos/Content/gato.png;gato.png
+/build:../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png;Gato.png
 
 #begin ../../ChaiFoxes.FMODAudio.Demos/Content/test.mp3
 /copy:../../ChaiFoxes.FMODAudio.Demos/Content/test.mp3;test.mp3
@@ -70,15 +70,3 @@
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /build:../../ChaiFoxes.FMODAudio.Demos/Content/Arial.spritefont;Arial.spritefont
-
-#begin ../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../ChaiFoxes.FMODAudio.Demos/Content/Gato.png;Gato.png
