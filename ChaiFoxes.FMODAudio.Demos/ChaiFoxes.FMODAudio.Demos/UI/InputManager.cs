@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
 
 namespace ChaiFoxes.FMODAudio.Demos.UI
 {
@@ -19,21 +20,25 @@ namespace ChaiFoxes.FMODAudio.Demos.UI
 		{
 			_oldClick = _click;
 
-#if ANDROID
-			MousePosition = Vector2.Zero;
-			_click = false;
-			var state = TouchPanel.GetState();
-			
-			if (state.Count > 0)
+			if (OperatingSystem.IsAndroid())
 			{
-				MousePosition = state[0].Position;
-				_click = state[0].State == TouchLocationState.Moved;
+				MousePosition = Vector2.Zero;
+				_click = false;
+				var state = TouchPanel.GetState();
+
+				if (state.Count > 0)
+				{
+					MousePosition = state[0].Position;
+					_click = state[0].State == TouchLocationState.Moved;
+				}
 			}
-#else
-			var mouse = Mouse.GetState();
-			MousePosition = mouse.Position.ToVector2();
-			_click = (mouse.LeftButton == ButtonState.Pressed);
-#endif
+			else
+			{
+
+				var mouse = Mouse.GetState();
+				MousePosition = mouse.Position.ToVector2();
+				_click = (mouse.LeftButton == ButtonState.Pressed);
+			}
 		}
 	}
 }

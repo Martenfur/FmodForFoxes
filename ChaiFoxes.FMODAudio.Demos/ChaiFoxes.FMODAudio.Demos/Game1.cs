@@ -23,12 +23,13 @@ namespace ChaiFoxes.FMODAudio.Demos
 			_graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-#if ANDROID
-			_graphics.IsFullScreen = true;
-			_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-			_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-			_graphics.SupportedOrientations = DisplayOrientation.Portrait;
-#endif
+			if (OperatingSystem.IsAndroid())
+			{
+				_graphics.IsFullScreen = true;
+				_graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+				_graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+				_graphics.SupportedOrientations = DisplayOrientation.Portrait;
+			}
 
 			IsMouseVisible = true;
 		}
@@ -46,16 +47,20 @@ namespace ChaiFoxes.FMODAudio.Demos
 		{
 			get
 			{
-#if !ANDROID
-				 return new Vector2(
-					_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
-				);
-#else
-				return new Vector2(
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-					GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
-				);
-#endif
+				if (!OperatingSystem.IsAndroid())
+				{
+					return new Vector2(
+						_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight
+					);
+				}
+				else
+				{
+					return new Vector2(
+						GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+						GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+					);
+				}
+
 			}
 		}
 
