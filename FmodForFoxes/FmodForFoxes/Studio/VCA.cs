@@ -60,7 +60,6 @@ namespace FmodForFoxes.Studio
 		/// <summary>
 		/// The VCA's GUID.
 		/// </summary>
-		// TODO: Convert back.
 		public FMOD.GUID ID
 		{
 			get

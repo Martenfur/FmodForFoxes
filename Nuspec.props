@@ -1,14 +1,16 @@
-<Project>
+﻿<Project>
 	<PropertyGroup>
-		<PackageVersion>2.0.0.0</PackageVersion>
+		<PackageVersion>3.0.0-dev.1</PackageVersion>
+		<FileVersion>$(PackageVersion)</FileVersion>
 		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
 		<Authors>Martenfur, StinkBrigade</Authors>
-		<Company>ChaiFoxes</Company>
+		<Company>ForFoxes</Company>
 		<Product>FmodForFoxes</Product>
 		<RepositoryType>git</RepositoryType>
 		<ProjectUrl>https://github.com/Martenfur/FmodForFoxes</ProjectUrl>
 		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
-		<Description>A crossplatform FMOD audio wrapper for Monogame.</Description>
+		<Description>A crossplatform FMOD audio wrapper for Monogame (and foxes).</Description>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<PackageIcon>icon.png</PackageIcon>
 	</PropertyGroup>
 </Project>

@@ -219,10 +219,9 @@ namespace FmodForFoxes.Studio
 		/// <summary>
 		/// Allows the timeline cursor to move past sustain points.
 		/// </summary>
-		//public void TriggerCue() =>
-		//	Native.triggerCue();
-		// TODO: Do somethign about this.
-
+		public void KeyOff() =>
+			Native.keyOff();
+		
 		public void Dispose() =>
 			Native.release();
 	}

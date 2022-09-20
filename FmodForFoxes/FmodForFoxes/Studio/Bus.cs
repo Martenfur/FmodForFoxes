@@ -110,7 +110,6 @@ namespace FmodForFoxes.Studio
 		/// <summary>
 		/// The Bus's GUID.
 		/// </summary>
-		// TODO: Convert back.
 		public FMOD.GUID ID
 		{
 			get

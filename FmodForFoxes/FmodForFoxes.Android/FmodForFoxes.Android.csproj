@@ -3,10 +3,11 @@
 		<TargetFramework>net6.0-android</TargetFramework>
 		<SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
 		<DefineConstants>ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
-		<Description>The MonoGame runtime for Android.</Description>
-		<PackageTags>Monogame, FMOD, Audio, Music, Android</PackageTags>
+		<PackageTags>Monogame, FMOD, Audio, Music, Android, ChaiFoxes.FMODAudio</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageOutputPath>..\..\package\</PackageOutputPath>
+		<OutputPath>..\..\bin\$(Configuration)</OutputPath>
 		<AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
-		<PackageOutputPath>..\..\Release\</PackageOutputPath>
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="..\..\Icon\icon.png">

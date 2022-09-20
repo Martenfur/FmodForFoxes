@@ -145,7 +145,6 @@ namespace FmodForFoxes.Studio
 		/// <summary>
 		/// The event description's GUID.
 		/// </summary>
-		// TODO: Convert back.
 		public FMOD.GUID ID
 		{
 			get

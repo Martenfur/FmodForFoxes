@@ -6,8 +6,14 @@
 
 - Renamed to FmodForFoxes.
 - Migrated to .NET6.
+- Renamed `TriggerCue` to `KeyOff`.
+
+### Added
+
+- Added fmod_errors header.
 
 ### Changed
+
 - Removed shared projects.
 - Updated to FMOD 2.02.08
 - Changed the license to MIT.
