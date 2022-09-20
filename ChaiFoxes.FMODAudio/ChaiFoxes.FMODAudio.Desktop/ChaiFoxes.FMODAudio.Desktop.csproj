@@ -11,7 +11,9 @@
     <PackageOutputPath>..\..\Release\</PackageOutputPath>
   </PropertyGroup>
 
-  <Import Project="..\ChaiFoxes.FMODAudio.Shared\ChaiFoxes.FMODAudio.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <None Remove="readme.txt" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Icon\icon.png">
       <Pack>True</Pack>
@@ -26,5 +28,8 @@
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.*">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ChaiFoxes.FMODAudio\ChaiFoxes.FMODAudio.csproj" />
   </ItemGroup>
 </Project>
