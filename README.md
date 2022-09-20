@@ -1,4 +1,4 @@
-
+﻿
 
 ![logo](/Icon/icon.png)
 
@@ -21,7 +21,8 @@ Also note that even though the primary target of this library is Monogame, its s
 
 ## Setup
 
-Initial setup is a little fiddly. Here's the thing - the FMOD license prohibits me from distributing their libraries in my Nuget package - so you have to download them yourself. But fear not, I've put together a detailed guide. With pictures.
+Initial setup is a little fiddly. Here's the thing - the FMOD license prohibits me from distributing their libraries in my Nuget package - so you'll have to download them yourself. 
+But fear not, I've put together a detailed guide. With pictures.
 
 ### Preparations
 
@@ -108,7 +109,9 @@ You need only `libfmod.so` from each directory. Copy everything except `.jar` fi
 
 ### Studio setup
 
-FMOD Studio setup process is exactly the same, but you'll need to look into `studio` instead of `core` directories. **It's also extremely important that ALL your dlls and jar are taken form the same version. FMOD doesn't like version mixup. Foxes don't like version mixup. Nobody does.** 
+FMOD Studio setup process is exactly the same, but you'll need to look into `studio` instead of `core` directories. 
+**It's also extremely important that ALL your dlls and jar are taken from the same version. 
+FMOD doesn't like version mixup. Foxes don't like version mixup. Nobody does.** 
 
 If you still have questions, take a look at the [Demos project](/FmodForFoxes.Samples).
 
@@ -134,26 +137,6 @@ channel.Looping = true;
 
 You can also check out the incluided [Demos project](/FmodForFoxes.Samples). 
 
-## Bait-and-switch
-
-As you could notice, there are only two nugets - Desktop and Android. But what if you want to use FMOD in a netstandard library? Since there is no crossplatform core FMOD library, this becomes a problem, right? Well, yeah. First-party C# bindings are made in a way that makes it impossible to extract core API without rewriting literally everything from scratch. I am not willing to do that. So, instead we will use a little trick. 
-
-Bait-and switch! :0
-
-We don't have a crossplatform library. But *we can fool* the project into thinking we have one. Open up your netstandard library's `csproj` and add this:
-
-```xml
-<PackageReference Include="FmodForFoxes.Desktop" Version="2.0.0.0" >
-  <PrivateAssets>All</PrivateAssets>
-</PackageReference>
-```
-
-But wait, what's this? We are adding a desktop nuget into the crossplatform project? Why? 
-
-That's the trick - we aren't actually using it! `<PrivateAssets>All</PrivateAssets>` makes it so the nuget's dll file is not copied over to the output directory. We are only using this nuget at compile-time - and then switching it to a platform-specific version, which is installed in your platform project. 
-
-Hacky? Yes. (:
-
 ## But what about other platforms?
 
 I'd like to make console versions of the library - but currently I have no ability
@@ -166,7 +149,7 @@ contact me and we'll figure something out. ; - )
 
 ## License and legal stuffs
 
-This library is licensed under MPL 2.0, so you can use it and its code in any 
+This library is licensed under MIT, so you can use it and its code in any 
 shenanigans you want. Free games, commercial games, anything - no payment or 
 royalties required. Just leave a credit. ; - )
 
