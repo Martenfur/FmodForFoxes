@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 namespace FmodForFoxes
 {
 	/// Windows and Linux-specific part of an audio manager.
-	public class DesktopNativeLibrary : INativeLibrary
+	public class DesktopNativeFmodLibrary : INativeFmodLibrary
 	{
 		private bool _loggingEnabled;
 
-		public void Init(FMODMode mode, bool loggingEnabled = false)
+		public void Init(FmodInitMode mode, bool loggingEnabled = false)
 		{
 			_loggingEnabled = loggingEnabled;
 			NativeLibrary.SetDllImportResolver(

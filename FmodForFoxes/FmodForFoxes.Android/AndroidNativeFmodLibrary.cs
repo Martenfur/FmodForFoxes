@@ -4,12 +4,12 @@ namespace FmodForFoxes
 	/// <summary>
 	/// Android-specific part of the audio manager.
 	/// </summary>
-	public class AndroidNativeLibrary : INativeLibrary
+	public class AndroidNativeFmodLibrary : INativeFmodLibrary
 	{
-		public void Init(FMODMode mode, bool loggingEnabled = false)
+		public void Init(FmodInitMode mode, bool loggingEnabled = false)
 		{
 			Java.Lang.JavaSystem.LoadLibrary(SelectDefaultLibraryName("fmod", loggingEnabled));
-			if (mode == FMODMode.CoreAndStudio)
+			if (mode == FmodInitMode.CoreAndStudio)
 			{ 
 				Java.Lang.JavaSystem.LoadLibrary(SelectDefaultLibraryName("fmodstudio", loggingEnabled));
 			}

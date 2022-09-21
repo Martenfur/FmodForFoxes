@@ -13,7 +13,7 @@ namespace FmodForFoxes.Samples.DesktopGL
 		[STAThread]
 		static void Main()
 		{
-			using(var game = new Game1(new DesktopNativeLibrary()))
+			using(var game = new Game1(new DesktopNativeFmodLibrary()))
 				game.Run();
 		}
 	}

@@ -1,18 +1,8 @@
 ﻿using FmodForFoxes.Studio;
-using Microsoft.Xna.Framework;
-using System;
-using System.Dynamic;
-using System.Runtime.Intrinsics.X86;
 
 namespace FmodForFoxes
 {
-	public enum FMODMode
-	{
-		Core,
-		CoreAndStudio
-	}
-
-	public static class FMODManager
+	public static class FmodManager
 	{
 		/// <summary>
 		/// This is the FMOD version which was tested on this
@@ -22,20 +12,20 @@ namespace FmodForFoxes
 		/// </summary>
 		public const string RecommendedNativeLibraryVersion = "2.00.08";
 
-		private static FMODMode _mode;
+		private static FmodInitMode _mode;
 
 		internal static bool _initialized { get; private set; } = false;
 
 		public static bool UsesStudio =>
-			_mode == FMODMode.CoreAndStudio;
+			_mode == FmodInitMode.CoreAndStudio;
 
 		/// <summary>
 		/// Initializes systems and loads the native libraries. Can only be called once. 
 		/// </summary>
 		/// <param name="preInitAction">Executes before initialization, but after the native instance creation.</param>
 		public static void Init(
-			INativeLibrary nativeLibrary,
-			FMODMode mode,
+			INativeFmodLibrary nativeLibrary,
+			FmodInitMode mode,
 			string rootDir,
 			int maxChannels = 256,
 			uint dspBufferLength = 4,

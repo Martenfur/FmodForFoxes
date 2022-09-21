@@ -1,11 +1,9 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using FmodForFoxes.Samples.Scenes;
+﻿using FmodForFoxes.Samples.Scenes;
 using FmodForFoxes.Samples.UI;
-using FmodForFoxes.Studio;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace FmodForFoxes.Samples
 {
@@ -14,10 +12,10 @@ namespace FmodForFoxes.Samples
 	/// </summary>
 	public class Game1 : Game
 	{
-		private readonly INativeLibrary _nativeLibrary;
+		private readonly INativeFmodLibrary _nativeLibrary;
 		private static GraphicsDeviceManager _graphics;
 
-		public Game1(INativeLibrary nativeLibrary)
+		public Game1(INativeFmodLibrary nativeLibrary)
 		{
 			_nativeLibrary = nativeLibrary;
 			_graphics = new GraphicsDeviceManager(this);
@@ -33,14 +31,6 @@ namespace FmodForFoxes.Samples
 
 			IsMouseVisible = true;
 		}
-
-		Bank masterBank;
-		Bank masterStringBank;
-
-		EventDescription musicDescription;
-		EventDescription sfxDescription;
-
-		EventInstance musicInstance;
 
 
 		public static Vector2 ScreenSize
@@ -75,7 +65,7 @@ namespace FmodForFoxes.Samples
 		{
 			// NOTE: You HAVE TO init fmod in the Initialize().
 			// Otherwise, it may not work on some platforms.
-			FMODManager.Init(_nativeLibrary, FMODMode.CoreAndStudio, "Content");
+			FmodManager.Init(_nativeLibrary, FmodInitMode.CoreAndStudio, "Content");
 			//FMODManager.Init(_nativeLibrary, FMODMode.Core, "Content"); // Use this if you don't want Studio functionality.
 
 			UIController.Init(GraphicsDevice);
@@ -99,7 +89,7 @@ namespace FmodForFoxes.Samples
 		/// </summary>
 		protected override void UnloadContent()
 		{
-			FMODManager.Unload();
+			FmodManager.Unload();
 		}
 
 		/// <summary>
@@ -109,7 +99,7 @@ namespace FmodForFoxes.Samples
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			FMODManager.Update();
+			FmodManager.Update();
 			UIController.Update();
 			SceneController.Update();
 

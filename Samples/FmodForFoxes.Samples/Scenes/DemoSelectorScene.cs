@@ -13,7 +13,7 @@ namespace FmodForFoxes.Samples.Scenes
 		{
 			// If Studio is not loaded, skip the selection screen, 
 			// since we can only select Core.
-			if (!FMODManager.UsesStudio)
+			if (!FmodManager.UsesStudio)
 			{
 				SceneController.ChangeScene(new CoreDemoScene());
 				return;
