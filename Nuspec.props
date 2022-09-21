@@ -8,6 +8,7 @@
 		<Product>FmodForFoxes</Product>
 		<RepositoryType>git</RepositoryType>
 		<ProjectUrl>https://github.com/Martenfur/FmodForFoxes</ProjectUrl>
+		<PackageProjectUrl>$(ProjectUrl)</PackageProjectUrl>
 		<RepositoryUrl>$(ProjectUrl)</RepositoryUrl>
 		<Description>A crossplatform FMOD audio wrapper for Monogame (and foxes).</Description>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
