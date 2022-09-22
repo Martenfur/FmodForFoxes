@@ -95,7 +95,7 @@ namespace FmodForFoxes
 
 		public Listener3D()
 		{
-			if (!FMODManager._initialized)
+			if (!FmodManager._initialized)
 			{
 				throw new Exception("You cannot create listeners before initializing FMODManager!");
 			}
@@ -192,7 +192,7 @@ namespace FmodForFoxes
 			out FMOD.VECTOR up
 		)
 		{
-			if (FMODManager.UsesStudio)
+			if (FmodManager.UsesStudio)
 			{
 				StudioSystem.Native.getListenerAttributes(_index, out var attributes);
 
@@ -235,7 +235,7 @@ namespace FmodForFoxes
 
 		private void UpdateNumListeners()
 		{
-			if (FMODManager.UsesStudio)
+			if (FmodManager.UsesStudio)
 			{
 				StudioSystem.Native.setNumListeners(_listeners.Count);
 			}

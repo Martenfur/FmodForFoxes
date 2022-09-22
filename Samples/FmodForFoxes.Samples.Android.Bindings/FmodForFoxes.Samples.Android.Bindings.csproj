@@ -5,12 +5,4 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Transforms\EnumFields.xml" />
-    <None Remove="Transforms\EnumMethods.xml" />
-    <None Remove="Transforms\Metadata.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedJar Include="Jars\fmod.jar" />
-  </ItemGroup>
 </Project>

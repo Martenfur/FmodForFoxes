@@ -7,6 +7,8 @@
 - Renamed to FmodForFoxes.
 - Migrated to .NET6.
 - Renamed `TriggerCue` to `KeyOff`.
+- Renamed `FMODManager` to `FmodManager`.
+- Replaced the `NativeLibraryLoader` class with `INativeLibraryLoader`.
 
 ### Added
 

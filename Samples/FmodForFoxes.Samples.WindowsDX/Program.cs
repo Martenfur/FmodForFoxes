@@ -14,7 +14,7 @@ namespace FmodForFoxes.Samples.WindowsDX
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1(new DesktopNativeLibrary()))
+            using (var game = new Game1(new DesktopNativeFmodLibrary()))
                 game.Run();
         }
     }
