@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FmodForFoxes.Samples.Androi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FmodForFoxes.Samples.Android.Bindings", "..\Samples\FmodForFoxes.Samples.Android.Bindings\FmodForFoxes.Samples.Android.Bindings.csproj", "{F56798D9-7183-4590-A547-ADD9D8353249}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FmodForFoxes.Samples.DesktopGL", "..\Samples\FmodForFoxes.Sample.DesktopGL\FmodForFoxes.Samples.DesktopGL.csproj", "{17E813FB-9F7F-4DA4-8DD7-71D6BF31FD8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FmodForFoxes.Samples.DesktopGL", "..\Samples\FmodForFoxes.Samples.DesktopGL\FmodForFoxes.Samples.DesktopGL.csproj", "{17E813FB-9F7F-4DA4-8DD7-71D6BF31FD8C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FmodForFoxes.Samples.WindowsDX", "..\Samples\FmodForFoxes.Samples.WindowsDX\FmodForFoxes.Samples.WindowsDX.csproj", "{B35F4BEB-9C79-408F-9596-610139088B02}"
 EndProject
