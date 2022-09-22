@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+		<NoWarn>1591;1573</NoWarn>
+		<DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
+		<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<PackageTags>Monogame, FMOD, Audio, Music, Windows, Linux, ChaiFoxes.FMODAudio</PackageTags>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageOutputPath>..\..\package\</PackageOutputPath>
+		<OutputPath>..\..\bin\$(Configuration)</OutputPath>
+		<AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="readme.txt" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\Icon\icon.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\LICENSE.md">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.*">
+			<PrivateAssets>All</PrivateAssets>
+		</PackageReference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\FmodForFoxes\FmodForFoxes.csproj" />
+	</ItemGroup>
+</Project>
