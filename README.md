@@ -134,7 +134,7 @@ So, after you've set everything up, it's time to bop some pops, as kids say thes
 3. Include the `FmodForFoxes` namespace and paste the following code into your
 Initialize() method:
 ```cs
-FMODManager.Init(_nativeLibrary, FMODMode.CoreAndStudio, "Content");
+FmodManager.Init(_nativeLibrary, FMODMode.CoreAndStudio, "Content");
 
 var sound = CoreSystem.LoadStreamedSound("test.mp3");
 var channel = sound.Play();
@@ -142,6 +142,30 @@ channel.Looping = true;
 ```
 
 `_nativeLibrary` is an instance of `INativeFmodLibrary` that you have to create separately in your platform-specific projects. [Samples project](/FmodForFoxes.Samples) already has this set up.
+
+And lastly, do note that `FmodManager` has to be properly updated and unloaded. Your main gameloop class has to have this added:
+
+```cs
+/// <summary>
+/// UnloadContent will be called once per game and is the place to unload
+/// game-specific content.
+/// </summary>
+protected override void UnloadContent()
+{
+	FmodManager.Unload();
+}
+
+/// <summary>
+/// Allows the game to run logic such as updating the world,
+/// checking for collisions, gathering input, and playing audio.
+/// </summary>
+/// <param name="gameTime">Provides a snapshot of timing values.</param>
+protected override void Update(GameTime gameTime)
+{
+	FmodManager.Update();
+	base.Update(gameTime);
+}
+```
 
 4. Compile and hope that you (and me) did everything right.
 

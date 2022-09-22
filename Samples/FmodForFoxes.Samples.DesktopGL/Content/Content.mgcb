@@ -36,9 +36,6 @@
 /processorParam:TextureFormat=Color
 /build:../../FmodForFoxes.Samples/Content/gato.png;gato.png
 
-#begin ../../FmodForFoxes.Samples/Content/test.mp3
-/copy:../../FmodForFoxes.Samples/Content/test.mp3;test.mp3
-
 #begin ../../FmodForFoxes.Samples/Content/Dialogue_CN.bank
 /copy:../../FmodForFoxes.Samples/Content/Dialogue_CN.bank;Dialogue_CN.bank
 
@@ -57,15 +54,6 @@
 #begin ../../FmodForFoxes.Samples/Content/Music.bank
 /copy:../../FmodForFoxes.Samples/Content/Music.bank;Music.bank
 
-#begin ../../FmodForFoxes.Samples/Content/SFX.bank
-/copy:../../FmodForFoxes.Samples/Content/SFX.bank;SFX.bank
-
-#begin ../../FmodForFoxes.Samples/Content/Vehicles.bank
-/copy:../../FmodForFoxes.Samples/Content/Vehicles.bank;Vehicles.bank
-
-#begin ../../FmodForFoxes.Samples/Content/VO.bank
-/copy:../../FmodForFoxes.Samples/Content/VO.bank;VO.bank
-
 #begin ../../FmodForFoxes.Samples/Content/Arial.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -82,3 +70,15 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../../FmodForFoxes.Samples/Content/Gato.png;Gato.png
+
+#begin ../../FmodForFoxes.Samples/Content/test.mp3
+/copy:../../FmodForFoxes.Samples/Content/test.mp3;test.mp3
+
+#begin ../../FmodForFoxes.Samples/Content/SFX.bank
+/copy:../../FmodForFoxes.Samples/Content/SFX.bank;SFX.bank
+
+#begin ../../FmodForFoxes.Samples/Content/Vehicles.bank
+/copy:../../FmodForFoxes.Samples/Content/Vehicles.bank;Vehicles.bank
+
+#begin ../../FmodForFoxes.Samples/Content/VO.bank
+/copy:../../FmodForFoxes.Samples/Content/VO.bank;VO.bank

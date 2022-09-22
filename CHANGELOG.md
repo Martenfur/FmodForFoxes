@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+
+## [v3.0.0] - *22.09.2022*
+
 ### Breaking:
 
 - Renamed to FmodForFoxes.
