@@ -210,15 +210,18 @@ namespace FmodForFoxes.Studio
 			Native.setCallback(callback, callbackMask);
 
 		/// <summary>
-		/// Loads all non-streaming sounds for the event.
+		/// Loads all non-streaming sounds for the event. Returns false if ERR
 		/// </summary>
-		public void LoadSampleData() => 
-			Native.loadSampleData();
+		public bool LoadSampleData()
+		{
+			var result = Native.loadSampleData();
+			return result == FMOD.RESULT.OK;
+		}
 
 		/// <summary>
 		/// Unloads all non-streaming sounds for the event.
 		/// </summary>
-		public void UnloadSampleData() => 
+		public void UnloadSampleData() =>
 			Native.unloadSampleData();
 	}
 }
