@@ -5,9 +5,9 @@
 
 [![nuget](https://badgen.net/nuget/v/FmodForFoxes?icon=nuget)](https://www.nuget.org/packages/FmodForFoxes)
 
-### Current FMOD version target: 2.02.08
+### Current FMOD version target: 2.02.19
 
-[**Join our Discord**](https://discord.gg/wgBb7cqGhC)
+[**Join our Discord**](https://discord.gg/EtJexdZs77)
 
 
 The time has come. You're finally witnessing a high-level cross-platform C# library, which makes Monogame and FMOD best friends.
@@ -32,7 +32,7 @@ But fear not, I've put together a detailed guide. With pictures.
 
 Visit the [FMOD Download page](https://www.fmod.com/download) (accessing it requires registration), find the FMOD Studio API downloads and get APIs for Windows, Linux and Android (in case you want all three). If you're going to set up all three, of course.
 
-**NOTE: Current version of the library was tested on FMOD v2.02.08. I really recommend getting it. Later versions will probably also work, but I have no guarantee.**
+**NOTE: Current version of the library was tested on FMOD v2.02.19. I really recommend getting it. Later versions will probably also work, but I have no guarantee.**
 
 
 Windows API requires installation, Linux and Android don't. You can drop them near the Windows API just to have everything in one place.
