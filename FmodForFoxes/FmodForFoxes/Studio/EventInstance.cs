@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
@@ -90,6 +91,72 @@ namespace FmodForFoxes.Studio
 			set =>
 				Native.set3DAttributes(value.ToFmodAttributes());
 		}
+
+		/// <summary>
+		/// Sound's position in 3D space. Can be used only if 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Position3D
+		{
+			get
+			{
+				Native.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+
+				return attributes.position.ToVector3();
+			}
+			set
+			{
+				Native.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+				attributes.position = value.ToFmodVector();
+				Native.set3DAttributes(attributes);
+			}
+		}
+
+
+		/// <summary>
+		/// Sound's velocity in 3D space. Can be used only if 3D positioning is enabled.
+		/// </summary>
+		public Vector3 Velocity3D
+		{
+			get
+			{
+				Native.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+
+				return attributes.velocity.ToVector3();
+			}
+			set
+			{
+				Native.get3DAttributes(out FMOD.ATTRIBUTES_3D attributes);
+				attributes.velocity = value.ToFmodVector();
+				Native.set3DAttributes(attributes);
+			}
+		}
+
+
+		/// <summary>
+		/// Distance from the source where attenuation begins.
+		/// </summary>
+		public float MinDistance3D
+		{
+			get
+			{
+				Native.getMinMaxDistance(out var minDistance, out var maxDistance);
+				return minDistance;
+			}
+		}
+
+		/// <summary>
+		/// Distance from the source where attenuation ends.
+		/// </summary>
+		public float MaxDistance3D
+		{
+			get
+			{
+				Native.getMinMaxDistance(out var minDistance, out var maxDistance);
+				return maxDistance;
+			}
+		}
+
+
 
 		/// <summary>
 		/// Timeline position in milliseconds.
