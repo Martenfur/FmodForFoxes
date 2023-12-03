@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Fixed:
+
+- Fixed 3D sound attibutes not being set properly when using Fmod Studio.
+
 
 ## [v3.0.0] - *22.09.2022*
 
