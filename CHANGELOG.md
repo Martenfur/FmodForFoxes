@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [v3.1.0] - *04.12.2023*
+
+### Added:
+
+- Added	`Position3D`, `Velocity3D`, `MinDistance`, `MaxDistance` to `EventInstance`.
+
+### Fixed:
+
+- Fixed 3D sound attibutes not being set properly when using Fmod Studio.
 
 ## [v3.0.0] - *22.09.2022*
 

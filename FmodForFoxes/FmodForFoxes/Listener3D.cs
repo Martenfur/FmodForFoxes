@@ -104,9 +104,9 @@ namespace FmodForFoxes
 			UpdateNumListeners();
 
 			SetAttributes(
-				Vector3.Zero, 
-				Vector3.Zero, 
-				Vector3.UnitY, 
+				Vector3.Zero,
+				Vector3.Zero,
+				Vector3.UnitY,
 				Vector3.UnitZ
 			);
 		}
@@ -174,9 +174,9 @@ namespace FmodForFoxes
 		)
 		{
 			SetAttributes(
-				position.ToFmodVector(), 
-				velocity.ToFmodVector(), 
-				forward.ToFmodVector(), 
+				position.ToFmodVector(),
+				velocity.ToFmodVector(),
+				forward.ToFmodVector(),
 				up.ToFmodVector()
 			);
 		}
@@ -224,13 +224,25 @@ namespace FmodForFoxes
 			FMOD.VECTOR up
 		)
 		{
-			CoreSystem.Native.set3DListenerAttributes(
-				_index,
-				ref position,
-				ref velocity,
-				ref forward,
-				ref up
-			);
+			if (FmodManager.UsesStudio)
+			{
+				var attributes = new FMOD.ATTRIBUTES_3D();
+				attributes.position = position;
+				attributes.velocity = velocity;
+				attributes.forward = forward;
+				attributes.up = up;
+				StudioSystem.Native.setListenerAttributes(_index, attributes);
+			}
+			else
+			{
+				CoreSystem.Native.set3DListenerAttributes(
+					_index,
+					ref position,
+					ref velocity,
+					ref forward,
+					ref up
+				);
+			}
 		}
 
 		private void UpdateNumListeners()
