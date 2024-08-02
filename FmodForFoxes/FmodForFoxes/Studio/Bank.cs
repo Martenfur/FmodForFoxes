@@ -28,7 +28,7 @@ namespace FmodForFoxes.Studio
 				 Native.setUserData(value);
 		}
 
-		internal Bank(FMOD.Studio.Bank bank)
+		public Bank(FMOD.Studio.Bank bank)
 		{
 			Native = bank;
 		}
