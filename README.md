@@ -5,7 +5,7 @@
 
 [![nuget](https://badgen.net/nuget/v/FmodForFoxes?icon=nuget)](https://www.nuget.org/packages/FmodForFoxes)
 
-### Current FMOD version target: 2.02.19
+### Current FMOD version target: 2.02.25
 
 [**Join our Discord**](https://discord.gg/EtJexdZs77)
 

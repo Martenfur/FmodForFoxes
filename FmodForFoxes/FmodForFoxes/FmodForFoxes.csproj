@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageTags>Monogame, FMOD, Audio, Music, ChaiFoxes.FMODAudio</PackageTags>
@@ -8,10 +8,11 @@
 		<PackageOutputPath>..\..\package\</PackageOutputPath>
 		<OutputPath>..\..\bin\$(Configuration)</OutputPath>
 		<AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="readme.txt">
+		<Content Include="README.md">
 			<PackagePath>\</PackagePath>
 			<Pack>true</Pack>
 		</Content>

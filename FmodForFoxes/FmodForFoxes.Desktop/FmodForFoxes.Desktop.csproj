@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 		<NoWarn>1591;1573</NoWarn>
 		<DefineConstants>UNITY_2017_4_OR_NEWER</DefineConstants>
 		<DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
@@ -10,6 +10,7 @@
 		<PackageOutputPath>..\..\package\</PackageOutputPath>
 		<OutputPath>..\..\bin\$(Configuration)</OutputPath>
 		<AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,6 +25,10 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
+		<Content Include="..\FmodForFoxes\README.md">
+			<PackagePath>\</PackagePath>
+			<Pack>true</Pack>
+		</Content>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.*">

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<PublishReadyToRun>false</PublishReadyToRun>
 		<TieredCompilation>false</TieredCompilation>
 	</PropertyGroup>
@@ -51,7 +51,7 @@
 	  <None Update="libfmod.so.13">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="libfmod.so.13.19">
+	  <None Update="libfmod.so.13.25">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="libfmodL.so">
@@ -60,7 +60,7 @@
 	  <None Update="libfmodL.so.13">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="libfmodL.so.13.19">
+	  <None Update="libfmodL.so.13.25">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="libfmodstudio.so">
@@ -69,7 +69,7 @@
 	  <None Update="libfmodstudio.so.13">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="libfmodstudio.so.13.19">
+	  <None Update="libfmodstudio.so.13.25">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	  <None Update="libfmodstudioL.so">
@@ -78,7 +78,7 @@
 	  <None Update="libfmodstudioL.so.13">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="libfmodstudioL.so.13.19">
+	  <None Update="libfmodstudioL.so.13.25">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
