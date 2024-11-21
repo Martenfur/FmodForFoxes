@@ -5,7 +5,7 @@
 
 [![nuget](https://badgen.net/nuget/v/FmodForFoxes?icon=nuget)](https://www.nuget.org/packages/FmodForFoxes)
 
-### Current FMOD version target: 2.02.19
+### Current FMOD version target: 2.02.25
 
 [**Join our Discord**](https://discord.gg/EtJexdZs77)
 
@@ -141,7 +141,7 @@ var channel = sound.Play();
 channel.Looping = true;
 ```
 
-`_nativeLibrary` is an instance of `INativeFmodLibrary` that you have to create separately in your platform-specific projects. [Samples project](/FmodForFoxes.Samples) already has this set up.
+`_nativeLibrary` is an instance of `INativeFmodLibrary` that you have to create separately in your platform-specific projects. [Samples project](/Samples) already has this set up.
 
 And lastly, do note that `FmodManager` has to be properly updated and unloaded. Your main gameloop class has to have this added:
 
@@ -169,7 +169,7 @@ protected override void Update(GameTime gameTime)
 
 4. Compile and hope that you (and me) did everything right.
 
-You can also check out the incluided [Samples project](/FmodForFoxes.Samples). 
+You can also check out the included [Samples project](/Samples). 
 
 ## But what about other platforms?
 

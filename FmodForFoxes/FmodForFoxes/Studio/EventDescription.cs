@@ -154,7 +154,7 @@ namespace FmodForFoxes.Studio
 			}
 		}
 
-		internal EventDescription(FMOD.Studio.EventDescription eventDescription)
+		public EventDescription(FMOD.Studio.EventDescription eventDescription)
 		{
 			Native = eventDescription;
 		}

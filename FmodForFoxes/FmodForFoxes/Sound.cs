@@ -225,14 +225,14 @@ namespace FmodForFoxes
 		private GCHandle _bufferHandle;
 
 
-		internal Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
+		public Sound(FMOD.Sound sound, byte[] buffer, GCHandle bufferHandle)
 			: this(sound)
 		{
 			_buffer = buffer;
 			_bufferHandle = bufferHandle;
 		}
 
-		internal Sound(FMOD.Sound sound)
+		public Sound(FMOD.Sound sound)
 		{
 			Native = sound;
 

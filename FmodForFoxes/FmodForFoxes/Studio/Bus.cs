@@ -120,7 +120,7 @@ namespace FmodForFoxes.Studio
 			}
 		}
 
-		internal Bus(FMOD.Studio.Bus bus)
+		public Bus(FMOD.Studio.Bus bus)
 		{
 			Native = bus;
 		}

@@ -1,6 +1,6 @@
 ﻿<Project>
 	<PropertyGroup>
-		<PackageVersion>3.1.0</PackageVersion>
+		<PackageVersion>3.2.0</PackageVersion>
 		<FileVersion>$(PackageVersion)</FileVersion>
 		<AssemblyVersion>$(PackageVersion)</AssemblyVersion>
 		<Authors>Minkberry, StinkBrigade</Authors>

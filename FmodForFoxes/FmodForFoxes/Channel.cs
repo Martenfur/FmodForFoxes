@@ -396,7 +396,7 @@ namespace FmodForFoxes
 
 		public FMOD.TIMEUNIT TrackPositionTimeunit;
 
-		internal Channel(Sound sound, FMOD.Channel channel) 
+		public Channel(Sound sound, FMOD.Channel channel) 
 			: this(channel)
 		{
 			Loops = Sound.Loops;
@@ -409,7 +409,7 @@ namespace FmodForFoxes
 			Velocity3D = sound.Velocity3D;
 		}
 
-		internal Channel(FMOD.Channel channel)
+		public Channel(FMOD.Channel channel)
 		{
 			Native = channel;
 			TrackPositionTimeunit = FMOD.TIMEUNIT.MS;

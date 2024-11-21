@@ -69,7 +69,7 @@ namespace FmodForFoxes.Studio
 			}
 		}
 
-		internal VCA(FMOD.Studio.VCA vca)
+		public VCA(FMOD.Studio.VCA vca)
 		{
 			Native = vca;
 		}
