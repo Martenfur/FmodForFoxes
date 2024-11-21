@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FmodForFoxes.Desktop</name>
+    </assembly>
+    <members>
+        <member name="T:FmodForFoxes.DesktopNativeFmodLibrary">
+            Windows and Linux-specific part of an audio manager.
+        </member>
+    </members>
+</doc>
