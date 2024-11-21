@@ -200,7 +200,7 @@ namespace FmodForFoxes.Studio
 				Native.setPaused(value);
 		}
 
-		internal EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
+		public EventInstance(EventDescription eventDescription, FMOD.Studio.EventInstance eventInstance)
 		{
 			Description = eventDescription;
 			Native = eventInstance;

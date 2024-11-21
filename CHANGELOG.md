@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Made constructors for `Attributes3D`, `Bank`, `Bus`, `EventDescription`, `EventInstance`, `VCA`, `Channel`, `Sound` public instead of internal.
+
 ## [v3.1.0] - *04.12.2023*
 
 ### Added:
