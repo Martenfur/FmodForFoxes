@@ -10,6 +10,7 @@
 
 - Made constructors for `Attributes3D`, `Bank`, `Bus`, `EventDescription`, `EventInstance`, `VCA`, `Channel`, `Sound` public instead of internal.
 - Updated to FMOD 2.02.25
+- Migrated to NET8.
 
 ## [v3.1.0] - *04.12.2023*
 

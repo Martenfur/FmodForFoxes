@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0-android</TargetFramework>
+		<TargetFramework>net8.0-android</TargetFramework>
 		<SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
 		<DefineConstants>ANDROID;UNITY_2017_4_OR_NEWER;UNITY_PS4</DefineConstants>
 		<PackageTags>Monogame, FMOD, Audio, Music, Android, ChaiFoxes.FMODAudio</PackageTags>
