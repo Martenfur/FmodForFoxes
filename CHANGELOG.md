@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [v3.2.0] - *22.12.2024*
+
 ### Added:
 
 - Added an option to load from stream or from byte buffer for `LoadSound`, `LoadStreamedSound` and `LoadBank`.
