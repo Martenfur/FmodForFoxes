@@ -2,7 +2,11 @@
 
 ## [Unreleased]
 
-### Changed
+### Added:
+
+- Added an option to load from stream or from byte buffer for `LoadSound`, `LoadStreamedSound` and `LoadBank`.
+
+### Changed:
 
 - Made constructors for `Attributes3D`, `Bank`, `Bus`, `EventDescription`, `EventInstance`, `VCA`, `Channel`, `Sound` public instead of internal.
 

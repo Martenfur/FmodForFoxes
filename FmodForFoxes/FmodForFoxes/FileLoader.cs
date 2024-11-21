@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System.IO;
 
 namespace FmodForFoxes
 {
@@ -18,6 +17,18 @@ namespace FmodForFoxes
 
 			// TitleContainer is cross-platform Monogame file loader.
 			var stream = TitleContainer.OpenStream(Path.Combine(RootDirectory, path));
+
+			return LoadFileAsBuffer(stream);
+		}
+
+		/// <summary>
+		/// Loads entire stream as a byte array.
+		/// </summary>
+		public static byte[] LoadFileAsBuffer(Stream stream)
+		{
+			// NOTE: Use this method to load audio files from memory 
+			// instead of built-in methods which load files directly.
+			// They will not work on some platforms.
 
 			// File is opened as a stream, so we need to read it to the end.
 			var buffer = new byte[16 * 1024];

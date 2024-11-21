@@ -10,18 +10,30 @@ namespace FmodForFoxes.Studio
 		public static FMOD.Studio.System Native;
 
 		/// <summary>
-		/// Loads bank from file with the default flag.
-		/// </summary>
-		public static Bank LoadBank(string name) =>
-			LoadBank(name, FMOD.Studio.LOAD_BANK_FLAGS.NORMAL);
-
-		/// <summary>
 		/// Loads bank from file with custom flags.
 		/// </summary>
-		public static Bank LoadBank(string path, FMOD.Studio.LOAD_BANK_FLAGS flags)
+		public static Bank LoadBank(string path, FMOD.Studio.LOAD_BANK_FLAGS flags = FMOD.Studio.LOAD_BANK_FLAGS.NORMAL)
+		{
+			var buffer = FileLoader.LoadFileAsBuffer(path);
+			return LoadBank(buffer, flags);
+		}
+
+		/// <summary>
+		/// Loads bank from stream with custom flags.
+		/// </summary>
+		public static Bank LoadBank(Stream stream, FMOD.Studio.LOAD_BANK_FLAGS flags = FMOD.Studio.LOAD_BANK_FLAGS.NORMAL)
+		{
+			var buffer = FileLoader.LoadFileAsBuffer(stream);
+			return LoadBank(buffer, flags);
+		}
+
+		/// <summary>
+		/// Loads bank from buffer with custom flags.
+		/// </summary>
+		public static Bank LoadBank(byte[] buffer, FMOD.Studio.LOAD_BANK_FLAGS flags = FMOD.Studio.LOAD_BANK_FLAGS.NORMAL)
 		{
 			Native.loadBankMemory(
-				FileLoader.LoadFileAsBuffer(path),
+				buffer,
 				flags,
 				out FMOD.Studio.Bank bank
 			);
